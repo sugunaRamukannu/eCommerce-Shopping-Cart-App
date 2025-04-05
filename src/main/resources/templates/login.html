@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <!-- Insert the header -->
-<div th:insert="fragments/header :: header('Login')"></div>
+<th:block th:insert="fragments/header :: header('Login')"></th:block>
 <main>
 	<section class="container min-vh-100 d-flex">
 		<div class="row min-w-25 align-items-center mx-auto">
@@ -28,4 +29,6 @@
 	</section>
 </main>
 <!-- Insert the footer -->
-<div th:insert="fragments/footer :: footer"></div>
+<th:block th:insert="fragments/footer :: footer"></th:block>
+
+</html>

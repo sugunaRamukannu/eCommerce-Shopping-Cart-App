@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <!-- Insert the header -->
-<div th:insert="fragments/header :: header('Welcome Home')"></div>
+<th:block th:insert="fragments/header :: header('Welcome Home')"></th:block>
 <main>
 	<section class="py-5 bg-primary title-section">
 		<div class="container px-5 px-md-0">
@@ -209,4 +210,6 @@
 	</section>
 </main>
 <!-- Insert the footer -->
-<div th:insert="fragments/footer :: footer"></div>
+<th:block th:insert="fragments/footer :: footer"></th:block>
+
+</html>
