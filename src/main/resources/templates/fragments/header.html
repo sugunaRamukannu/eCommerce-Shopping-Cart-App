@@ -7,7 +7,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title th:text="${title}">Default Title</title>
-		<link rel="stylesheet" th:href="@{/assets/brite/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/assets/bootswatch-5/brite/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/assets/css/main.css}">
 	</head>
 	<header>
@@ -45,7 +45,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link text-white">
+							<a th:href="@{/products}" class="nav-link text-white">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 									class="bi bi-box-seam d-lg-block mx-auto" viewBox="0 0 16 16">
 									<path
@@ -81,7 +81,7 @@
 						</li>
 						<li th:if="${session.mobilePhoneNumber != null}" class="nav-item">
 
-						<li th:if="${session.mobilePhoneNumber != null}" class="nav-item dropdown">
+						<li th:if="${session.mobilePhoneNumber != null}" class="nav-item dropdown" data-bs-toggle="collapse" href="#collapseExample" >
 							<a class="nav-link dropdown-toggle text-primary" href="#" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -92,7 +92,7 @@
 								</svg>
 								Profile
 							</a>
-							<ul class="dropdown-menu rounded-0">
+							<ul class="dropdown-menu rounded-0" data-bs-toggle="collapse" data-bs-target="#collapseExample">
 								<li>
 									<a class="dropdown-item" href="#">
 										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"

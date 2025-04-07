@@ -21,4 +21,9 @@ public class ProductController {
 	public String createAccount() {
 		return "create-account";
 	}
+
+	@GetMapping("/products")
+	public String products() {
+		return "products";
+	}
 }
