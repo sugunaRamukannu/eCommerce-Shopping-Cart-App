@@ -7,8 +7,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title th:text="${title}">Default Title</title>
-		<link rel="stylesheet" href="/assets/brite/bootstrap.min.css">
-		<link rel="stylesheet" href="/assets/css/main.css">
+		<link rel="stylesheet" th:href="@{/assets/bootswatch-5/brite/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/assets/css/main.css}">
 	</head>
 
 	<body>
@@ -68,11 +68,6 @@
 									Products
 								</a>
 							</li>
-
-							<li>
-							<button  type="button" class="btn btn-primary text-dark me-2 rounded-0">Login</button>
-								
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -83,11 +78,18 @@
 						<input type="search" class="form-control rounded-0" placeholder="Search Products"
 							aria-label="Search">
 					</form>
-					<!--
+
 					<div class="text-end">
 						<button type="button" class="btn btn-primary text-dark me-2 rounded-0">Login</button>
-					</div>-->
+					</div>
 				</div>
 			</div>
-		</header>
+		</nav>
+
+		<body>
+
+
+	</header>
 </th:block>
+
+</html>
