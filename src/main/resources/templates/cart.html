@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #e6f2e6;">
+
+<div class="container text-center mt-5">
+    <div class="p-5 rounded shadow" style="background-color: white;">
+        <h1 class="mb-4" th:text="${welcomeMessage}">Welcome to Our Application!</h1>
+        <p class="lead">This is a simple welcome page using Thymeleaf and Bootstrap.</p>
+        <a class="btn btn-success mt-3" th:href="@{/cart}">Login</a>
+        <a class="btn btn-outline-secondary mt-3 ms-2" th:href="@{/register}">Create Account</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="header(title)">
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,6 +68,11 @@
 									Products
 								</a>
 							</li>
+
+							<li>
+							<button  type="button" class="btn btn-primary text-dark me-2 rounded-0">Login</button>
+								
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -77,10 +83,10 @@
 						<input type="search" class="form-control rounded-0" placeholder="Search Products"
 							aria-label="Search">
 					</form>
-
+					<!--
 					<div class="text-end">
 						<button type="button" class="btn btn-primary text-dark me-2 rounded-0">Login</button>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</header>

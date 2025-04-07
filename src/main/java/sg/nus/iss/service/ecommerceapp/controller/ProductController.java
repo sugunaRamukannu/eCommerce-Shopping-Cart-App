@@ -10,8 +10,9 @@ public class ProductController {
 		return "index";
 	}
 	
-	@GetMapping("/login")
-	public String login() {
-		return "login";
+	@GetMapping("/cart")
+	public String displayProductss() {
+		return "cart";
 	}
+	
 }
