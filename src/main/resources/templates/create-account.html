@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Insert the header -->
+<th:block th:insert="fragments/header :: header('Create Account')"></th:block>
+<main>
+	<section class="container p-5 d-flex">
+		<div class="row min-w-25 align-items-center mx-auto mt-5 pt-5">
+			<div class="col mt-5 pt-5">
+				<form>
+					<h1 class="mb-4 fw-bold">Create Account</h1>
+					<div class="row row-cols-1 row-cols-lg-2 mb-3">
+						<div class="col mb-3">
+							<label for="firstName" class="form-label">First Name</label>
+							<input type="text" class="form-control rounded-0" id="firstName" name="firstName"
+								placeholder="Enter First Name">
+						</div>
+						<div class="col mb-3">
+							<label for="lastName" class="form-label">Last Name</label>
+							<input type="text" class="form-control rounded-0" id="lastName" name="lastName"
+								placeholder="Enter Last Name">
+						</div>
+						<div class="col mb-3">
+							<label for="email" class="form-label">Email Address</label>
+							<input type="email" class="form-control rounded-0" id="email" name="email"
+								placeholder="Enter Email">
+						</div>
+						<div class="col mb-3">
+							<label for="mobilePhoneNumber" class="form-label">Mobile Phone Number</label>
+							<input type="tel" class="form-control rounded-0" id="mobilePhoneNumber"
+								name="mobilePhoneNumber" placeholder="Enter Mobile Phone Number">
+						</div>
+						<div class="col mb-3">
+							<label for="password" class="form-label">Password</label>
+							<input type="password" class="form-control rounded-0" id="password"
+								name="password" placeholder="Enter Password">
+						</div>
+						<div class="w-100"></div> <!-- To add extra space as large layout placeholder -->
+						<div class="col col-lg-3 mt-3">
+							<button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</main>
+<!-- Insert the footer -->
+<th:block th:insert="fragments/footer :: footer"></th:block>
+
+</html>
