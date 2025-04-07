@@ -16,17 +16,35 @@
 	padding-top: 10rem !important;
 }
 
+.card-category {
+	width: 10rem;
+}
+
+.card-product {
+	width: 13rem;
+}
+
 .shadow-color {
 	box-shadow: 3px 3px 0 0 white;
 }
 
 .pill {
-	transform: translate(40%, -160%) !important;
+	transform: translate(40%, -160%);
 	font-size: 0.6rem;
+}
+
+.svg-bg-small {
+	background-color: white;
+	transition: 0.3s;
+	min-height: 10rem;
+}
+
+.svg-bg-small:hover {
+	background-color:rgb(51, 106, 75);
 }
 
 @media only screen and (max-width: 600px) {
   .pill {
-    transform: translate(110%, 0) !important;
+    transform: translate(110%, 0);
   }
 }
