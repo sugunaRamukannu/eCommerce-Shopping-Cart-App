@@ -16,7 +16,7 @@
 			<nav class="px-3 py-2 bg-dark text-white">
 				<div class="container px-5 px-md-0">
 					<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-						<a href="/"
+						<a th:href="@{/}"
 							class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
 							<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
 								class="bi bi-basket3-fill me-2" viewBox="0 0 16 16">
@@ -25,9 +25,13 @@
 							</svg>
 							<span class="fs-3 fw-bold">GetFreshFood</span>
 						</a>
+						<form class="d-flex me-5">
+							<input class="form-control bg-light me-sm-2 rounded-0" type="search" placeholder="Search Products">
+							<button class="btn btn-primary my-2 my-sm-0 rounded-0" type="submit">Search</button>
+						</form>
 						<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 							<li>
-								<a href="#" class="nav-link text-white">
+								<a th:href="@{/}" class="nav-link text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-house d-block mx-auto" viewBox="0 0 16 16">
 										<path
@@ -39,13 +43,13 @@
 							<li>
 								<a href="#" class="nav-link text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-										class="bi bi-window-sidebar d-block mx-auto" viewBox="0 0 16 16">
+										class="bi bi-receipt d-block mx-auto" viewBox="0 0 16 16">
 										<path
-											d="M2.5 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1" />
+											d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27m.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0z" />
 										<path
-											d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v2H1V3a1 1 0 0 1 1-1zM1 13V6h4v8H2a1 1 0 0 1-1-1m5 1V6h9v7a1 1 0 0 1-1 1z" />
+											d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5" />
 									</svg>
-									<span>Dashboard</span>
+									<span>Purchases</span>
 								</a>
 							</li>
 							<li>
@@ -68,22 +72,21 @@
 									Products
 								</a>
 							</li>
+							<li>
+								<a th:href="@{/login}" class="nav-link text-black bg-primary">
+									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+										class="bi bi-person-circle d-block mx-auto" viewBox="0 0 16 16">
+										<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+										<path fill-rule="evenodd"
+											d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+									</svg>
+									Login
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
 			</nav>
-			<div class="px-3 py-2 border-bottom">
-				<div class="container d-flex flex-wrap justify-content-center px-5 px-md-0">
-					<form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
-						<input type="search" class="form-control rounded-0" placeholder="Search Products"
-							aria-label="Search">
-					</form>
-
-					<div class="text-end">
-						<button type="button" class="btn btn-primary text-dark me-2 rounded-0">Login</button>
-					</div>
-				</div>
-			</div>
 		</header>
 </th:block>
 
