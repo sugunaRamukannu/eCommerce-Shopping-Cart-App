@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <!-- Insert the header -->
-<th:block th:insert="fragments/header :: header('Create Account')"></th:block>
+<th:block th:insert="~{fragments/header :: header('Create Account')}"></th:block>
 <main>
 	<section class="container p-5 d-flex">
-		<div class="row min-w-25 align-items-center mx-auto mt-5 pt-5">
-			<div class="col">
+		<div class="row solo-box-page align-items-center mx-auto mt-5 pt-5">
+			<div class="col border border-black p-5">
 				<form>
-					<h1 class="mb-4 fw-bold">Create Account</h1>
+					<h1 class="mb-4 fw-bold text-center">Create Account</h1>
 					<div class="row row-cols-1 row-cols-lg-2 mb-3">
 						<div class="col mb-3">
 							<label for="firstName" class="form-label">First Name</label>
@@ -46,6 +46,6 @@
 	</section>
 </main>
 <!-- Insert the footer -->
-<th:block th:insert="fragments/footer :: footer"></th:block>
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
 
 </html>
