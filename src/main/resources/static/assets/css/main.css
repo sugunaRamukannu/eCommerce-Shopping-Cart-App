@@ -39,8 +39,16 @@
 	min-height: 10rem;
 }
 
+.svg-bg-small > div {
+	transform: translate(10%, 30%);
+}
+
 .svg-bg-small:hover {
 	background-color:rgb(51, 106, 75);
+}
+
+.svg-bg-small:hover, .svg-bg-small:hover a {
+	color: white;
 }
 
 @media only screen and (max-width: 600px) {

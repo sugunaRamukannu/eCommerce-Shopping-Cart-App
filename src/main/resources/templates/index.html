@@ -2,29 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <!-- Insert the header -->
-<th:block th:insert="fragments/header :: header('Welcome To GetFreshFood')"></th:block>
+<th:block th:insert="~{fragments/header :: header('Welcome To GetFreshFood')}"></th:block>
 <main>
 	<section class="py-5 bg-primary title-section">
 		<div class="container px-5 px-md-0">
 			<div class="row g-2 text-black">
 				<div class="col-lg-8">
 					<div class="svg-bg-small position-relative border border-3 border-dark">
-						<h2 class="position-absolute top-50 start-50 translate-middle">Promotion 1</h2>
+						<div class="position-absolute">
+							<span class="fs-3 fw-bold d-block mb-3">Fresh Produce from S$0.50</span>
+							<a href="#">Shop Now</a>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="svg-bg-small position-relative border border-3 border-dark">
-						<h2 class="position-absolute top-50 start-50 translate-middle">Promotion 1</h2>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="svg-bg-small position-relative border border-3 border-dark">
-						<h2 class="position-absolute top-50 start-50 translate-middle">Promotion 1</h2>
-					</div>
-				</div>
-				<div class="col-lg-8">
-					<div class="svg-bg-small position-relative border border-3 border-dark">
-						<h2 class="position-absolute top-50 start-50 translate-middle">Promotion 1</h2>
+						<div class="position-absolute">
+							<span class="fs-3 fw-bold d-block mb-3">Fresh Produce from S$0.50</span>
+							<a href="#">Shop Now</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -41,7 +37,7 @@
 	</section>
 	<section class="py-5 svg-bg">
 		<div class="container px-5 px-md-0">
-			<h2 class="my-4 fw-bold fs-3">Recommended For You</h2>
+			<h2 class="my-4 fw-bold fs-3">Get It Here!</h2>
 			<div class="row">
 				<div class="col">
 					<div class="card card-category position-relative text-center rounded-0 border border-2">
@@ -281,6 +277,6 @@
 	</section>
 </main>
 <!-- Insert the footer -->
-<th:block th:insert="fragments/footer :: footer"></th:block>
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
 
 </html>
