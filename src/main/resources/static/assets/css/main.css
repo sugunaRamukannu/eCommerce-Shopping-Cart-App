@@ -51,6 +51,14 @@
 	color: white;
 }
 
+a.active-link {
+	color: #a2e436 !important;
+}
+
+.solo-box-page {
+	min-width: 35%;
+}
+
 @media only screen and (max-width: 600px) {
   .pill {
     transform: translate(110%, 0);

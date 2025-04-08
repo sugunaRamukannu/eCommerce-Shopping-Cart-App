@@ -3,8 +3,6 @@ package sg.nus.iss.service.ecommerceapp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class ProductController {
 	@GetMapping("/")
@@ -17,6 +15,16 @@ public class ProductController {
 		return "login";
 	}
 	
+	@GetMapping("/login/otp")
+	public String enterOTP() {
+		return "otp";
+	}
+	
+	@GetMapping("/login/forgetPassword")
+	public String forgetPassword() {
+		return "forget-password";
+	}
+	
 	@GetMapping("/account/create")
 	public String createAccount() {
 		return "create-account";
@@ -25,5 +33,10 @@ public class ProductController {
 	@GetMapping("/products")
 	public String products() {
 		return "products";
+	}
+	
+	@GetMapping("/categories")
+	public String categories() {
+		return "categories";
 	}
 }
