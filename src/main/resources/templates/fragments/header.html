@@ -9,6 +9,7 @@
 		<title th:text="${title}">Default Title</title>
 		<link rel="stylesheet" th:href="@{/assets/bootswatch-5/brite/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/assets/css/main.css}">
+		<link rel="icon" type="image/x-icon" th:href="@{assets/img/basket3-fill.svg}">
 		<script th:src="@{/assets/js/script.js}" defer></script>
 	</head>
 	<body>
@@ -83,8 +84,8 @@
 									</a>
 								</li>
 							</ul>
-						<li th:if="${session.mobilePhoneNumber != null}" class="nav-item">
-							<a href="#" data-page="cart" class="nav-link text-white position-relative">
+						<li class="nav-item">
+							<a th:href="@{/cart}" data-page="cart" class="nav-link text-white position-relative">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 									class="bi bi-cart d-lg-block mx-auto" viewBox="0 0 16 16">
 									<path
