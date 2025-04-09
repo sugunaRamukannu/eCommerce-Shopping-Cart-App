@@ -15,7 +15,7 @@ public class ProductCategory {
 	@Column(name="product_category_id")
 	private int id;
 	private String category;
-
+	
 	public ProductCategory() {
 	}
 
