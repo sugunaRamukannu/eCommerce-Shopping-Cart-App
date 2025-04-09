@@ -1,5 +1,9 @@
 package sg.nus.iss.service.ecommerceapp.repository;
 
-public interface ProductCategoryRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
+
+public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Integer> {
 
 }
