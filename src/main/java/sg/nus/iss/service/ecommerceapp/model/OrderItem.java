@@ -27,6 +27,7 @@ public class OrderItem {
 	private double purchasePrice;
 
 	@ManyToOne
+	@JoinColumn(name="order_id")
 	private Order order;
 	
 	public OrderItem(){}
