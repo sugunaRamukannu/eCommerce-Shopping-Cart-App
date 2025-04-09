@@ -1,5 +1,8 @@
 package sg.nus.iss.service.ecommerceapp.service;
 
-public class CustomerServiceImpl implements CustomerService{
+import org.springframework.stereotype.Service;
 
+@Service
+public class CustomerServiceImpl implements CustomerService {
+	
 }

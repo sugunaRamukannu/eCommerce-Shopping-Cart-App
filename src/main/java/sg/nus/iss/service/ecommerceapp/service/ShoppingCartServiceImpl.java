@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import sg.nus.iss.service.ecommerceapp.model.CartItem;
 import sg.nus.iss.service.ecommerceapp.model.CartSummary;
 import sg.nus.iss.service.ecommerceapp.model.Customer;
+import sg.nus.iss.service.ecommerceapp.model.DeliveryAddress;
 import sg.nus.iss.service.ecommerceapp.model.Product;
 import sg.nus.iss.service.ecommerceapp.model.ShoppingCart;
 import sg.nus.iss.service.ecommerceapp.repository.CartItemRepository;
@@ -109,6 +110,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		}
 		System.out.println("SUMMARY");
 		return new CartSummary(0, 0.0);
+	}
+	
+	public void emptyCart() {
+		cartItemRepository.deleteAll();
+	}
+
+	@Override
+	public List<DeliveryAddress> findDeliveryAddressesByCustomer(int customerId) {
+		return customerRepository.findDeliveryAddressesByCustomer(customerId);
 	}
 }
 		

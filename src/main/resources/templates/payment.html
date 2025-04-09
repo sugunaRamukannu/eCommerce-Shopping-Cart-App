@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Insert the header -->
+<th:block th:insert="~{fragments/header :: header('Cart - Payment Details')}"></th:block>
+<main>
+	<section class="container p-5 d-flex">
+		<div class="row solo-box-page-wide align-items-center mx-auto mt-5 pt-5">
+			<div class="col border border-black p-5">
+				<form action="#" method="post">
+					<h1 class="mb-4 fw-bold text-center">Payment Details</h1>
+					<div class="row mb-3">
+						<div class="col col-12 mb-3">
+							Total: S$1000
+						</div>
+						<div class="col-12 col-lg-6 mb-3">
+							<label for="firstName" class="form-label">First Name</label>
+							<input type="text" class="form-control rounded-0" id="firstName" name="firstName"
+								placeholder="Enter First Name">
+						</div>
+						<div class="col-12 col-lg-6 mb-3">
+							<label for="lastName" class="form-label">Last Name</label>
+							<input type="text" class="form-control rounded-0" id="lastName" name="lastName"
+								placeholder="Enter Last Name">
+						</div>
+						<div class="col-12 col-lg-6 mb-3">
+							<label for="cardNumber" class="form-label">Card Number</label>
+							<input type="text" class="form-control rounded-0" id="cardNumber" name="cardNumber"
+								placeholder="Enter Card Number">
+						</div>
+						<div class="col-12 col-lg-3 mb-3">
+							<label for="cvv" class="form-label">CVV</label>
+							<input type="number" class="form-control rounded-0" id="cvv" name="cvv"
+								placeholder="Enter CVV">
+						</div>
+						<div class="col-12 col-lg-3 mb-3">
+							<label for="cardExpiry" class="form-label">Card Expiry</label>
+							<input type="date" class="form-control rounded-0" id="cardExpiry" name="cardExpiry"
+								placeholder="Enter Card Expiry">
+						</div>
+
+						<div class="col col-lg-3 mt-3">
+							<button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</main>
+<!-- Insert the footer -->
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
+
+</html>
