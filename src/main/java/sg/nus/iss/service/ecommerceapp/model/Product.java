@@ -1,5 +1,7 @@
 package sg.nus.iss.service.ecommerceapp.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,8 +21,11 @@ public class Product {
 	private int id;
 	private String name;
 	private String description;
-	private double unitPrice;
+	private double price;
 	private String imgUrl;
+	
+	@OneToMany(mappedBy = "product")
+	private List<CartItem> cartItems;
 
 	@ManyToOne
 	@JoinColumn(name = "product_category_id")
@@ -36,6 +42,14 @@ public class Product {
 		this.productCategory = productCategory;
 	}
 
+	public List<CartItem> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
+
 	public String getImgUrl() {
 		return imgUrl;
 	}
@@ -44,12 +58,12 @@ public class Product {
 		this.imgUrl = imgUrl;
 	}
 
-	public double getUnitPrice() {
-		return unitPrice;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setPrice(double unitPrice) {
+		this.price = unitPrice;
 	}
 
 	public String getDescription() {

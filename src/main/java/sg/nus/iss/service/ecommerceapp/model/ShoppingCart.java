@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -21,50 +22,56 @@ public class ShoppingCart {
 	@Column(name="shopping_cart_id")
 	private int id;
 
-	@ManyToMany
-	@JoinTable(name = "product_cart",
-	joinColumns = @JoinColumn(name = "product_id"),
-	inverseJoinColumns = @JoinColumn(name="shopping_cart_id"))
-	private List<Product> products;
-
 	@OneToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	private double totalPrice;
+	
+	@OneToMany(mappedBy = "shoppingCart")
+	private List<CartItem> items;
+	
 
 	public ShoppingCart() {
 	}
+
+
+	public List<CartItem> getItems() {
+		return items;
+	}
+
+
+	public void setItems(List<CartItem> items) {
+		this.items = items;
+	}
+
 
 	public double getTotalPrice() {
 		return totalPrice;
 	}
 
+
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
 
 	public Customer getCustomer() {
 		return customer;
 	}
 
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
 	}
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 }
