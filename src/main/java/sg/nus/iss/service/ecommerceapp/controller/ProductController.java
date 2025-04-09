@@ -20,11 +20,6 @@ public class ProductController {
 		return "otp";
 	}
 	
-	@GetMapping("/login/forgetPassword")
-	public String forgetPassword() {
-		return "forget-password";
-	}
-	
 	@GetMapping("/account/create")
 	public String createAccount() {
 		return "create-account";
@@ -40,8 +35,4 @@ public class ProductController {
 		return "categories";
 	}
 	
-	@GetMapping("/cart")
-	public String cart() {
-		return "cart";
-	}
 }
