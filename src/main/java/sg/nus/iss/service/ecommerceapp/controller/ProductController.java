@@ -35,8 +35,4 @@ public class ProductController {
 		return "categories";
 	}
 	
-	@GetMapping("/cart")
-	public String cart() {
-		return "cart";
-	}
 }
