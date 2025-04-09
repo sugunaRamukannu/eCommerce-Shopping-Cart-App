@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import sg.nus.iss.service.ecommerceapp.model.Product;
+import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.ProductService;
 import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
 
@@ -22,13 +23,17 @@ public class ProductController {
 	@Autowired
 	private ShoppingCartService shoppingCartService;
 	
-	
 	@GetMapping("/")
 	public String displayProducts(Model model) {
 		List<Product> products = productService.listAllProducts();
 		model.addAttribute("products", products);
 		
 		return "index";
+	}
+	
+	@GetMapping("/products")
+	public String displayProductsPage() {
+		return "products";
 	}
 	
 	@PostMapping("/add-to-cart/{productId}")
@@ -38,6 +43,13 @@ public class ProductController {
 		System.out.println("PRODUCT ADDED");
 		
 		return "redirect:/";
+	}
+	
+	@PostMapping("/cart/empty")
+	public String emptyCart() {
+		
+		shoppingCartService.emptyCart();
+		return "redirect:/cart";
 	}
 	
 //	@PostMapping("/add-to-cart/{productId}")

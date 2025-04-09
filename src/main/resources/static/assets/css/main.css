@@ -56,7 +56,11 @@ a.active-link {
 }
 
 .solo-box-page {
-	min-width: 35%;
+	min-width: 30%;
+}
+
+.solo-box-page-wide {
+	max-width: 70%;
 }
 
 .coupon {
@@ -66,5 +70,9 @@ a.active-link {
 @media only screen and (max-width: 600px) {
   .pill {
     transform: translate(110%, 0);
+  }
+  
+  .solo-box-page-wide {
+  	max-width: 100%;
   }
 }

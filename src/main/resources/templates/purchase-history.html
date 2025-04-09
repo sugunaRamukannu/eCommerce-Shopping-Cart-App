@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Insert the header -->
+<th:block th:insert="~{fragments/header :: header('Purchase History')}"></th:block>
+<main>
+	<section class="container p-5 d-flex">
+		<div class="row solo-box-page-wide align-items-center mx-auto mt-5 pt-5">
+			<div class="col border border-black p-5">
+				<h1 class="mb-4 fw-bold text-center">My Purchase History</h1>
+				<div class="row mb-3">
+					<div class="col d-flex flex-column">
+						<span>Order ID:</span>
+				
+						<span>Total Price:</span>
+
+						<span>Product Name:</span>
+
+						<span>Description:</span>
+
+						<span>Item Price:</span>
+					</div>
+				</div>
+			</div>
+	</section>
+</main>
+<!-- Insert the footer -->
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
+
+</html>
