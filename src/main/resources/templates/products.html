@@ -8,19 +8,26 @@
 
 		<div class="row w-100 align-items-center mx-auto mt-5 pt-5">
 			<aside class="col-lg-2 mt-5 me-5 pt-5 px-lg-0 d-none d-lg-block align-self-start">
-				<div class="border border-2 border-black p-3 pb-0 mb-5 d-flex flex-column">
+				<div class="border border-2 border-black p-3 pb-0 mb-5">
 					<span class="fs-3 fw-bold d-inline-block mb-3">Sort By</span>
-					<span class="fs-5 mb-2">Price: Low to high</span>
-					<span class="fs-5 mb-2">Price: High to low</span>
-					<span class="fs-5 mb-2">Product A-Z</span>
-					<span class="fs-5 mb-2">Product Z-A</span>
-				</div>
-				<div class="border border-2 border-black p-3 pb-0 mb-5 d-flex flex-column">
-					<span class="fs-3 fw-bold d-inline-block mb-3">Filter By</span>
-					<span class="fs-5 mb-2">Price: Low to high</span>
-					<span class="fs-5 mb-2">Price: High to low</span>
-					<span class="fs-5 mb-2">Product A-Z</span>
-					<span class="fs-5 mb-2">Product Z-A</span>
+					<ul class="p-0">
+						<li class="nav-link fs-5 mb-2">
+							<a th:href="@{/products(sort='priceLowHigh', filter=${param.filter}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+								class="text-decoration-none text-dark">Price: Low to high</a>
+						</li>
+						<li class="nav-link fs-5 mb-2">
+							<a th:href="@{/products(sort='priceHighLow', filter=${param.filter}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+								class="text-decoration-none text-dark">Price: High to low</a>
+						</li>
+						<li class="nav-link fs-5 mb-2">
+							<a th:href="@{/products(sort='nameAZ', filter=${param.filter}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+								class="text-decoration-none text-dark">Product: A-Z</a>
+						</li>
+						<li class="nav-link fs-5">
+							<a th:href="@{/products(sort='nameZA', filter=${param.filter}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+								class="text-decoration-none text-dark">Product: Z-A</a>
+						</li>
+					</ul>
 				</div>
 			</aside>
 			<div class="col">

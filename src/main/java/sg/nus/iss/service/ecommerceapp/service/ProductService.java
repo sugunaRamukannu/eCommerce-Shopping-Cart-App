@@ -11,4 +11,16 @@ public interface ProductService {
 
 	List<Product> listAllProducts();
 
+	List<Product> findAllProducts();
+
+	List<Product> findFeaturedProducts();
+
+	public boolean saveProduct(Product product);
+
+	public List<Product> SearchProductByName(String name);
+
+	public List<Product> SearchProductByCategory(String category);
+
+	public List<Product> getProductsByCategory(int categoryId);
+
 }
