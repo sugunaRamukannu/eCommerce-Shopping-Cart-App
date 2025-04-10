@@ -30,7 +30,7 @@ public class ProductCategory {
 
 	@Override
 	public String toString() {
-		return "Category no: " + getId() + ", category: " + getCategory();
+		return getCategory();
 	}
 
 	public List<Product> getProducts() {
