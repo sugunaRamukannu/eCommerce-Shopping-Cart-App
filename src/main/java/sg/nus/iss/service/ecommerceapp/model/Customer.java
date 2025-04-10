@@ -1,15 +1,15 @@
 package sg.nus.iss.service.ecommerceapp.model;
 
+
 import java.util.Collection;
-import org.springframework.security.core.GrantedAuthority;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 
 @Entity
@@ -20,12 +20,6 @@ public class Customer extends User {
 //	@Size(min=8,max = 8, message = "Invalid mobile number")
 //	@Column(name="mobile_phone_number")
 	private String mobilePhoneNumber;
-
-@OneToOne(mappedBy = "customer")
-	private ShoppingCart shoppingCart;
-	
-	@OneToMany(mappedBy="id")
-	private List<DeliveryAddress> deliveryAddresses;
 	
 	public Customer(int id, String firstName, String lastName, String userName, String email,
 			String mobilePhoneNumber, String password, String role) {
@@ -37,7 +31,22 @@ public class Customer extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-public List<DeliveryAddress> getDeliveryAddresses() {
+	public String getMobilePhoneNumber() {
+		return mobilePhoneNumber;
+	}
+
+	public void setMobilePhoneNumber(String mobilePhoneNumber) {
+		this.mobilePhoneNumber = mobilePhoneNumber;
+	}
+
+
+	@OneToOne(mappedBy = "customer")
+	private ShoppingCart shoppingCart;
+	
+	@OneToMany(mappedBy="id")
+	private List<DeliveryAddress> deliveryAddresses;
+
+	public List<DeliveryAddress> getDeliveryAddresses() {
 		return deliveryAddresses;
 	}
 
@@ -53,15 +62,7 @@ public List<DeliveryAddress> getDeliveryAddresses() {
 		this.shoppingCart = shoppingCart;
 	}
 
-	public String getMobilePhoneNumber() {
-		return mobilePhoneNumber;
-	}
-
-	public void setMobilePhoneNumber(String mobilePhoneNumber) {
-		this.mobilePhoneNumber = mobilePhoneNumber;
-	}
-
-	@Override
+@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return null;
@@ -71,7 +72,9 @@ public List<DeliveryAddress> getDeliveryAddresses() {
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return null;
+  }
+	
 
 	}
 
-}
+

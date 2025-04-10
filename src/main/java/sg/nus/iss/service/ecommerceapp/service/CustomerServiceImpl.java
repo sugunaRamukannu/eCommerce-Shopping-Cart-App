@@ -3,7 +3,7 @@ package sg.nus.iss.service.ecommerceapp.service;
 
 import java.util.Optional;
 
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.stereotype.Service;
 
 import sg.nus.iss.service.ecommerceapp.model.Customer;
