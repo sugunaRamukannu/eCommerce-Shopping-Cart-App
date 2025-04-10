@@ -5,41 +5,57 @@
 <th:block th:insert="~{fragments/header :: header('Create Account')}"></th:block>
 <main>
 	<section class="container p-5 d-flex">
-		<div class="row solo-box-page-wide align-items-center mx-auto mt-5 pt-5">
+
+		<div class="row solo-box-page align-items-center mx-auto mt-5 pt-5">
 			<div class="col border border-black p-5">
-				<form>
+				<form th:action="@{/register}" th:object="${customer}" method="post">
+
 					<h1 class="mb-4 fw-bold text-center">Create Account</h1>
 					<div class="row row-cols-1 row-cols-lg-2 mb-3">
 						<div class="col mb-3">
 							<label for="firstName" class="form-label">First Name</label>
-							<input type="text" class="form-control rounded-0" id="firstName" name="firstName"
-								placeholder="Enter First Name">
+							<input type="text" th:field="*{firstName}" class="form-control rounded-0" id="firstName"
+								name="firstName" placeholder="Enter First Name">
+							<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger">
+							</div>
 						</div>
+
+
 						<div class="col mb-3">
 							<label for="lastName" class="form-label">Last Name</label>
-							<input type="text" class="form-control rounded-0" id="lastName" name="lastName"
-								placeholder="Enter Last Name">
+							<input type="text" th:field="*{lastName}" class="form-control rounded-0" id="lastName"
+								name="lastName" placeholder="Enter Last Name">
+							<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger">
+							</div>
 						</div>
+
 						<div class="col mb-3">
 							<label for="email" class="form-label">Email Address</label>
-							<input type="email" class="form-control rounded-0" id="email" name="email"
-								placeholder="Enter Email">
+							<input type="email" th:field="*{email}" class="form-control rounded-0" id="email"
+								name="email" placeholder="Enter Email">
 						</div>
 						<div class="col mb-3">
 							<label for="mobilePhoneNumber" class="form-label">Mobile Phone Number</label>
-							<input type="tel" class="form-control rounded-0" id="mobilePhoneNumber"
-								name="mobilePhoneNumber" placeholder="Enter Mobile Phone Number">
+							<input type="tel" th:field="*{mobilePhoneNumber}" class="form-control rounded-0"
+								id="mobilePhoneNumber" name="mobilePhoneNumber" placeholder="Enter Mobile Phone Number">
+							<div th:if="${#fields.hasErrors('mobilePhoneNumber')}" th:errors="*{mobilePhoneNumber}"
+								class="text-danger"></div>
+							<div th:if="${mobileExists}" class="alert alert-danger" role="alert">
+								Mobile number already exists. Please use another number.
+							</div>
 						</div>
 						<div class="col mb-3">
 							<label for="password" class="form-label">Password</label>
-							<input type="password" class="form-control rounded-0" id="password"
+							<input type="password" th:field="*{password}" class="form-control rounded-0" id="password"
 								name="password" placeholder="Enter Password">
+								<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">
 						</div>
 						<div class="w-100"></div> <!-- To add extra space as large layout placeholder -->
 						<div class="col col-lg-3 mt-3">
 							<button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
 						</div>
 					</div>
+
 				</form>
 			</div>
 		</div>

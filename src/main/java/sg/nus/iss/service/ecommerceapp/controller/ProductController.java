@@ -31,12 +31,14 @@ public class ProductController {
 		return "index";
 	}
 	
+
 	@GetMapping("/products")
 	public String displayProductsPage() {
 		return "products";
+
 	}
 	
-	@PostMapping("/add-to-cart/{productId}")
+	@PostMapping("/cart/{productId}")
 	public String addToCart(@PathVariable int productId) {
 		
 		shoppingCartService.addProductToCart(productId);
@@ -69,8 +71,5 @@ public class ProductController {
 //		return ResponseEntity.ok(response); // Return as JSON
 //	}
 	
-	@GetMapping("/login")
-	public String login() {
-		return "login";
-	}
+
 }

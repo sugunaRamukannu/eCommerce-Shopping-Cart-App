@@ -1,0 +1,34 @@
+package sg.nus.iss.service.ecommerceapp.service;
+
+import org.springframework.stereotype.Service;
+
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
+
+@Service
+public class SmsOtpServiceImpl implements OtpService {
+
+    private static final String ACCOUNT_SID = "AC3eb7093756e0cb849faa2f97fe69b2f7";
+    
+    private static final String AUTH_TOKEN = "0c6dd099b40f4fdbee1731aec651413e";
+    private static final String FROM_PHONE = "+18595453665";
+    
+//    private SmsOtpServiceImpl smsOtpServiceImpl;
+ 
+    public SmsOtpServiceImpl() {
+    	Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+    }
+
+
+    @Override
+    public void sendOtp(String mobileNumber, String otp) {
+    	System.out.println("mobileNumber"+ mobileNumber);
+        Message.creator(
+            new PhoneNumber("+65"+mobileNumber),
+            new PhoneNumber(FROM_PHONE),
+            "Your verification code is: " + otp + ". Do not share it with anyone"
+        ).create();
+    }
+}

@@ -1,36 +1,43 @@
 package sg.nus.iss.service.ecommerceapp.model;
 
-import java.util.List;
-
+import java.util.Collection;
+import org.springframework.security.core.GrantedAuthority;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import java.util.List;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+
 
 @Entity
-@Table(name="customers")
+@Table(name = "customers")
 public class Customer extends User {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="customer_id")
-	private int id;
-	private String phoneNumber;
 	
-	@OneToOne(mappedBy = "customer")
+//	@NotBlank(message = "Code is required")
+//	@Size(min=8,max = 8, message = "Invalid mobile number")
+//	@Column(name="mobile_phone_number")
+	private String mobilePhoneNumber;
+
+@OneToOne(mappedBy = "customer")
 	private ShoppingCart shoppingCart;
 	
 	@OneToMany(mappedBy="id")
 	private List<DeliveryAddress> deliveryAddresses;
-
-	public Customer() {
+	
+	public Customer(int id, String firstName, String lastName, String userName, String email,
+			String mobilePhoneNumber, String password, String role) {
+		super(id, firstName, lastName, userName, email, password,role);
+		this.setMobilePhoneNumber(mobilePhoneNumber);
 	}
 
-	public List<DeliveryAddress> getDeliveryAddresses() {
+	public Customer() {
+		// TODO Auto-generated constructor stub
+	}
+
+public List<DeliveryAddress> getDeliveryAddresses() {
 		return deliveryAddresses;
 	}
 
@@ -46,20 +53,25 @@ public class Customer extends User {
 		this.shoppingCart = shoppingCart;
 	}
 
-	public int getId() {
-		return id;
+	public String getMobilePhoneNumber() {
+		return mobilePhoneNumber;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setMobilePhoneNumber(String mobilePhoneNumber) {
+		this.mobilePhoneNumber = mobilePhoneNumber;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+
 	}
 
 }
