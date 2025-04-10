@@ -19,29 +19,27 @@ import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 public class MyUserDetailService implements UserDetailsService {
 	@Autowired
 	private CustomerService userService;
-	
+
 	@Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("userdata"+username);
-		Optional <Customer> user=userService.findBymobilePhoneNumber(username);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println("userdata" + username);
+		Optional<Customer> user = userService.findBymobilePhoneNumber(username);
 
-        if (user.isEmpty()) {
-        	 System.out.println("user");
-            throw new UsernameNotFoundException("Invalid user");
-        }
+		if (user.isEmpty()) {
+			System.out.println("user");
+			throw new UsernameNotFoundException("Invalid user");
+		}
 
-		
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.get().getRole()));
-        System.out.println("user"+user.get().getMobilePhoneNumber());
+		// GrantedAuthority is an interface used by Spring Security to manage roles and
+		// permissions.
 
-        return new org.springframework.security.core.userdetails.User(
-                user.get().getMobilePhoneNumber(),
-                user.get().getPassword(),
-                authorities
-        );
-    }
-	
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_" + user.get().getRole()));
+		System.out.println("user" + user.get().getMobilePhoneNumber());
 
+		// returning the user details
+		return new org.springframework.security.core.userdetails.User(user.get().getMobilePhoneNumber(),
+				user.get().getPassword(), authorities);
+	}
 
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Verify OTP</title>
+</head>
+<body>
+    <h1>Verify OTP</h1>
+    <form action="/verify-otp" method="post">
+        <div>
+            <label for="otp">Enter OTP:</label>
+            <input type="text" name="otp" required>
+            <input type="hidden" name="mobileNumber" value="${mobileNumber}" />
+        </div>
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>
