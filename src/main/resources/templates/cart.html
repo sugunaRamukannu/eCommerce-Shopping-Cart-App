@@ -10,52 +10,39 @@
 			<aside class="col-xs-12 col-lg-8 px-lg-0 align-self-start mb-2 mb-lg-0">
 				<div class="border border-2 border-black p-3 mb-2 d-flex flex-column">
 					<span class="fs-3 fw-bold d-inline-block">Deliver To</span>
-					<span>Address is this:</span>
+					<span>Address is this:
+						<span th:each="address: ${addresses}">
+							<span th:text="${address}"></span>
+						</span>
+					</span>
+					<div th:each="product: ${products}">
+						<span th:text="${product.id}"></span>
+					</div>
 				</div>
 				<div class="border border-2 border-black p-3">
-					<span class="fs-3 fw-bold d-inline-block me-2">Select All</span>
-					<input style="width:30px; height: 30px;" class="form-check-input rounded-0" type="checkbox" value=""
-						id="checkIndeterminate">
+					<span class="fs-3 fw-bold d-inline-block me-2">Cart Items</span>
 					<div class="form-check d-flex align-items-center justify-content-around">
-						<input style="width:30px; height: 30px;" class="form-check-input rounded-0" type="checkbox"
-							value="" id="checkChecked" checked>
-						<label class="form-check-label" for="checkChecked">
-							Apple
-						</label>
-
-						<span>S$20</span>
-						<div>
-							<button class="btn btn-primary rounded-0">-</button>
-							<span class="d-inline-block px-3">1</span>
-							<button class="btn btn-primary rounded-0">+</button>
+						<div th:each="item : ${cartItems}">
+							<span th:text="${item.product.name}"></span>
+							<span th:text="'S$' + ${item.price}"></span>
+							<span th:text="${item.quantity}"></span>
+							<span th:text="'S$' + ${item.price * item.quantity}"></span>
 						</div>
-						<img src="https://picsum.photos/100" />
-					</div>
-					<hr />
-					<div class="form-check d-flex align-items-center justify-content-around">
-						<input style="width:30px; height: 30px;" class="form-check-input rounded-0" type="checkbox"
-							value="" id="checkChecked" checked>
-						<label class="form-check-label" for="checkChecked">
-							Apple
-						</label>
-
-						<span>S$20</span>
-						<div>
-							<button class="btn btn-primary rounded-0">-</button>
-							<span class="d-inline-block px-3">1</span>
-							<button class="btn btn-primary rounded-0">+</button>
+						<div th:if="${#lists.isEmpty(cartItems)}">
+							<span colspan="4">No items in cart.</span>
 						</div>
-						<img src="https://picsum.photos/100" />
 					</div>
-				</div>
+					<!-- Cart Summary -->
+					<form th:action="@{/cart/empty}" method="post">
+						<button class="btn btn-danger rounded-0">Empty Cart</button>
+					</form>
 			</aside>
 			<div class="col px-lg-2">
 				<div class="border border-2 border-black p-3 mb-5 d-flex flex-column">
-					<span class="fs-3 fw-bold d-inline-block mb-3">Coupons</span>
-					<span class="fs-5 mb-2">Item Subtotal</span>
-					<span class="fs-5 mb-2">Delivery Fee</span>
-					<span class="fs-5 mb-2">Discounts</span>
-					<span class="fs-4 fw-bold my-2">Total: S$100</span>
+					<span class="fs-3 fw-bold d-inline-block mb-3">Checkout Details</span>
+					<span>Total Quantity: <span th:id="cart-count" th:text="${itemCount}"></span></span>
+					<span class="fs-4 fw-bold my-2">Total Amount: <span th:id="cart-total" th:text="'S$' + ${totalPrice} + 0"></span></span></span>
+
 					<button class="btn btn-primary rounded-0 w-100">Check Out</button>
 				</div>
 			</div>

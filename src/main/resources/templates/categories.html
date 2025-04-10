@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Insert the header -->
+<th:block th:insert="~{fragments/header :: header('Categories')}"></th:block>
+<main>
+	<section class="container p-5 px-lg-0 d-flex">
+
+		<div class="row w-100 align-items-center mx-auto mt-5 pt-5">
+			<div class="col">
+				<h1 class="mb-4 fw-bold">Categories</h1>
+				<div class="card card-category position-relative text-center rounded-0 border border-2">
+					<div class="card-body">
+						<img src="https://picsum.photos/300" class="card-img-top rounded-0" alt="...">
+						<p class="card-text fw-bold mb-0 mt-2">Fruits & Vegetables</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+<!-- Insert the footer -->
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
+
+</html>
