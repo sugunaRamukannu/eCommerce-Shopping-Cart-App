@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Insert the header -->
+<th:block th:insert="~{fragments/header :: header('Order Detail')}"></th:block>
+<main>
+	<section class="container p-5 d-flex">
+		<div class="row solo-box-page-wide align-items-center mx-auto mt-5 pt-5">
+			<div class="col border border-black p-5">
+				<h1 class="order-detail-title mb-4 fw-bold text-center">Order ID </h1>
+				<div class="row mb-3 flex-column g-3">
+					<div class="order-box col border border-black p-5">
+						<span class="fs-3 fw-semibold">Product 1:</span>
+						<span class="fs-3 fw-semibold">Product Name:</span>
+						<span class="fs-3 fw-semibold">Product Description:</span>
+						<span class="fs-3 fw-semibold">Img:</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+<!-- Insert the footer -->
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
+
+</html>

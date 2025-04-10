@@ -1,3 +1,4 @@
+// navigation bar & document title
 const currentPage = document.title.toLowerCase()
 
 const links = document.querySelectorAll(".nav-link")
@@ -9,6 +10,25 @@ links.forEach(link => {
 	}
 })
 
+// get last part of url in the form of id and append to page title
+if (currentPage.includes("order detail")) {
+	const orderIdNo = location.pathname.split("/").pop() 
+	const orderIdTitle = document.querySelector(".order-detail-title")
+	document.title += " " + orderIdNo
+	orderIdTitle.textContent += orderIdNo
+}
+
+//redirect to order details page
+const orderBoxes = document.querySelectorAll(".order-box")
+
+orderBoxes.forEach(order => {
+	order.addEventListener("click", () => {
+		const orderId = order.dataset.orderId
+		location.href=`/purchases/order-detail/${orderId}`
+	})
+})
+
+/*
 // Fetch actual cart summary on page load
 		   window.addEventListener('DOMContentLoaded', () => {
 		       fetch('/cart/summary')
@@ -37,3 +57,4 @@ links.forEach(link => {
         function updateCartCount(count) {
             document.getElementById('cart-count').textContent = count;
         }
+		*/

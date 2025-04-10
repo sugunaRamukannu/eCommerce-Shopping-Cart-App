@@ -23,10 +23,10 @@
 					<span class="fs-3 fw-bold d-inline-block me-2">Cart Items</span>
 					<div class="form-check d-flex align-items-center justify-content-around">
 						<div th:each="item : ${cartItems}">
-							<span th:text="${item.product.name}"></span>
-							<span th:text="'S$' + ${item.price}"></span>
-							<span th:text="${item.quantity}"></span>
-							<span th:text="'S$' + ${item.price * item.quantity}"></span>
+							<span class="fs-4 fw-bold" th:text="${item.product.name}"></span>
+							<span class="fs-5 fw-medium" th:text="'S$' + ${item.price}"></span>
+							<span class="fs-5 fw-medium" th:text="${item.quantity}"></span>
+							<span class="fs-5 fw-medium" th:text="'S$' + ${item.price * item.quantity}"></span>
 						</div>
 						<div th:if="${#lists.isEmpty(cartItems)}">
 							<span colspan="4">No items in cart.</span>
@@ -40,7 +40,7 @@
 			<div class="col px-lg-2">
 				<div class="border border-2 border-black p-3 mb-5 d-flex flex-column">
 					<span class="fs-3 fw-bold d-inline-block mb-3">Checkout Details</span>
-					<span>Total Quantity: <span th:id="cart-count" th:text="${itemCount}"></span></span>
+					<span class="fs-4 fw-medium">Total Quantity: <span th:id="cart-count" th:text="${itemCount}"></span></span>
 					<span class="fs-4 fw-bold my-2">Total Amount: <span th:id="cart-total" th:text="'S$' + ${totalPrice} + 0"></span></span></span>
 
 					<button class="btn btn-primary rounded-0 w-100">Check Out</button>

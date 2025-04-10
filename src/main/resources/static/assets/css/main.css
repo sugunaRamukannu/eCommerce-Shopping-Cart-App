@@ -33,21 +33,22 @@
 	font-size: 0.6rem;
 }
 
-.svg-bg-small {
+.banner-box {
 	background-color: white;
 	transition: 0.3s;
 	min-height: 10rem;
 }
 
-.svg-bg-small > div {
+.banner-box > div {
 	transform: translate(10%, 30%);
 }
 
-.svg-bg-small:hover {
+.banner-box:hover {
 	background-color:rgb(51, 106, 75);
+	cursor: pointer;
 }
 
-.svg-bg-small:hover, .svg-bg-small:hover a {
+.banner-box:hover, .banner-box:hover a {
 	color: white;
 }
 
@@ -65,6 +66,18 @@ a.active-link {
 
 .coupon {
 	align-items: flex-start !important;
+}
+
+.order-box {
+	display: flex;
+	gap: 5rem;
+	flex-wrap: wrap;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.order-box:hover {
+	background-color: #a2e436;
 }
 
 @media only screen and (max-width: 600px) {
