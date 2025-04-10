@@ -69,29 +69,32 @@ public class LoginController {
 		    return "create-account";
 		}
 	    
-
-	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute Customer customer, BindingResult bindingResult, Model model) {
 		
-		 if(bindingResult.hasErrors()) {
-			 System.out.println("error");
-			 System.out.println(bindingResult.getAllErrors());
-			 model.addAttribute("customer", customer);
-			 return"create-account";
-			 }
-		 if (customerService.checkMobileExists(customer.getMobilePhoneNumber())) {
-		        model.addAttribute("mobileExists", true);
-		        model.addAttribute("customer", customer);
-		        return "create-account"; 
-		    }
-		 
-		String encoded = passwordEncoder.encode(customer.getPassword());
-	    customer.setPassword(encoded);
-	    customerService.saveCustomer(customer);
-	    model.addAttribute("logindto", new LoginDto());
-	 boolean isUserExists = true; // Set your condition here
-	 System.out.println("isValidCustomersregist"+isUserExists);
-	 model.addAttribute("showPassword",isUserExists);
-	return "/login";
-	}
+		@PostMapping("/register")
+		public String register(@Valid @ModelAttribute Customer customer, BindingResult bindingResult, Model model) {
+			
+			 if(bindingResult.hasErrors()) {
+				 System.out.println("error");
+				 System.out.println(bindingResult.getAllErrors());
+				 model.addAttribute("customer", customer);
+				 return"create-account";
+				 }
+			 if (customerService.checkMobileExists(customer.getMobilePhoneNumber())) {
+			        model.addAttribute("mobileExists", true);
+			        model.addAttribute("customer", customer);
+			        return "create-account"; 
+			    }
+			 
+			String encoded = passwordEncoder.encode(customer.getPassword());
+		    customer.setPassword(encoded);
+		    System.out.println("fortsname"+customer.getFirstName());
+		    customerService.saveCustomer(customer);
+		    model.addAttribute("logindto", new LoginDto());
+		 boolean isUserExists = true; // Set your condition here
+		 System.out.println("isValidCustomersregist"+isUserExists);
+		 model.addAttribute("showPassword",isUserExists);
+		return "/login";
+		}
+
+
 }

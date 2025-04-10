@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import sg.nus.iss.service.ecommerceapp.model.Product;
-import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.ProductService;
 import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
 
@@ -37,6 +36,14 @@ public class ProductController {
 		return "products";
 
 	}
+	
+
+	@GetMapping("/cart")
+	public String displayCart() {
+		return "cart";
+
+	}
+	
 	
 	@PostMapping("/cart/{productId}")
 	public String addToCart(@PathVariable int productId) {

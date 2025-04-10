@@ -37,7 +37,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		//For Spring security 
 		String phoneNumber = "999";
 		
-		Optional<Customer> optionalCustomer = customerRepository.findByPhoneNumber(phoneNumber);
+		Optional<Customer> optionalCustomer = customerRepository.findBymobilePhoneNumber(phoneNumber);
 		
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
@@ -77,7 +77,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		
 		String phoneNumber = "999";
 		
-		Optional<Customer> optionalCustomer = customerRepository.findByPhoneNumber(phoneNumber);
+		Optional<Customer> optionalCustomer = customerRepository.findBymobilePhoneNumber(phoneNumber);
 		
 		if (optionalCustomer.isPresent()) {
 			ShoppingCart shoppingCart = optionalCustomer.get().getShoppingCart();
@@ -94,7 +94,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		
 		String phoneNumber = "999";
 		
-		Optional<Customer> optionalCustomer = customerRepository.findByPhoneNumber(phoneNumber);
+		Optional<Customer> optionalCustomer = customerRepository.findBymobilePhoneNumber(phoneNumber);
 		
 		if (optionalCustomer.isPresent()) {
 			ShoppingCart shoppingCart = optionalCustomer.get().getShoppingCart();

@@ -16,7 +16,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	Optional <Customer> findBymobilePhoneNumber(String mobilePhoneNumber);
 
 
-	boolean existsByPhoneNumber(String phoneNumber);
+//	boolean existsByPhoneNumber(String mobilePhoneNumber);
 	
 	@Query("SELECT d FROM DeliveryAddress d WHERE d.customer.id = :id")
 	List<DeliveryAddress> findDeliveryAddressesByCustomer(@Param("id") int customerId);

@@ -22,10 +22,10 @@ public abstract class User implements UserDetails{
 	GenerationType.IDENTITY)
   @Column(name="customer_id")
 	private int id;
-	 @NotBlank(message = "Name is required")
+//	 @NotBlank(message = "Name is required")
 	 @Column(name="first_name")
 	private String firstName;
-	 @NotBlank(message = "Name is required")
+//	 @NotBlank(message = "Name is required")
 	 @Column(name="last_name")
 	private String lastName;
 	 @Column(name="user_name")
@@ -46,6 +46,19 @@ public abstract class User implements UserDetails{
 		this.email = email;
 		this.password = password;
 		this.role=role;
+	}
+	public String getFirstName() {
+		return  firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	public String getPassword() {
