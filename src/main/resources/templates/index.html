@@ -37,12 +37,12 @@
 	<section class="py-5 svg-bg">
 		<div class="container px-5 px-md-0">
 			<h2 class="my-4 fw-bold fs-3">Get It Here!</h2>
-			<div class="row">
-				<div class="col">
+			<div class="row row-card g-3">
+				<div class="col col-lg-2" th:each="c:${categories}">
 					<div class="card card-category position-relative text-center rounded-0 border border-2">
 						<div class="card-body">
 							<img src="https://picsum.photos/300" class="card-img-top rounded-0" alt="...">
-							<p class="card-text fw-bold mb-0 mt-2">Fruits & Vegetables</p>
+							<p class="card-text fw-bold mb-0 mt-2" th:text="${c.category}">Fruits & Vegetables</p>
 						</div>
 					</div>
 				</div>
@@ -52,14 +52,14 @@
 	<section class="py-5">
 		<div class="container px-5 px-md-0">
 			<h2 class="my-4 fw-bold fs-3">Fruits & Vegetables</h2>
-			<div class="row row-card g-1 g-lg-5">
-					<div class="col" th:each="product:${products}">
+			<div class="row row-card g-3">
+					<div class="col col-lg-3" th:each="product:${products}">
 						<div class="card card-product position-relative p-2 rounded-0 border border-2">
 							<div class="card-body">
 								<span class="badge fs-6 text-bg-primary position-absolute rounded-0">Sale</span>
 								<img src="https://picsum.photos/300" class="card-img-top rounded-0" alt="...">
 								<h5 class="card-title mt-4" th:text="${product.name}">Apple</h5>
-								<p class="card-text fw-light mb-0">Fruits & Vegetables</p>
+								<p class="card-text fw-light mb-0" th:text="${product.productCategory}">Fruits & Vegetables</p>
 								<span th:text="${product.description}"></span>
 								<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-2">
 									<span class="fs-5" th:text="${product.price}">S$20</span>
