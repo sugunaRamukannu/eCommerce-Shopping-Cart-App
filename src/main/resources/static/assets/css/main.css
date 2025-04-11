@@ -18,10 +18,12 @@
 
 .card-category {
 	width: 10rem;
+	
 }
 
 .card-product {
-	width: 13rem;
+	width: 15rem;
+	height: 100%;
 }
 
 .shadow-color {
