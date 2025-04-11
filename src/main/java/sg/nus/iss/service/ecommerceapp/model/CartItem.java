@@ -25,6 +25,7 @@ public class CartItem {
 	private Product product;
 	private int quantity;
 	private double price;
+	private boolean checkedOut;
 	
 	public CartItem() {}
 	
@@ -66,5 +67,13 @@ public class CartItem {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	public boolean isCheckedOut() {
+		return checkedOut;
+	}
+
+	public void setCheckedOut(boolean checkedOut) {
+		this.checkedOut = checkedOut;
 	}
 }

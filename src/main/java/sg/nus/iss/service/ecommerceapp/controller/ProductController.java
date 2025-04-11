@@ -96,13 +96,6 @@ public class ProductController {
 		return "redirect:/";
 	}
 	
-	@PostMapping("/cart/empty")
-	public String emptyCart() {
-		
-		shoppingCartService.emptyCart();
-		return "redirect:/cart";
-	}
-	
 //	@PostMapping("/add-to-cart/{productId}")
 //	@ResponseBody
 //	public ResponseEntity<Map<String, Object>> addToCart(@PathVariable Integer productId) {

@@ -13,10 +13,11 @@ import sg.nus.iss.service.ecommerceapp.model.DeliveryAddress;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 
-	Optional <Customer> findBymobilePhoneNumber(String mobilePhoneNumber);
+	Optional<Customer> findByMobilePhoneNumber(String mobilePhoneNumber);
 
-
-//	boolean existsByPhoneNumber(String mobilePhoneNumber);
+	//return boolean
+	@Query("SELECT COUNT(c) > 0 FROM Customer c WHERE c.mobilePhoneNumber = :mobilePhoneNumber")
+	boolean existsByPhoneNumber(@Param("mobilePhoneNumber") String mobilePhoneNumber);
 	
 	@Query("SELECT d FROM DeliveryAddress d WHERE d.customer.id = :id")
 	List<DeliveryAddress> findDeliveryAddressesByCustomer(@Param("id") int customerId);
