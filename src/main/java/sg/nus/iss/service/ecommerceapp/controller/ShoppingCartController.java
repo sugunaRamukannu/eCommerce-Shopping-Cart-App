@@ -40,19 +40,22 @@ public class ShoppingCartController {
 //		List<CartItem> cartItems = shoppingCartService.listItemInCart();
 //		model.addAttribute("cartItems", cartItems);
 
-		//see if session exists?
+		/* session function below - need to extract */
+		// see if session exists?
 		String userName = (String) sessionObj.getAttribute("userName");
-		
+
 		if (userName == null) {
 			return "redirect:/login";
 		}
 		model.addAttribute("userName", userName);
-		
+
 		// get customer phone number first
 		Customer customer = customerService.findByCustomerUserName(userName);
 
-		//with mobile phone number, it is possible to retrieve the respective user cart details
+		// with mobile phone number, it is possible to retrieve the respective user cart
+		// details
 		String mobilePhoneNumber = customer.getMobilePhoneNumber();
+		/* session function above - need to extract */
 
 		Map<Product, List<CartItem>> groupedItems = shoppingCartService.listItemInCart(mobilePhoneNumber);
 
@@ -69,7 +72,24 @@ public class ShoppingCartController {
 	}
 
 	@PostMapping("/cart/{productId}")
-	public String addToCart(@PathVariable int productId, String mobilePhoneNumber) {
+	public String addToCart(@PathVariable int productId, HttpSession sessionObj, Model model) {
+
+		/* session function below - need to extract */
+		// see if session exists?
+		String userName = (String) sessionObj.getAttribute("userName");
+
+		if (userName == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("userName", userName);
+
+		// get customer phone number first
+		Customer customer = customerService.findByCustomerUserName(userName);
+
+		// with mobile phone number, it is possible to retrieve the respective user cart
+		// details
+		String mobilePhoneNumber = customer.getMobilePhoneNumber();
+		/* session function above - need to extract */
 
 		shoppingCartService.addProductToCart(productId, mobilePhoneNumber);
 		System.out.println("PRODUCT ADDED");
@@ -86,7 +106,24 @@ public class ShoppingCartController {
 //	}
 
 	@PostMapping("/cart/delete")
-	public String deleteProductFromCart(@RequestParam("productId") int productId, Model model, String mobilePhoneNumber) {
+	public String deleteProductFromCart(@RequestParam("productId") int productId, HttpSession sessionObj, Model model) {
+
+		/* session function below - need to extract */
+		// see if session exists?
+		String userName = (String) sessionObj.getAttribute("userName");
+
+		if (userName == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("userName", userName);
+
+		// get customer phone number first
+		Customer customer = customerService.findByCustomerUserName(userName);
+
+		// with mobile phone number, it is possible to retrieve the respective user cart
+		// details
+		String mobilePhoneNumber = customer.getMobilePhoneNumber();
+		/* session function above - need to extract */
 
 		shoppingCartService.deleteProductFromCart(productId, mobilePhoneNumber);
 
@@ -125,7 +162,24 @@ public class ShoppingCartController {
 //		return "checkout";
 //	}
 	@GetMapping("/cart/checkout")
-	public String showCheckedoutItems(Model model, String mobilePhoneNumber) {
+	public String showCheckedoutItems(HttpSession sessionObj, Model model) {
+
+		/* session function below - need to extract */
+		// see if session exists?
+		String userName = (String) sessionObj.getAttribute("userName");
+
+		if (userName == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("userName", userName);
+
+		// get customer phone number first
+		Customer customer = customerService.findByCustomerUserName(userName);
+
+		// with mobile phone number, it is possible to retrieve the respective user cart
+		// details
+		String mobilePhoneNumber = customer.getMobilePhoneNumber();
+		/* session function above - need to extract */
 
 		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems(mobilePhoneNumber);
 
@@ -140,7 +194,8 @@ public class ShoppingCartController {
 	}
 
 	@PostMapping("/cart/checkout")
-	public String checkoutSelectedItems(@RequestParam("checkedoutItems") List<Integer> itemIds, Model model, String mobilePhoneNumber) {
+	public String checkoutSelectedItems(@RequestParam("checkedoutItems") List<Integer> itemIds, Model model,
+			HttpSession sessionObj) {
 
 //		 if (itemIds == null || itemIds.isEmpty()) {
 //		        // Handle the case where no items are selected
@@ -156,6 +211,23 @@ public class ShoppingCartController {
 //		        return "cart"; // Redirect back to cart if no items are selected
 //		    }
 
+		/* session function below - need to extract */
+		// see if session exists?
+		String userName = (String) sessionObj.getAttribute("userName");
+
+		if (userName == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("userName", userName);
+
+		// get customer phone number first
+		Customer customer = customerService.findByCustomerUserName(userName);
+
+		// with mobile phone number, it is possible to retrieve the respective user cart
+		// details
+		String mobilePhoneNumber = customer.getMobilePhoneNumber();
+		/* session function above - need to extract */
+		
 		shoppingCartService.updateCheckedoutStatus(itemIds, mobilePhoneNumber);
 
 		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems(mobilePhoneNumber);
