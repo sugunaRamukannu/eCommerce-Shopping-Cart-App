@@ -35,7 +35,7 @@ public class ShoppingCartController {
 	@Autowired
 	private CustomerService customerService;
 
-	@GetMapping("/cart") // test with 1 first
+	@GetMapping("/cart")
 	public String showCart(HttpSession sessionObj, Model model) {
 //		List<CartItem> cartItems = shoppingCartService.listItemInCart();
 //		model.addAttribute("cartItems", cartItems);
@@ -69,9 +69,9 @@ public class ShoppingCartController {
 	}
 
 	@PostMapping("/cart/{productId}")
-	public String addToCart(@PathVariable int productId) {
+	public String addToCart(@PathVariable int productId, String mobilePhoneNumber) {
 
-		shoppingCartService.addProductToCart(productId);
+		shoppingCartService.addProductToCart(productId, mobilePhoneNumber);
 		System.out.println("PRODUCT ADDED");
 
 		return "redirect:/";
@@ -86,9 +86,9 @@ public class ShoppingCartController {
 //	}
 
 	@PostMapping("/cart/delete")
-	public String deleteProductFromCart(@RequestParam("productId") int productId, Model model) {
+	public String deleteProductFromCart(@RequestParam("productId") int productId, Model model, String mobilePhoneNumber) {
 
-		shoppingCartService.deleteProductFromCart(productId);
+		shoppingCartService.deleteProductFromCart(productId, mobilePhoneNumber);
 
 		return "redirect:/cart";
 	}
@@ -125,9 +125,9 @@ public class ShoppingCartController {
 //		return "checkout";
 //	}
 	@GetMapping("/cart/checkout")
-	public String showCheckedoutItems(Model model) {
+	public String showCheckedoutItems(Model model, String mobilePhoneNumber) {
 
-		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems();
+		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems(mobilePhoneNumber);
 
 		double totalPrice = checkedoutItems.entrySet().stream().mapToDouble(
 				entry -> entry.getKey().getPrice() * entry.getValue().stream().mapToInt(CartItem::getQuantity).sum())
@@ -140,7 +140,7 @@ public class ShoppingCartController {
 	}
 
 	@PostMapping("/cart/checkout")
-	public String checkoutSelectedItems(@RequestParam("checkedoutItems") List<Integer> itemIds, Model model) {
+	public String checkoutSelectedItems(@RequestParam("checkedoutItems") List<Integer> itemIds, Model model, String mobilePhoneNumber) {
 
 //		 if (itemIds == null || itemIds.isEmpty()) {
 //		        // Handle the case where no items are selected
@@ -156,9 +156,9 @@ public class ShoppingCartController {
 //		        return "cart"; // Redirect back to cart if no items are selected
 //		    }
 
-		shoppingCartService.updateCheckedoutStatus(itemIds);
+		shoppingCartService.updateCheckedoutStatus(itemIds, mobilePhoneNumber);
 
-		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems();
+		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems(mobilePhoneNumber);
 
 		double totalPrice = checkedoutItems.entrySet().stream().mapToDouble(
 				entry -> entry.getKey().getPrice() * entry.getValue().stream().mapToInt(CartItem::getQuantity).sum())

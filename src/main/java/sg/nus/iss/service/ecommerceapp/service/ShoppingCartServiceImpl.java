@@ -39,11 +39,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	
 
 	@Override
-	public ShoppingCart addProductToCart(int productId) {
-		// For Spring security
-		String phoneNumber = "999";
+	public ShoppingCart addProductToCart(int productId, String mobilePhoneNumber) {
 
-		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(phoneNumber);
+		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
@@ -137,10 +135,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 	
 	@Override
-	public void checkoutCurrentUserSelectedItems(List<Integer> itemIds) {
-		String phoneNumber = "999";
-		
-		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(phoneNumber);
+	public void checkoutCurrentUserSelectedItems(List<Integer> itemIds, String mobilePhoneNumber) {	
+		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 		
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
@@ -157,11 +153,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 	
 	@Override
-	public Map<Product, List<CartItem>> showCheckedoutItems() {
+	public Map<Product, List<CartItem>> showCheckedoutItems(String mobilePhoneNumber) {
 		
-		String phoneNumber = "999";
-		
-		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(phoneNumber);
+		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 		
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
@@ -181,11 +175,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 	
 	@Override
-	public void updateCheckedoutStatus(List<Integer> selectedItemIds) {
+	public void updateCheckedoutStatus(List<Integer> selectedItemIds, String mobilePhoneNumber) {
 		
-		String phoneNumber = "999";
-		
-		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(phoneNumber);
+		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 		
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
@@ -227,11 +219,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 //	}
 	
 	@Override
-	public void deleteProductFromCart(int productId) {
+	public void deleteProductFromCart(int productId, String mobilePhoneNumber) {
 		
-		String phoneNumber = "999";
-		
-			Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(phoneNumber);
+			Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 		
 			if (optionalCustomer.isPresent()) {
 				Customer customer = optionalCustomer.get();

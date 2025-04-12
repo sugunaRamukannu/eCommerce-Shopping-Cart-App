@@ -14,21 +14,21 @@ public interface ShoppingCartService {
 //	List<CartItem> listItemInCart();
 	Map<Product, List<CartItem>> listItemInCart(String mobilePhoneNumber);
 	
-	ShoppingCart addProductToCart(int productId);
+	ShoppingCart addProductToCart(int productId, String mobilePhoneNumber);
 	
 	CartSummary getCartSummary(String mobilePhoneNumber);
 	
-	void checkoutCurrentUserSelectedItems(List<Integer> itemIds);
+	void checkoutCurrentUserSelectedItems(List<Integer> itemIds, String mobilePhoneNumber);
 	
-	Map<Product, List<CartItem>> showCheckedoutItems();
+	Map<Product, List<CartItem>> showCheckedoutItems(String mobilePhoneNumber);
 	
-	void updateCheckedoutStatus(List<Integer> selectedItemIds);
+	void updateCheckedoutStatus(List<Integer> selectedItemIds, String mobilePhoneNumber);
 	
 	List<DeliveryAddress> findDeliveryAddressesByCustomer(String mobilePhoneNumber);
 	
 //	void uncheckedCurrentUserItems();
 	
-	void deleteProductFromCart(int productId);
+	void deleteProductFromCart(int productId, String mobilePhoneNumber);
 	
 	void emptyCart();
 
