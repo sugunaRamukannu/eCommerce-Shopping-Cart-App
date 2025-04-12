@@ -11,43 +11,72 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.service.ecommerceapp.model.CartItem;
 import sg.nus.iss.service.ecommerceapp.model.CartSummary;
+import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.model.DeliveryAddress;
 import sg.nus.iss.service.ecommerceapp.model.Product;
+import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
 
 @Controller
 public class ShoppingCartController {
 
-	//add products to cart
-	//list of products, click on add button, product gets added into shopping cart
-	//pull product details from product repository
-	//display products in shopping cart
-	//store products in shopping cart repository
-	
+	// add products to cart
+	// list of products, click on add button, product gets added into shopping cart
+	// pull product details from product repository
+	// display products in shopping cart
+	// store products in shopping cart repository
+
 	@Autowired
 	private ShoppingCartService shoppingCartService;
-	
-	@GetMapping("/cart/{id}") //test with 1 first
-	public String showCart(@PathVariable int id, Model model) {
+
+	@Autowired
+	private CustomerService customerService;
+
+	@GetMapping("/cart") // test with 1 first
+	public String showCart(HttpSession sessionObj, Model model) {
 //		List<CartItem> cartItems = shoppingCartService.listItemInCart();
 //		model.addAttribute("cartItems", cartItems);
-//		
-		Map<Product, List<CartItem>> groupedItems = shoppingCartService.listItemInCart();
+
+		//see if session exists?
+		String userName = (String) sessionObj.getAttribute("userName");
 		
+		if (userName == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("userName", userName);
+		
+		// get customer phone number first
+		Customer customer = customerService.findByCustomerUserName(userName);
+
+		//with mobile phone number, it is possible to retrieve the respective user cart details
+		String mobilePhoneNumber = customer.getMobilePhoneNumber();
+
+		Map<Product, List<CartItem>> groupedItems = shoppingCartService.listItemInCart(mobilePhoneNumber);
+
 		model.addAttribute("groupedItems", groupedItems);
-		
-		CartSummary cartSummary = shoppingCartService.getCartSummary();
+
+		CartSummary cartSummary = shoppingCartService.getCartSummary(mobilePhoneNumber);
 		model.addAttribute("totalPrice", cartSummary.getTotalPrice());
 		model.addAttribute("itemCount", cartSummary.getItemCount());
-		
-		List<DeliveryAddress> addresses = shoppingCartService.findDeliveryAddressesByCustomer(id);
+
+		List<DeliveryAddress> addresses = shoppingCartService.findDeliveryAddressesByCustomer(mobilePhoneNumber);
 		model.addAttribute("addresses", addresses);
-		
+
 		return "cart";
 	}
-	
+
+	@PostMapping("/cart/{productId}")
+	public String addToCart(@PathVariable int productId) {
+
+		shoppingCartService.addProductToCart(productId);
+		System.out.println("PRODUCT ADDED");
+
+		return "redirect:/";
+	}
+
 //	@PostMapping("/cart")
 //	public CartSummary addToCart(int productId) {
 //		shoppingCartService.addProductToCart(productId);
@@ -55,33 +84,33 @@ public class ShoppingCartController {
 //		
 //		return shoppingCartService.getCartSummary();
 //	}
-	
+
 	@PostMapping("/cart/delete")
 	public String deleteProductFromCart(@RequestParam("productId") int productId, Model model) {
-		
+
 		shoppingCartService.deleteProductFromCart(productId);
-		
+
 		return "redirect:/cart";
 	}
-	
+
 	@PostMapping("/cart/empty")
-    public String emptyCart() {
-		
-        shoppingCartService.emptyCart();
-        return "redirect:/cart";
-    }
-	
-		//proceed to checkout button clicked
-		//goes into the checkout page
-		//displays selected products
-		//customer to fill in shipping address
-		//apply discounts if any
-		//proceed to payment button
-	
-	//retain checked UI
-	//increase checked box size
-	//if same product, the quantity should increase and not have a separate row
-	
+	public String emptyCart() {
+
+		shoppingCartService.emptyCart();
+		return "redirect:/cart";
+	}
+
+	// proceed to checkout button clicked
+	// goes into the checkout page
+	// displays selected products
+	// customer to fill in shipping address
+	// apply discounts if any
+	// proceed to payment button
+
+	// retain checked UI
+	// increase checked box size
+	// if same product, the quantity should increase and not have a separate row
+
 //	@GetMapping("/cart/checkout")
 //	public String showCheckoutItems(Model model) {
 //		List<CartItem> checkedoutItems = shoppingCartService.showCheckedoutItems();
@@ -97,22 +126,22 @@ public class ShoppingCartController {
 //	}
 	@GetMapping("/cart/checkout")
 	public String showCheckedoutItems(Model model) {
-		
+
 		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems();
-		
-		double totalPrice = checkedoutItems.entrySet().stream()
-		        .mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue().stream().mapToInt(CartItem::getQuantity).sum())
-		        .sum();
-		
+
+		double totalPrice = checkedoutItems.entrySet().stream().mapToDouble(
+				entry -> entry.getKey().getPrice() * entry.getValue().stream().mapToInt(CartItem::getQuantity).sum())
+				.sum();
+
 		model.addAttribute("checkedoutItems", checkedoutItems);
 		model.addAttribute("totalPrice", totalPrice);
-		
+
 		return "checkout";
 	}
-	
+
 	@PostMapping("/cart/checkout")
 	public String checkoutSelectedItems(@RequestParam("checkedoutItems") List<Integer> itemIds, Model model) {
-		
+
 //		 if (itemIds == null || itemIds.isEmpty()) {
 //		        // Handle the case where no items are selected
 //		        model.addAttribute("errorMessage", "No items selected for checkout.");
@@ -126,33 +155,33 @@ public class ShoppingCartController {
 //				
 //		        return "cart"; // Redirect back to cart if no items are selected
 //		    }
-		
+
 		shoppingCartService.updateCheckedoutStatus(itemIds);
-		
+
 		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems();
-		
-		double totalPrice = checkedoutItems.entrySet().stream()
-		        .mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue().stream().mapToInt(CartItem::getQuantity).sum())
-		        .sum();
-		
-		model.addAttribute("checkedoutItems",checkedoutItems);
+
+		double totalPrice = checkedoutItems.entrySet().stream().mapToDouble(
+				entry -> entry.getKey().getPrice() * entry.getValue().stream().mapToInt(CartItem::getQuantity).sum())
+				.sum();
+
+		model.addAttribute("checkedoutItems", checkedoutItems);
 		model.addAttribute("totalPrice", totalPrice);
-		
+
 		return "checkout";
 	}
-	
+
 //	@GetMapping("/cart/back")
 //	public String backToCart(HttpSession session) {
 //		shoppingCartService.uncheckedCurrentUserItems();
-		
+
 //		List<CartItem> cartItems = shoppingCartService.listItemInCart();
 //		model.addAttribute("cartItems", cartItems);
 //		
 //		CartSummary cartSummary = shoppingCartService.getCartSummary();
 //		model.addAttribute("totalPrice", cartSummary.getTotalPrice());
 //		model.addAttribute("itemCount", cartSummary.getItemCount());
-		
+
 //		return "redirect:/cart";
 //	}
-	
+
 }

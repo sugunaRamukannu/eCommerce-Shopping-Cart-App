@@ -45,16 +45,22 @@
 							</div>
 						</div>
 						<div class="col mb-3">
-							<label for="password" class="form-label">Password</label>
-							<input type="password" th:field="*{password}" class="form-control rounded-0" id="password"
-								name="password" placeholder="Enter Password">
-								<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">
-						</div>
-						<div class="w-100"></div> <!-- To add extra space as large layout placeholder -->
-						<div class="col col-lg-6 mt-3 mx-auto">
-							<button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
-						</div>
-					</div>
+							<label for="userName" class="form-label">Username</label>
+							<input type="text" th:field="*{userName}" class="form-control rounded-0" id="userName"
+								name="userName" placeholder="Enter Usermame">
+							<div th:if="${#fields.hasErrors('userName')}" th:errors="*{password}" class="text-danger">
+							</div>
+							<div class="col mb-3">
+								<label for="password" class="form-label">Password</label>
+								<input type="password" th:field="*{password}" class="form-control rounded-0"
+									id="password" name="password" placeholder="Enter Password">
+								<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+									class="text-danger">
+								</div>
+								<div class="col col-lg-6 mt-3 mx-auto">
+									<button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
+								</div>
+							</div>
 
 				</form>
 			</div>

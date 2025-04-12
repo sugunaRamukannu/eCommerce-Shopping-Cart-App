@@ -12,15 +12,24 @@ import sg.nus.iss.service.ecommerceapp.model.ShoppingCart;
 public interface ShoppingCartService {
 
 //	List<CartItem> listItemInCart();
-	Map<Product, List<CartItem>> listItemInCart();
+	Map<Product, List<CartItem>> listItemInCart(String mobilePhoneNumber);
+	
 	ShoppingCart addProductToCart(int productId);
-	CartSummary getCartSummary();
+	
+	CartSummary getCartSummary(String mobilePhoneNumber);
+	
 	void checkoutCurrentUserSelectedItems(List<Integer> itemIds);
+	
 	Map<Product, List<CartItem>> showCheckedoutItems();
+	
 	void updateCheckedoutStatus(List<Integer> selectedItemIds);
-	List<DeliveryAddress> findDeliveryAddressesByCustomer(int customerId);
+	
+	List<DeliveryAddress> findDeliveryAddressesByCustomer(String mobilePhoneNumber);
+	
 //	void uncheckedCurrentUserItems();
+	
 	void deleteProductFromCart(int productId);
+	
 	void emptyCart();
 
 }

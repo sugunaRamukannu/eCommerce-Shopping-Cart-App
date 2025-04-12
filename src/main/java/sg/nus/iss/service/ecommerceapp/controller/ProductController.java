@@ -79,23 +79,6 @@ public class ProductController {
 	    return "products"; 
 	}
 	
-
-	@GetMapping("/cart")
-	public String displayCart() {
-		return "cart";
-
-	}
-	
-	
-	@PostMapping("/cart/{productId}")
-	public String addToCart(@PathVariable int productId) {
-		
-		shoppingCartService.addProductToCart(productId);
-		System.out.println("PRODUCT ADDED");
-		
-		return "redirect:/";
-	}
-	
 //	@PostMapping("/add-to-cart/{productId}")
 //	@ResponseBody
 //	public ResponseEntity<Map<String, Object>> addToCart(@PathVariable Integer productId) {

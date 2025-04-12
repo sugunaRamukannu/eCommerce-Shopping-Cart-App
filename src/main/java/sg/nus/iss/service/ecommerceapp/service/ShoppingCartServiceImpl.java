@@ -35,6 +35,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	@Autowired
 	private CartItemRepository cartItemRepository;
+	
+	
 
 	@Override
 	public ShoppingCart addProductToCart(int productId) {
@@ -78,11 +80,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public Map<Product, List<CartItem>> listItemInCart() {
+	public Map<Product, List<CartItem>> listItemInCart(String mobilePhoneNumber) {
 
-		String phoneNumber = "999";
-
-		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(phoneNumber);
+		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 
 		if (optionalCustomer.isPresent()) {
 			ShoppingCart shoppingCart = optionalCustomer.get().getShoppingCart();
@@ -117,11 +117,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 //	}
 
 	@Override
-	public CartSummary getCartSummary() {
+	public CartSummary getCartSummary(String mobilePhoneNumber) {
 
-		String phoneNumber = "999";
-
-		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(phoneNumber);
+		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 
 		if (optionalCustomer.isPresent()) {
 			ShoppingCart shoppingCart = optionalCustomer.get().getShoppingCart();
@@ -259,7 +257,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public List<DeliveryAddress> findDeliveryAddressesByCustomer(int customerId) {
-		return customerRepository.findDeliveryAddressesByCustomer(customerId);
+	public List<DeliveryAddress> findDeliveryAddressesByCustomer(String mobilePhoneNumber) {
+		return customerRepository.findDeliveryAddressesByCustomer(mobilePhoneNumber);
 	}
 }

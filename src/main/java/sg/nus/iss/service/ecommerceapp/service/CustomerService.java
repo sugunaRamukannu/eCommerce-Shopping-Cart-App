@@ -7,10 +7,12 @@ import sg.nus.iss.service.ecommerceapp.model.Customer;
 
 public interface CustomerService {
 	
-	public boolean  checkMobileExists(String mobilePhoneNumber);
+	public boolean checkMobileExists(String mobilePhoneNumber);
+	
 	public Customer saveCustomer(Customer customer);
+	
 	public Optional<Customer> findBymobilePhoneNumber(String username);
-
-
+	
+	public Customer findByCustomerUserName(String userName);
 
 }
