@@ -28,6 +28,24 @@ orderBoxes.forEach(order => {
 	})
 })
 
+
+/*temp to fix later*/
+function updateCartCount(count) {
+          document.getElementById('cart-count').textContent = count;
+      }
+	
+	function submitDeleteForm(productId) {
+			        document.getElementById('delete-form-' + productId).submit();
+			    }
+				
+			    document.querySelector("#checkout-form").addEventListener("submit", function(event) {
+			        const checkboxes = document.querySelectorAll("#checkout-form input[name='checkedoutItems']:checked");
+			        if (checkboxes.length === 0) {
+			            alert("Please select at least one item to checkout.");
+			            event.preventDefault();
+			        }
+			    });
+
 /*
 // Fetch actual cart summary on page load
 		   window.addEventListener('DOMContentLoaded', () => {
@@ -53,8 +71,4 @@ orderBoxes.forEach(order => {
 				localStorage.setItem('cartCount', cartCount);
             });
         });
-
-        function updateCartCount(count) {
-            document.getElementById('cart-count').textContent = count;
-        }
 		*/

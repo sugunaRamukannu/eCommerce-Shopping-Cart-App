@@ -22,10 +22,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public boolean checkMobileExists(String mobilePhoneNumber) {
 		 System.out.println("phonenumber"+mobilePhoneNumber);
-		 System.out.println("phonenumbersa"+customerRepo.findBymobilePhoneNumber(mobilePhoneNumber).isPresent());
+		 System.out.println("phonenumbersa"+customerRepo.findByMobilePhoneNumber(mobilePhoneNumber).isPresent());
 //		Optional<Customer> user= customerRepo.findByPhoneNumber(customer.getMobilePhoneNumber());
 		//instead of writing code that checks for null values using if statements, you can use Optional methods to handle null values more
-		return customerRepo.findBymobilePhoneNumber(mobilePhoneNumber).isPresent();
+		return customerRepo.findByMobilePhoneNumber(mobilePhoneNumber).isPresent();
 		
 	
 	};
@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Optional<Customer> findBymobilePhoneNumber(String username) {
 		// TODO Auto-generated method stub
-		return customerRepo.findBymobilePhoneNumber(username);
+		return customerRepo.findByMobilePhoneNumber(username);
 	}
 
 
