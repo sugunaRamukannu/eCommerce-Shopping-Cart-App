@@ -78,9 +78,9 @@
 												th:checked="${entry.value[0].checkedOut}" />
 										</td>
 										<td th:text="${entry.key.name}"></td>
-										<td th:text="'S$' + ${entry.key.price}"></td>
+										<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price, 1, 2)}"></td>
 										<td th:text="${entry.value.size()}"></td>
-										<td th:text="'S$' + ${entry.key.price * entry.value.size()}"></td>
+										<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price * entry.value.size(), 1, 2)}"></td>
 										<td>
 											<button type="button" class="btn btn-danger btn-sm rounded-0"
 												th:onclick="'submitDeleteForm(' + ${entry.key.id} + ')'">
@@ -93,7 +93,7 @@
 
 							<!-- Cart Summary -->
 							<div class="d-flex justify-content-between">
-								<h3>Total: <span th:id="cart-total" th:text="'S$' + ${totalPrice}"></span></h3>
+								<h3>Total: <span th:id="cart-total" th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></h3>
 								<!--<h3>Items: <span th:id="cart-count" th:text="${itemCount}"></span></h3>-->
 							</div>
 

@@ -24,7 +24,7 @@ const orderBoxes = document.querySelectorAll(".order-box")
 orderBoxes.forEach(order => {
 	order.addEventListener("click", () => {
 		const orderId = order.dataset.orderId
-		location.href=`/purchases/order-detail/${orderId}`
+		location.href=`/order-detail/${orderId}`
 	})
 })
 

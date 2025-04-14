@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.model.Order;
 import sg.nus.iss.service.ecommerceapp.model.OrderItem;
+import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.OrderItemService;
 import sg.nus.iss.service.ecommerceapp.service.OrderService;
 
 @Controller
 public class PurchaseHistoryController {
+	
+	@Autowired
+	private CustomerService customerService;
 
 	@Autowired
 	private OrderService orderService;
@@ -29,12 +34,21 @@ public class PurchaseHistoryController {
 		//Customer customer = (Customer) sessionObj.getAttribute("loggedInCustomer");
 	
 		@GetMapping("/purchase-history")
-		public String viewPurchaseHistory(Model model) {
-		Customer customer = new Customer();
-		customer.setId(2); //hardcoding based on customer id -> need to see how to integrate with logged-in customer
+		public String viewPurchaseHistory(Model model, Authentication authentication) {
+			
+		String mobilePhoneNumber = authentication.getName();
 		
-		List<Order> orders = orderService.findByCustomer(customer);
+		Optional<Customer> optCustomer = customerService.findBymobilePhoneNumber(mobilePhoneNumber);
+		
+		if (optCustomer.isPresent()) {
+			Customer customer = optCustomer.get();
+			
+			List<Order> orders = orderService.findByCustomer(customer);
 			model.addAttribute("orders", orders);
+		} else {
+			return "redirect:/login";
+		}
+		
 			return "purchase-history";
 		}
 		

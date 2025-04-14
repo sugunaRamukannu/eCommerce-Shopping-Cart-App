@@ -46,8 +46,8 @@ public class ShoppingCartController {
 		model.addAttribute("totalPrice", cartSummary.getTotalPrice());
 		model.addAttribute("itemCount", cartSummary.getItemCount());
 
-		List<DeliveryAddress> addresses = shoppingCartService.findDeliveryAddressesByCustomer(mobilePhoneNumber);
-		model.addAttribute("addresses", addresses);
+//		List<DeliveryAddress> addresses = shoppingCartService.findDeliveryAddressesByCustomer(mobilePhoneNumber);
+//		model.addAttribute("addresses", addresses);
 
 		return "cart";
 	}

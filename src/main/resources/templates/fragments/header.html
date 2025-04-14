@@ -123,17 +123,15 @@
 								<a class="nav-link text-primary" href="#" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
 									<!-- Profile Picture Added Based on Last Digit in Phone Number-->
-									<img class="rounded-circle d-lg-block mx-auto" width="80" height="80"
+									<img class="profile rounded-circle d-lg-block mx-auto" width="80" height="80"
 										th:src="@{'/assets/img/'+ ${#authentication.name.charAt(#authentication.name.length() - 1)} +'.svg'}"
-										alt="Profile"
-										style="border-radius: 50%;
-										 border: 3px solid #73AD21;">
+										alt="Profile">
 
 								</a>
 								<ul class="dropdown-menu rounded-0" data-bs-toggle="collapse"
 									data-bs-target="#collapseExample">
 									<li>
-										<a class="dropdown-item" th:href="@{/purchases}">
+										<a class="dropdown-item" th:href="@{/purchase-history}">
 											<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
 												fill="currentColor" class="bi bi-receipt" viewBox="0 0 16 16">
 												<path

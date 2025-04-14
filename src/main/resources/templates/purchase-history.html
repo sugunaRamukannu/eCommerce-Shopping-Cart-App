@@ -8,17 +8,20 @@
 		<div class="row solo-box-page-wide align-items-center mx-auto mt-5 pt-5">
 			<div class="col border border-black p-5">
 				<h1 class="mb-4 fw-bold text-center">My Purchase History</h1>
-				<div class="row mb-3 flex-column g-3">
-					<div data-order-id="1" class="order-box col border border-black p-5">
-						<span class="fs-3 fw-semibold">Order ID:</span>
-						<span class="fs-3 fw-semibold">Order Date:</span>
-						<span class="fs-3 fw-semibold">Order Price:</span>
-					</div>
-					<div data-order-id="2" class="order-box col border border-black p-5">
-						<span class="fs-3 fw-semibold">Order ID:</span>
-						<span class="fs-3 fw-semibold">Order Date:</span>
-						<span class="fs-3 fw-semibold">Order Price:</span>
-					</div>
+				<div th:if="${orders.isEmpty()}" class="text-center py-5">
+					<h2 class="text-muted">No orders found</h2>
+				</div>
+				<div class="row mb-3 flex-column g-3" th:each="order:${orders}">
+					<a th:href="@{/order-detail/{id} (id=${order.id})}" class="text-decoration-none text-dark">
+						<div data-order-id="1" class="order-box col border border-black p-5">
+							<span class="fs-3 fw-semibold">Order ID:<span th:text="${order.id}"></span></span>
+							<span class="fs-3 fw-semibold">Order Date:<span th:text="${order.orderDate}"></span></span>
+							<span class="fs-3 fw-semibold">Order Price:<span
+									th:text="'S$' + ${#numbers.formatDecimal(order.totalPrice, 1, 2)}"></span></span>
+							<span class="fs-3 fw-semibold">Order Status:<span
+									th:text="${order.orderStatus}"></span></span>
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>
