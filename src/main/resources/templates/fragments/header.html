@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="header(title)">
 
@@ -90,7 +90,8 @@
 										</a>
 									</li>
 								</ul>
-							<li th:if="${session.userName != null}" class="nav-item">
+								<!--it injects the current authentication and security context into your Thymeleaf engine-->
+							<li sec:authorize="isAuthenticated()"  class="nav-item">
 								<a th:href="@{/cart}" data-page="cart" class="nav-link text-white position-relative">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-cart d-lg-block mx-auto" viewBox="0 0 16 16">
@@ -104,7 +105,8 @@
 									<span>Cart</span>
 								</a>
 							</li>
-							<li th:if="${session.userName == null}" class="nav-item">
+							
+							<li sec:authorize="!isAuthenticated()"  class="nav-item">
 								<a data-page="login" th:href="@{/login}" class="nav-link text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-person-circle d-lg-block mx-auto" viewBox="0 0 16 16">
@@ -116,8 +118,8 @@
 								</a>
 							</li>
 
-							<li th:if="${session.userName != null}" class="nav-item dropdown"
-								data-bs-toggle="collapse" href="#collapseExample">
+							<li sec:authorize="isAuthenticated()" class="nav-item dropdown" data-bs-toggle="collapse"
+								href="#collapseExample">
 								<a class="nav-link text-primary" href="#" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
 									<!-- Profile Picture Added -->

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 
 @Configuration
 @EnableWebSecurity
@@ -32,9 +33,8 @@ public class Webconfig {
 				// Authorization configuration - define which URLs are accessible by which
 				// roles.
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/", "/login", "/login-check", "/forgot-password", "/register",
-								"/send-otp", "/reset-password", "/createAccount", "/submit-password", "/products",
-								"/assets/**")
+						.requestMatchers("/", "/login", "/login-check", "/forgot-password", "/register", "/send-otp",
+								"/reset-password", "/createAccount", "/submit-password", "/products", "/assets/**")
 						.permitAll() // URLs that don't require authentication.
 						// .requestMatchers("/createAccount").hasRole("ADMIN")
 						// .requestMatchers("/cart/**").hasRole("USER")
@@ -88,5 +88,14 @@ public class Webconfig {
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	// SpringSecurityDialect is a thymeleaf dialect that allows you to use spring
+	// security expressions directly
+	// into your HTML templates..in order to enable it, we have to register this as
+	// a bean
+	@Bean
+	SpringSecurityDialect springSecurityDialect() {
+		return new SpringSecurityDialect();
 	}
 }
