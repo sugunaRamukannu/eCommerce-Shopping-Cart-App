@@ -90,8 +90,8 @@
 										</a>
 									</li>
 								</ul> -->
-								<!--it injects the current authentication and security context into your Thymeleaf engine-->
-							<li sec:authorize="isAuthenticated()"  class="nav-item">
+							<!--it injects the current authentication and security context into your Thymeleaf engine-->
+							<li sec:authorize="isAuthenticated()" class="nav-item">
 								<a th:href="@{/cart}" data-page="cart" class="nav-link text-white position-relative">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-cart d-lg-block mx-auto" viewBox="0 0 16 16">
@@ -105,8 +105,8 @@
 									<span>Cart</span>
 								</a>
 							</li>
-							
-							<li sec:authorize="!isAuthenticated()"  class="nav-item">
+
+							<li sec:authorize="!isAuthenticated()" class="nav-item">
 								<a data-page="login" th:href="@{/login}" class="nav-link text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-person-circle d-lg-block mx-auto" viewBox="0 0 16 16">
@@ -122,10 +122,11 @@
 								href="#collapseExample">
 								<a class="nav-link text-primary" href="#" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
-									<!-- Profile Picture Added -->
+									<!-- Profile Picture Added Based on Last Digit in Phone Number-->
 									<img class="rounded-circle d-lg-block mx-auto" width="50" height="50"
-										src="https://images.pexels.com/photos/31465740/pexels-photo-31465740/free-photo-of-surprised-man-covering-mouth-in-studio-setting.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-										alt="Profile">
+										th:src="@{'/assets/img/'+ ${#authentication.name.charAt(#authentication.name.length() - 1)} +'-circle-fill.svg'}"
+										alt="Profile" style="filter: brightness(0) invert(1);">
+
 								</a>
 								<ul class="dropdown-menu rounded-0" data-bs-toggle="collapse"
 									data-bs-target="#collapseExample">
