@@ -249,8 +249,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		cartItemRepository.deleteAll();
 	}
 
-	@Override
-	public List<DeliveryAddress> findDeliveryAddressesByCustomer(String mobilePhoneNumber) {
-		return customerRepository.findDeliveryAddressesByCustomer(mobilePhoneNumber);
-	}
+//	@Override
+//	public List<DeliveryAddress> findDeliveryAddressesByCustomer(String mobilePhoneNumber) {
+//		return customerRepository.findDeliveryAddressesByCustomer(mobilePhoneNumber);
+//	}
 }

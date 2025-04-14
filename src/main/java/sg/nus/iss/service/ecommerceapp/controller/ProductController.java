@@ -4,13 +4,17 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import sg.nus.iss.service.ecommerceapp.model.CartSummary;
 import sg.nus.iss.service.ecommerceapp.model.Product;
 import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
 import sg.nus.iss.service.ecommerceapp.repository.ProductCategoryRepository;
@@ -77,6 +81,27 @@ public class ProductController {
 	        return "error";
 	    }
 	    return "products"; 
+	}
+	
+	@PostMapping("/add-to-cart/{productId}")
+	public String addToCart(@PathVariable int productId, Authentication authentication) {
+		
+		String mobilePhoneNumber = authentication.getName();
+		
+		shoppingCartService.addProductToCart(productId, mobilePhoneNumber);
+		System.out.println("PRODUCT ADDED");
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/cart/summary")
+	@ResponseBody
+	public ResponseEntity<CartSummary> getCartSummary(Authentication authentication) {
+		
+		String mobilePhoneNumber = authentication.getName();
+		
+	    CartSummary summary = shoppingCartService.getCartSummary(mobilePhoneNumber);
+	    return ResponseEntity.ok(summary);
 	}
 	
 //	@PostMapping("/add-to-cart/{productId}")

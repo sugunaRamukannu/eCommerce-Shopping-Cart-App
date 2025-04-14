@@ -24,41 +24,20 @@ public class CartItem {
 	@JoinColumn(name = "product_id")
 	private Product product;
 	private int quantity;
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private Order order;
 	private double price;
 	private boolean checkedOut;
 	
 	public CartItem() {}
-	
-	public int getQuantity() {
-		return quantity;
+
+	public boolean isCheckedOut() {
+		return checkedOut;
 	}
-	
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	
-	public Product getProduct() {
-		return product;
-	}
-	
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
-	public ShoppingCart getShoppingCart() {
-		return shoppingCart;
-	}
-	
-	public void setShoppingCart(ShoppingCart shoppingCart) {
-		this.shoppingCart = shoppingCart;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
+
+	public void setCheckedOut(boolean checkedOut) {
+		this.checkedOut = checkedOut;
 	}
 
 	public double getPrice() {
@@ -68,12 +47,44 @@ public class CartItem {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	public boolean isCheckedOut() {
-		return checkedOut;
+
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setCheckedOut(boolean checkedOut) {
-		this.checkedOut = checkedOut;
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

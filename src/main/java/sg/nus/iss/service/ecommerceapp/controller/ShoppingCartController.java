@@ -123,8 +123,10 @@ public class ShoppingCartController {
 				entry -> entry.getKey().getPrice() * entry.getValue().stream().mapToInt(CartItem::getQuantity).sum())
 				.sum();
 
+		double shippingFee = 5.00;
 		model.addAttribute("checkedoutItems", checkedoutItems);
 		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("shippingFee", shippingFee);
 
 		return "checkout";
 	}
