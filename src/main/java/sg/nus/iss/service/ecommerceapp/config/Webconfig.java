@@ -33,7 +33,7 @@ public class Webconfig {
 				// Authorization configuration - define which URLs are accessible by which
 				// roles.
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/", "/login", "/login-check", "/forgot-password", "/register", "/send-otp",
+						.requestMatchers("/", "/login", "/login-check", "/search", "/forgot-password", "/register", "/send-otp",
 								"/reset-password", "/createAccount", "/submit-password", "/products", "/assets/**")
 						.permitAll() // URLs that don't require authentication.
 						// .requestMatchers("/createAccount").hasRole("ADMIN")

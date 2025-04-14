@@ -7,7 +7,7 @@
 	<section class="container p-5 pb-0 px-lg-0 mt-5 pt-5">
 		<div class="coupon row align-items-center mx-auto mt-5 pt-5">
 			<h1 class="mb-4 fw-bold">My Cart</h1>
-			<aside class="col-xs-12 col-lg-8 px-lg-0 align-self-start mb-2 mb-lg-0">
+			<!--<aside class="col-xs-12 col-lg-8 px-lg-0 align-self-start mb-2 mb-lg-0">
 				<div class="border border-2 border-black p-3 mb-2 d-flex flex-column">
 					<span class="fs-3 fw-bold d-inline-block">Deliver To</span>
 					<span>Address is this:
@@ -32,74 +32,85 @@
 							<span colspan="4">No items in cart.</span>
 						</div>
 					</div>
-					<!--To fix -->
 					<div th:each="entry : ${groupedItems}">
 						<form th:action="@{/cart/delete}" method="post" th:id="'delete-form-' + ${entry.key.id}"
 							style="display:none;">
 							<input type="hidden" name="productId" th:value="${entry.key.id}" />
 						</form>
 					</div>
-					<form th:action="@{/cart/empty}" method="post">
-						<button class="btn btn-danger mt-3 rounded-0">Empty Cart</button>
-					</form>
-					<!--To fix -->
-			</aside>
+			</aside> -->
 			<div class="col px-lg-2">
 				<div class="border border-2 border-black p-3 mb-5 d-flex flex-column">
-					<span class="fs-3 fw-bold d-inline-block mb-3">Checkout Details</span>
-					<span class="fs-4 fw-medium">Total Quantity: <span th:id="cart-count"
-							th:text="${itemCount}"></span></span>
-					<span class="fs-4 fw-bold my-2">Total Amount: <span th:id="cart-total"
-							th:text="'S$' + ${totalPrice} + 0"></span></span></span>
-
-					<!--To fix -->
-					<form th:action="@{/cart/checkout}" method="post" id="checkout-form">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Select</th>
-									<th>Product</th>
-									<th>Unit Price</th>
-									<th>Quantity</th>
-									<th>Total Price</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- Loop through cartItems -->
-								<tr th:each="entry : ${groupedItems}">
-									<td>
-										<input type="checkbox" th:id="'item-' + ${entry.key.id}"
-											th:value="${entry.key.id}" name="checkedoutItems"
-											th:checked="${entry.value[0].checkedOut}" />
-									</td>
-									<td th:text="${entry.key.name}"></td>
-									<td th:text="'S$' + ${entry.key.price}"></td>
-									<td th:text="${entry.value.size()}"></td>
-									<td th:text="'S$' + ${entry.key.price * entry.value.size()}"></td>
-									<td>
-										<button type="button" class="btn btn-danger btn-sm"
-											th:onclick="'submitDeleteForm(' + ${entry.key.id} + ')'">
-											Remove
-										</button>
-									</td>
-								</tr>
-								<tr th:if="${#maps.isEmpty(groupedItems)}">
-									<td colspan="5">No items in cart.</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<!-- Cart Summary -->
-						<div class="d-flex justify-content-between">
-							<h3>Total: <span th:id="cart-total" th:text="'S$' + ${totalPrice}"></span></h3>
-							<h3>Items: <span th:id="cart-count" th:text="${itemCount}"></span></h3>
+					<div th:if="${#maps.isEmpty(groupedItems)}" class="fs-2 fw-semibold mx-auto">
+						<div class="d-flex flex-column mx-auto">
+							No items in cart!
+							<a th:href="@{/products}" class="btn btn-primary rounded-0 mt-3">Add product</a>
 						</div>
 
-						<!-- Proceed to checkout button -->
-						<button type="submit" class="btn btn-primary mt-3 rounded-0 w-100">Proceed to Checkout</button>
-					</form>
-					<!--To fix -->
+					</div>
+					<span th:if="${!#maps.isEmpty(groupedItems)}">
+						<span class="fs-3 fw-bold d-inline-block">Checkout Details</span>
+
+						<!--To fix -->
+						<form th:action="@{/cart/empty}" method="post">
+							<button class="btn btn-danger mt-3 rounded-0 mb-3">Empty Cart</button>
+						</form>
+
+						<!--To fix -->
+						<form th:action="@{/cart/checkout}" class="overflow-x-scroll" method="post" id="checkout-form">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Select</th>
+										<th>Product</th>
+										<th>Unit Price</th>
+										<th>Quantity</th>
+										<th>Total Price</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- Loop through cartItems -->
+									<tr th:each="entry : ${groupedItems}">
+										<td>
+											<input type="checkbox" th:id="'item-' + ${entry.key.id}"
+												th:value="${entry.key.id}" name="checkedoutItems"
+												th:checked="${entry.value[0].checkedOut}" />
+										</td>
+										<td th:text="${entry.key.name}"></td>
+										<td th:text="'S$' + ${entry.key.price}"></td>
+										<td th:text="${entry.value.size()}"></td>
+										<td th:text="'S$' + ${entry.key.price * entry.value.size()}"></td>
+										<td>
+											<button type="button" class="btn btn-danger btn-sm rounded-0"
+												th:onclick="'submitDeleteForm(' + ${entry.key.id} + ')'">
+												Remove
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<!-- Cart Summary -->
+							<div class="d-flex justify-content-between">
+								<h3>Total: <span th:id="cart-total" th:text="'S$' + ${totalPrice}"></span></h3>
+								<!--<h3>Items: <span th:id="cart-count" th:text="${itemCount}"></span></h3>-->
+							</div>
+
+
+
+							<!-- Proceed to checkout button -->
+							<button type="submit" class="btn btn-primary mt-3 rounded-0 w-50">Proceed to
+								Checkout</button>
+						</form>
+
+						<div th:each="entry : ${groupedItems}">
+							<form th:action="@{/cart/delete}" method="post" th:id="'delete-form-' + ${entry.key.id}"
+								style="display:none;">
+								<input type="hidden" name="productId" th:value="${entry.key.id}" />
+							</form>
+						</div>
+					</span>
 
 				</div>
 

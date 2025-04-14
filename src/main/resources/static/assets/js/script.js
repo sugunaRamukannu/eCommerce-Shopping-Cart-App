@@ -46,7 +46,7 @@ function updateCartCount(count) {
 			        }
 			    });
 
-/*
+
 // Fetch actual cart summary on page load
 		   window.addEventListener('DOMContentLoaded', () => {
 		       fetch('/cart/summary')
@@ -71,4 +71,4 @@ function updateCartCount(count) {
 				localStorage.setItem('cartCount', cartCount);
             });
         });
-		*/
+	

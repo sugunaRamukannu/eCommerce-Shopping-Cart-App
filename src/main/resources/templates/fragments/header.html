@@ -62,7 +62,7 @@
 									Products
 								</a>
 							</li>
-							<li class="nav-item dropdown" data-bs-toggle="collapse" href="#collapseExample">
+							<!--<li class="nav-item dropdown" data-bs-toggle="collapse" href="#collapseExample">
 								<a data-page="categories" class="nav-link dropdown-toggle text-white"
 									th:href="@{/categories}" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
@@ -89,7 +89,7 @@
 											<span>Category 1</span>
 										</a>
 									</li>
-								</ul>
+								</ul> -->
 								<!--it injects the current authentication and security context into your Thymeleaf engine-->
 							<li sec:authorize="isAuthenticated()"  class="nav-item">
 								<a th:href="@{/cart}" data-page="cart" class="nav-link text-white position-relative">
@@ -98,10 +98,10 @@
 										<path
 											d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
 									</svg>
-									<span id="cart-count" class="pill position-absolute badge rounded-0 bg-primary">
+									<!--<span id="cart-count" class="pill position-absolute badge rounded-0 bg-primary">
 										99+
 										<span class="visually-hidden">unread messages</span>
-									</span>
+									</span> -->
 									<span>Cart</span>
 								</a>
 							</li>

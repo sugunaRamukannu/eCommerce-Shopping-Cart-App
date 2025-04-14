@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.service.ecommerceapp.model.CartItem;
 import sg.nus.iss.service.ecommerceapp.model.CartSummary;
-import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.model.DeliveryAddress;
 import sg.nus.iss.service.ecommerceapp.model.Product;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
@@ -32,30 +31,12 @@ public class ShoppingCartController {
 	@Autowired
 	private ShoppingCartService shoppingCartService;
 
-	@Autowired
-	private CustomerService customerService;
-
 	@GetMapping("/cart")
-	public String showCart(HttpSession sessionObj, Model model) {
+	public String showCart(Model model, Authentication authentication) {
 //		List<CartItem> cartItems = shoppingCartService.listItemInCart();
 //		model.addAttribute("cartItems", cartItems);
 
-		/* session function below - need to extract */
-		// see if session exists?
-		String userName = (String) sessionObj.getAttribute("userName");
-
-		if (userName == null) {
-			return "redirect:/login";
-		}
-		model.addAttribute("userName", userName);
-
-		// get customer phone number first
-		Customer customer = customerService.findByCustomerUserName(userName);
-
-		// with mobile phone number, it is possible to retrieve the respective user cart
-		// details
-		String mobilePhoneNumber = customer.getMobilePhoneNumber();
-		/* session function above - need to extract */
+		String mobilePhoneNumber = authentication.getName();
 
 		Map<Product, List<CartItem>> groupedItems = shoppingCartService.listItemInCart(mobilePhoneNumber);
 
@@ -72,24 +53,9 @@ public class ShoppingCartController {
 	}
 
 	@PostMapping("/cart/{productId}")
-	public String addToCart(@PathVariable int productId, HttpSession sessionObj, Model model) {
+	public String addToCart(@PathVariable int productId, Model model, Authentication authentication) {
 
-		/* session function below - need to extract */
-		// see if session exists?
-		String userName = (String) sessionObj.getAttribute("userName");
-
-		if (userName == null) {
-			return "redirect:/login";
-		}
-		model.addAttribute("userName", userName);
-
-		// get customer phone number first
-		Customer customer = customerService.findByCustomerUserName(userName);
-
-		// with mobile phone number, it is possible to retrieve the respective user cart
-		// details
-		String mobilePhoneNumber = customer.getMobilePhoneNumber();
-		/* session function above - need to extract */
+		String mobilePhoneNumber = authentication.getName();
 
 		shoppingCartService.addProductToCart(productId, mobilePhoneNumber);
 		System.out.println("PRODUCT ADDED");
@@ -106,24 +72,9 @@ public class ShoppingCartController {
 //	}
 
 	@PostMapping("/cart/delete")
-	public String deleteProductFromCart(@RequestParam("productId") int productId, HttpSession sessionObj, Model model) {
+	public String deleteProductFromCart(@RequestParam("productId") int productId, Model model, Authentication authentication) {
 
-		/* session function below - need to extract */
-		// see if session exists?
-		String userName = (String) sessionObj.getAttribute("userName");
-
-		if (userName == null) {
-			return "redirect:/login";
-		}
-		model.addAttribute("userName", userName);
-
-		// get customer phone number first
-		Customer customer = customerService.findByCustomerUserName(userName);
-
-		// with mobile phone number, it is possible to retrieve the respective user cart
-		// details
-		String mobilePhoneNumber = customer.getMobilePhoneNumber();
-		/* session function above - need to extract */
+		String mobilePhoneNumber = authentication.getName();
 
 		shoppingCartService.deleteProductFromCart(productId, mobilePhoneNumber);
 
@@ -162,24 +113,9 @@ public class ShoppingCartController {
 //		return "checkout";
 //	}
 	@GetMapping("/cart/checkout")
-	public String showCheckedoutItems(HttpSession sessionObj, Model model) {
+	public String showCheckedoutItems(Model model, Authentication authentication) {
 
-		/* session function below - need to extract */
-		// see if session exists?
-		String userName = (String) sessionObj.getAttribute("userName");
-
-		if (userName == null) {
-			return "redirect:/login";
-		}
-		model.addAttribute("userName", userName);
-
-		// get customer phone number first
-		Customer customer = customerService.findByCustomerUserName(userName);
-
-		// with mobile phone number, it is possible to retrieve the respective user cart
-		// details
-		String mobilePhoneNumber = customer.getMobilePhoneNumber();
-		/* session function above - need to extract */
+		String mobilePhoneNumber = authentication.getName();
 
 		Map<Product, List<CartItem>> checkedoutItems = shoppingCartService.showCheckedoutItems(mobilePhoneNumber);
 
@@ -195,7 +131,7 @@ public class ShoppingCartController {
 
 	@PostMapping("/cart/checkout")
 	public String checkoutSelectedItems(@RequestParam("checkedoutItems") List<Integer> itemIds, Model model,
-			HttpSession sessionObj) {
+			Authentication authentication) {
 
 //		 if (itemIds == null || itemIds.isEmpty()) {
 //		        // Handle the case where no items are selected
@@ -211,22 +147,7 @@ public class ShoppingCartController {
 //		        return "cart"; // Redirect back to cart if no items are selected
 //		    }
 
-		/* session function below - need to extract */
-		// see if session exists?
-		String userName = (String) sessionObj.getAttribute("userName");
-
-		if (userName == null) {
-			return "redirect:/login";
-		}
-		model.addAttribute("userName", userName);
-
-		// get customer phone number first
-		Customer customer = customerService.findByCustomerUserName(userName);
-
-		// with mobile phone number, it is possible to retrieve the respective user cart
-		// details
-		String mobilePhoneNumber = customer.getMobilePhoneNumber();
-		/* session function above - need to extract */
+		String mobilePhoneNumber = authentication.getName();
 		
 		shoppingCartService.updateCheckedoutStatus(itemIds, mobilePhoneNumber);
 

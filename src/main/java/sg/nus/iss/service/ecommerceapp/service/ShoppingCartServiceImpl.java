@@ -1,5 +1,6 @@
 package sg.nus.iss.service.ecommerceapp.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,8 +36,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	@Autowired
 	private CartItemRepository cartItemRepository;
-	
-	
 
 	@Override
 	public ShoppingCart addProductToCart(int productId, String mobilePhoneNumber) {
@@ -64,7 +63,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 				cartItem.setQuantity(1);
 				cartItem.setPrice(product.getPrice());
 				cartItemRepository.save(cartItem);
+				// prevent null pointer
+				if (shoppingCart.getItems() == null) {
+					shoppingCart.setItems(new ArrayList<>());
+				}
 				shoppingCart.getItems().add(cartItem);
+				shoppingCart.setCustomer(customer);
 			}
 
 			System.out.println("ADDED");
@@ -133,16 +137,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		System.out.println("SUMMARY");
 		return new CartSummary(0, 0.0);
 	}
-	
+
 	@Override
-	public void checkoutCurrentUserSelectedItems(List<Integer> itemIds, String mobilePhoneNumber) {	
+	public void checkoutCurrentUserSelectedItems(List<Integer> itemIds, String mobilePhoneNumber) {
 		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
-		
+
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
 			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
-			
-			if (shoppingCart != null) {	
+
+			if (shoppingCart != null) {
 				List<CartItem> items = cartItemRepository.findAllById(itemIds);
 				for (CartItem item : items) {
 					item.setCheckedOut(true);
@@ -151,53 +155,53 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			}
 		}
 	}
-	
+
 	@Override
 	public Map<Product, List<CartItem>> showCheckedoutItems(String mobilePhoneNumber) {
-		
+
 		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
-		
+
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
 			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
-			
+
 			if (shoppingCart != null) {
 				List<CartItem> checkedoutItems = cartItemRepository.findByCheckedOut(true);
-				
+
 				Map<Product, List<CartItem>> groupedItems = checkedoutItems.stream()
 						.collect(Collectors.groupingBy(CartItem::getProduct, LinkedHashMap::new, Collectors.toList()));
-				
+
 				return groupedItems;
 			}
 		}
-		
+
 		return new HashMap<>();
 	}
-	
+
 	@Override
 	public void updateCheckedoutStatus(List<Integer> selectedItemIds, String mobilePhoneNumber) {
-		
+
 		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
-		
+
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
 			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
-			
+
 			if (shoppingCart != null) {
 				List<CartItem> allCartItems = shoppingCart.getItems();
-		
+
 				for (CartItem item : allCartItems) {
 					boolean isSelected = selectedItemIds.contains(item.getProduct().getId());
-						item.setCheckedOut(isSelected);
-				
-					}
-				
+					item.setCheckedOut(isSelected);
+
+				}
+
 				cartItemRepository.saveAll(allCartItems);
 			}
 		}
 	}
-	
-	//this is to unchecked ALL user items
+
+	// this is to unchecked ALL user items
 //	public void uncheckedCurrentUserItems() {
 //		
 //		String phoneNumber = "999";
@@ -217,28 +221,27 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 //			}
 //		}
 //	}
-	
+
 	@Override
 	public void deleteProductFromCart(int productId, String mobilePhoneNumber) {
-		
-			Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
-		
-			if (optionalCustomer.isPresent()) {
-				Customer customer = optionalCustomer.get();
-				ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
-			
-				if (shoppingCart != null) {
-					List<CartItem> cartItems = shoppingCart.getItems();
-					
-					List<CartItem> toDelete = cartItems.stream()
-							.filter(item -> item.getProduct().getId() == productId)
-							.collect(Collectors.toList());
-					
-					cartItems.removeAll(toDelete);
-					cartItemRepository.deleteAll(toDelete);
-					shoppingCartRepository.save(shoppingCart);
-				}
+
+		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
+
+		if (optionalCustomer.isPresent()) {
+			Customer customer = optionalCustomer.get();
+			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
+
+			if (shoppingCart != null) {
+				List<CartItem> cartItems = shoppingCart.getItems();
+
+				List<CartItem> toDelete = cartItems.stream().filter(item -> item.getProduct().getId() == productId)
+						.collect(Collectors.toList());
+
+				cartItems.removeAll(toDelete);
+				cartItemRepository.deleteAll(toDelete);
+				shoppingCartRepository.save(shoppingCart);
 			}
+		}
 	}
 
 	@Override
