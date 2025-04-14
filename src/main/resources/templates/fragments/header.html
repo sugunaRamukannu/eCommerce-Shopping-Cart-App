@@ -41,7 +41,7 @@
 								name="keyword" required>
 							<button class="btn btn-primary rounded-0" type="submit">Search</button>
 						</form>
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5 align-items-lg-center">
 							<li class="nav-item">
 								<a th:href="@{/}" data-page="home" class="nav-link text-white" aria-current="page">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -123,9 +123,11 @@
 								<a class="nav-link text-primary" href="#" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
 									<!-- Profile Picture Added Based on Last Digit in Phone Number-->
-									<img class="rounded-circle d-lg-block mx-auto" width="50" height="50"
-										th:src="@{'/assets/img/'+ ${#authentication.name.charAt(#authentication.name.length() - 1)} +'-circle-fill.svg'}"
-										alt="Profile" style="filter: brightness(0) invert(1);">
+									<img class="rounded-circle d-lg-block mx-auto" width="80" height="80"
+										th:src="@{'/assets/img/'+ ${#authentication.name.charAt(#authentication.name.length() - 1)} +'.svg'}"
+										alt="Profile"
+										style="border-radius: 50%;
+										 border: 3px solid #73AD21;">
 
 								</a>
 								<ul class="dropdown-menu rounded-0" data-bs-toggle="collapse"
