@@ -1,6 +1,7 @@
 package sg.nus.iss.service.ecommerceapp.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
-	
+
 	public List<Product> listAllProducts() {
-		
+
 		return productRepository.findAll();
 	}
 
@@ -46,6 +47,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional
+	public Product saveProducts(Product product) {
+		return productRepository.save(product);
+	}
+
+	@Override
+	@Transactional
 	public List<Product> SearchProductByName(String name) {
 		return productRepository.SearchProductByName(name);
 	}
@@ -62,5 +69,22 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByCategoryId(categoryId);
 	}
 
+	@Override
+	public boolean deleteProduct(int id) {
+		Optional<Product> product = productRepository.findById(id);
+		if (product.isPresent()) {
+			productRepository.deleteById(id);
+		}
+		return false;
+	}
 
+	@Override
+	public Optional<Product> findProduct(int id) {
+		return productRepository.findById(id);
+	}
+
+	@Override
+	public Product editProduct(Product existingProduct) {
+		return productRepository.save(existingProduct);
+	}
 }

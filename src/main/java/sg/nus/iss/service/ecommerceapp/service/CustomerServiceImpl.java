@@ -3,7 +3,6 @@ package sg.nus.iss.service.ecommerceapp.service;
 
 import java.util.Optional;
 
-
 import org.springframework.stereotype.Service;
 
 import sg.nus.iss.service.ecommerceapp.model.Customer;
@@ -44,5 +43,14 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 
+	@Override
+	public Customer findByCustomerUserName(String userName) {
+		Optional<Customer> customerOpt = customerRepo.findCustomerByUserName(userName);
+		
+		if (customerOpt.isPresent()) {
+			return customerOpt.get();
+		}
+		return null;
+	}
 
 }
