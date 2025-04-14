@@ -60,19 +60,23 @@
 						<div class="card-body d-flex flex-column justify-content-between">
 							<span class="badge fs-6 text-bg-primary position-absolute rounded-0"
 								th:text="${p.labels}">Sale</span>
-							<img th:src="${p.productUrl}" height="200" class="card-img-top rounded-0" th:alt="${p.name}">
+							<img th:src="${p.productUrl}" height="200" class="card-img-top rounded-0"
+								th:alt="${p.name}">
 							<h5 class="card-title mt-4" th:text="${p.name}">Apple</h5>
-							<p class="card-text fw-light mb-0" th:text="${p.productCategory.category}">Fruits & Vegetables
+							<p class="card-text fw-light mb-0" th:text="${p.productCategory.category}">Fruits &
+								Vegetables
 							</p>
 							<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">
-								<span class="fs-5"
-									th:text="'S$' + ${#numbers.formatDecimal(p.price, 1, 2)}">S$20</span>
-								<button class="btn btn-primary rounded-0" type="button"><svg
-										xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-										class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-										<path fill-rule="evenodd"
-											d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-									</svg>Add</button>
+								<span class="fs-5" th:text="'S$' + ${#numbers.formatDecimal(p.price, 1, 2)}">S$20</span>
+								<form th:action="@{/cart/{id}(id=${p.id})}" method="post">
+									<button th:data-product-id="${p.id}"
+										class="btn btn-primary rounded-0 add-to-cart-btn" type="submit"><svg
+											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+											<path fill-rule="evenodd"
+												d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+										</svg>Add</button>
+								</form>
 							</div>
 						</div>
 					</div>
