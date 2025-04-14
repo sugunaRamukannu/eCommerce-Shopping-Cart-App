@@ -29,68 +29,79 @@
 						</li>
 					</ul>
 				</div>
-			</aside>
-			<div class="col row g-2">
-				<h1 class="mb-4 fw-bold">Products</h1>
-				<div class="col col-lg-4">
-					<div class="card card-product position-relative p-2 rounded-0 border border-2">
-						<div class="card-body d-flex flex-column justify-content-between">
-							<span class="badge fs-6 text-bg-primary position-absolute rounded-0">Sale</span>
-							<img src="https://picsum.photos/300" class="card-img-top rounded-0" alt="...">
-							<h5 class="card-title mt-4">Apple</h5>
-							<p class="card-text fw-light mb-0">Fruits & Vegetables</p>
-							<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">
-								<span class="fs-5">S$20</span>
-								<button class="btn btn-primary rounded-0" type="button"><svg
-										xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-										class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-										<path fill-rule="evenodd"
-											d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-									</svg>Add</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col col-lg-4">
-					<div class="card card-product position-relative p-2 rounded-0 border border-2">
-						<div class="card-body d-flex flex-column justify-content-between">
-							<span class="badge fs-6 text-bg-primary position-absolute rounded-0">Sale</span>
-							<img src="https://picsum.photos/300" class="card-img-top rounded-0" alt="...">
-							<h5 class="card-title mt-4">Apple</h5>
-							<p class="card-text fw-light mb-0">Fruits & Vegetables</p>
-							<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">
-								<span class="fs-5">S$20</span>
-								<button class="btn btn-primary rounded-0" type="button"><svg
-										xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-										class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-										<path fill-rule="evenodd"
-											d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-									</svg>Add</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col col-lg-4">
-					<div class="card card-product position-relative p-2 rounded-0 border border-2">
-						<div class="card-body d-flex flex-column justify-content-between">
-							<span class="badge fs-6 text-bg-primary position-absolute rounded-0">Sale</span>
-							<img src="https://picsum.photos/300" class="card-img-top rounded-0" alt="...">
-							<h5 class="card-title mt-4">Apple</h5>
-							<p class="card-text fw-light mb-0">Fruits & Vegetables</p>
-							<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">
-								<span class="fs-5">S$20</span>
-								<button class="btn btn-primary rounded-0" type="button"><svg
-										xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-										class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-										<path fill-rule="evenodd"
-											d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-									</svg>Add</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+				<div class="border border-2 border-black p-3 pb-0 mb-5">
+					<span class="fs-3 fw-bold d-inline-block mb-3">Filter By</span>
+					<ul class="p-0">
 
+						<li class="nav-link fs-5 mb-2">
+							<a th:href="@{/products(filter='category:electronics', sort=${param.sort}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+								class="text-decoration-none text-dark">Fruit</a>
+						</li>
+						<li class="nav-link fs-5 mb-2">
+							<a th:href="@{/products(filter='category:clothing', sort=${param.sort}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+								class="text-decoration-none text-dark">Food</a>
+						</li>
+					</ul>
+				</div>
+			</aside>
+			<div class="col">
+							<form>
+						
+								<h1 class="mb-4 fw-bold" th:text="${param.keyword != null ? 'Search Results' : 'Products'}">Products</h1>
+								
+								<div class="row row-cols-2 row-cols-lg-4 mb-3 g-3">
+									
+									<th:block th:each="product : ${products}">
+										<div class="col">
+											<div class="card card-product position-relative p-2 rounded-0 border border-2">
+												<div class="card-body d-flex flex-column justify-content-between">
+													<th:block th:if="${product.labels != null and not #lists.isEmpty(product.labels)}">
+														<span class="badge fs-6 text-bg-primary position-absolute top-0 start-0 mt-2 ms-2 rounded-0" 
+															  th:text="${product.labels}">Sale</span>
+													</th:block>
+													<!--click product image to pop up enlarge image-->
+													<img th:src="${product.productUrl}" height="200" class="card-img-top rounded-0" th:alt="${product.name}" 
+													th:attr="data-bs-toggle='modal', data-bs-target='#imageModal__' + ${product.id}">
+													<!-- Modal with unique ID -->
+													<div class="modal fade" th:id="'imageModal__' + ${product.id}" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+													  <div class="modal-dialog modal-dialog-centered modal-lg">
+													    <div class="modal-content">
+													      <div class="modal-header">
+													        <h5 class="modal-title" th:text="${product.name}">Product Name</h5>
+													        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													      </div>
+													      <div class="modal-body text-center">
+													        <img th:src="${product.productUrl}" alt="Product Image" class="img-fluid mb-3">
+													        <p class="text-muted" th:text="${product.description}">Product description goes here.</p>
+													      </div>
+													    </div>
+													  </div>
+													</div>
+													<h5 class="card-title mt-4" th:text="${product.name}">Apple</h5>
+													<p class="card-text fw-light mb-0" th:text="${product.productCategory.category}">Fruits & Vegetables</p>
+													<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">
+														<span class="fs-5" th:text="'S$' + ${#numbers.formatDecimal(product.price, 1, 2)}">S$20.00</span>
+														<button class="btn btn-primary rounded-0" type="button">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+																fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+																<path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+															</svg>Add
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</th:block>
+									
+									
+									<th:block th:if="${products.isEmpty()}">
+										<div class="col-12">
+											<p class="text-muted mt-4">No products found.</p>
+										</div>
+									</th:block>
+								</div>
+							</form>
+						</div>
 		</div>
 	</section>
 </main>
