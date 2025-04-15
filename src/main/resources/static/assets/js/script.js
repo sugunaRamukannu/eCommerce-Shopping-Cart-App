@@ -38,22 +38,22 @@ orderBoxes.forEach(order => {
 function updateCartCount(count) {
           document.getElementById('cart-count').textContent = count;
       }*/
-	
-	function submitDeleteForm(productId) {
-			document.getElementById('delete-form-' + productId).submit();
-	}
+
+function submitDeleteForm(productId) {
+	document.getElementById('delete-form-' + productId).submit();
+}
 				
-			    document.querySelector("#checkout-form").addEventListener("submit", function(event) {
-			        const checkboxes = document.querySelectorAll("#checkout-form input[name='checkedoutItems']:checked");
-			        if (checkboxes.length === 0) {
-			            alert("Please select at least one item to checkout.");
-			            event.preventDefault();
-			        }
-			    });
+document.querySelector("#checkout-form")?.addEventListener("submit", function(event) {
+	const checkboxes = document.querySelectorAll("#checkout-form input[name='checkedoutItems']:checked");
+	if (checkboxes.length === 0) {
+		alert("Please select at least one item to checkout.");
+		event.preventDefault();
+	}
+});
 
 
 // Fetch actual cart summary on page load
-		   window.addEventListener('DOMContentLoaded', () => {
+	/*	   window.addEventListener('DOMContentLoaded', () => {
 		       fetch('/cart/summary')
 		           .then(response => response.json())
 		           .then(data => {
@@ -63,17 +63,17 @@ function updateCartCount(count) {
 				   
 				   // Update the cart count on the page load
 				   	        updateCartCount(cartCount);
-		   });
+		   });*/
 		      
 
 				
         // Simulate adding to the cart
-        document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+     /*   document.querySelectorAll(".add-to-cart-btn").forEach(button => {
             button.addEventListener("click", () => {
                 cartCount++;
                 updateCartCount(cartCount);
 				
 				localStorage.setItem('cartCount', cartCount);
             });
-        });
+        });*/
 	
