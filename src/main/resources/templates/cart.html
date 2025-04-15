@@ -59,7 +59,7 @@
 						<!--To fix -->
 						<form th:action="@{/cart/checkout}" class="overflow-x-scroll" method="post" id="checkout-form">
 							<table class="table table-striped">
-								<thead>
+								<thead class="fs-4 fw-semibold">
 									<tr>
 										<th>Select</th>
 										<th>Product</th>
@@ -71,16 +71,18 @@
 								</thead>
 								<tbody>
 									<!-- Loop through cartItems -->
-									<tr th:each="entry : ${groupedItems}">
+									<tr class="fs-5 fw-medium" th:each="entry : ${groupedItems}">
 										<td>
-											<input type="checkbox" th:id="'item-' + ${entry.key.id}"
-												th:value="${entry.key.id}" name="checkedoutItems"
-												th:checked="${entry.value[0].checkedOut}" />
+											<input class="form-check-input p-2 rounded-0" type="checkbox"
+												th:id="'item-' + ${entry.key.id}" th:value="${entry.key.id}"
+												name="checkedoutItems" th:checked="${entry.value[0].checkedOut}" />
 										</td>
 										<td th:text="${entry.key.name}"></td>
 										<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price, 1, 2)}"></td>
 										<td th:text="${entry.value.size()}"></td>
-										<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price * entry.value.size(), 1, 2)}"></td>
+										<td
+											th:text="'S$' + ${#numbers.formatDecimal(entry.key.price * entry.value.size(), 1, 2)}">
+										</td>
 										<td>
 											<button type="button" class="btn btn-danger btn-sm rounded-0"
 												th:onclick="'submitDeleteForm(' + ${entry.key.id} + ')'">
@@ -93,7 +95,8 @@
 
 							<!-- Cart Summary -->
 							<div class="d-flex justify-content-between">
-								<h3>Total: <span th:id="cart-total" th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></h3>
+								<h3>Total: <span th:id="cart-total"
+										th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></h3>
 								<!--<h3>Items: <span th:id="cart-count" th:text="${itemCount}"></span></h3>-->
 							</div>
 

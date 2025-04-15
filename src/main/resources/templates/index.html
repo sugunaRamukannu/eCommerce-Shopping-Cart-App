@@ -6,45 +6,21 @@
 <main>
 	<section class="py-5 bg-primary title-section">
 		<div class="container px-5 px-md-0">
-			<div class="row g-2 text-black">
-				<div class="col-lg-8">
-					<div class="banner-box position-relative border border-3 border-dark">
-						<div class="position-absolute">
-							<span class="fs-3 fw-bold d-block mb-3">Fresh Produce from S$0.50</span>
-							<a href="#">Shop Now</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="banner-box position-relative border border-3 border-dark">
-						<div class="position-absolute">
-							<span class="fs-3 fw-bold d-block mb-3">Fresh Produce from S$0.50</span>
-							<a href="#">Shop Now</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="py-5 bg-primary">
-		<div class="container px-5 px-md-0">
-			<h1 class="display-5 fw-bold">Food For Thought</h1>
-			<p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in
-				previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to
-				your liking.</p>
+			<h1 class="display-4 fw-bold mb-3">Food For Thought</h1>
+			<p class="col-md-8 fs-3 fw-semibold">Welcome to GetFreshFood! Where your every shopping needs are met!</p>
 		</div>
 	</section>
 	<section class="py-5 svg-bg">
 		<div class="container px-5 px-md-0">
-			<h2 class="my-4 fw-bold fs-3">Get It Here!</h2>
+			<h2 class="my-4 fw-bold fs-3">Categories</h2>
 			<div class="row row-cols-lg-6 g-4">
 				<div class="col" th:each="c:${categories}">
 					<div class="card card-category position-relative text-center rounded-0 border border-2">
-						<div class="card-body">
+						<div class="card-body d-flex flex-column">
 							<!--loop image filename from category ID-->
 							<img th:src="@{'/assets/img/categories/category_' + ${c.id} + '.jpg'}"
 								class="card-img-top rounded-0" th:alt="${c.category}">
-							<p class="card-text fw-light mb-0 mt-2" th:text="${c.category}">Fruits & Vegetables</p>
+							<a th:href="@{'/products/' + ${c.id}}" class="card-text fs-5 mb-0 mt-auto" th:text="${c.category}">Fruits & Vegetables</a>
 						</div>
 					</div>
 				</div>

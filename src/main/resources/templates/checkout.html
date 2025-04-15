@@ -7,69 +7,66 @@
 	<section class="container p-5 pb-0 px-lg-0 mt-5 pt-5">
 		<div class="coupon row align-items-center mx-auto mt-5 pt-5">
 			<h1 class="mb-4 fw-bold">Checkout Summary</h1>
-			<div class="container mt-5">
-				<div class="mb-4">
-				        <p><strong>Subtotal:</strong> <span th:text="${totalPrice}">0.00</span></p>
-				        <p><strong>Shipping Fee:</strong> <span th:text="${shippingFee}"></span></p>
-				        <p><strong>Discount applied:</strong> <span th:text="${totalPrice}"></span></p>
-				 </div>
-				 
-				 <div class="text-end mt-3">
-				         <h4>
-				             Total: S$
-				 			<span th:text="${totalPrice}">0.00</span>
-				         </h4>
-				     </div>
-					<br>
-				
-			    <table class="table table-bordered">
-			        <thead class="table-light">
-			            <tr>
-			                <th>Product</th>
-			                <th>Unit Price</th>
-			                <th>Quantity</th>
-			                <th>Subtotal</th>
-			            </tr>
-			        </thead>
-			        <tbody>
-			            <tr th:each="entry : ${checkedoutItems}">
-							<td th:text="${entry.key.name}"></td>
-							<td th:text="'S$' + ${entry.key.price}"></td>
-							<td th:text="${entry.value.size()}"></td>
-							<td th:text="'S$' + ${entry.key.price * entry.value.size()}"></td>
-			            </tr>
-						<tr th:if="${#lists.isEmpty(checkedoutItems)}">
-						<td colspan="5">No items to checkout.</td>
+			<div class="container p-5 border border-black">
+				<div class="mb-4 fs-3">
+					<p><strong>Subtotal:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}">0.00</span></p>
+					<p><strong>Shipping Fee:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(shippingFee, 1, 2)}"></span></p>
+					<p><strong>Discount applied:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></p>
+				</div>
+
+				<div class="my-3">
+					<h4 class="fs-2 fw-bolder">
+						Total: <strong th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}">0.00</strong>
+					</h4>
+				</div>
+				<table class="table table-striped">
+					<thead class="fs-4 fw-semibold">
+						<tr>
+							<th>Product</th>
+							<th>Unit Price</th>
+							<th>Quantity</th>
+							<th>Subtotal</th>
 						</tr>
-			        </tbody>
-			    </table>
-				
-			    
-				
+					</thead>
+					<tbody>
+						<tr class="fs-5 fw-medium" th:each="entry : ${checkedoutItems}">
+							<td th:text="${entry.key.name}"></td>
+							<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price, 1, 2)}"></td>
+							<td th:text="${entry.value.size()}"></td>
+							<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price * entry.value.size(), 1, 2)}"></td>
+						</tr>
+						<tr th:if="${#lists.isEmpty(checkedoutItems)}">
+							<td colspan="5">No items to checkout.</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+
 				<br>
-				
-				<h3>Delivery Details</h3>
-				        <div class="mb-3">
-				            <label for="deliveryAddress" class="form-label">Delivery Address</label>
-				            <textarea id="deliveryAddress" name="deliveryAddress" class="form-control" rows="3" required></textarea>
-				        </div>
 
-				        <div class="mb-3">
-				            <label for="paymentMethod" class="form-label">Payment Method</label>
-				            <select id="paymentMethod" name="paymentMethod" class="form-control" required>
-				                <option value="">Select</option>
-				                <option value="CreditCard">Credit Card</option>
-				                <option value="PayNow">PayNow</option>
-				                <option value="CashOnDelivery">Cash on Delivery</option>
-				            </select>
-				        </div>
+				<h3 class="fs-3 fw-bold">Delivery Details</h3>
+				<form th:action="@{/cart/checkout/payment}" method="post">
+					<div class="mb-3 fs-5 fw-semibold">
+						<label for="address" class="form-label">Delivery Address</label>
+						<textarea id="address" name="deliveryAddress" class="form-control rounded-0" rows="3" required></textarea>
+					</div>
 
-			    <div class="mt-4">
-			        <form th:action="@{/cart/checkout/payment}" method="post">
-			            <button type="submit" class="btn btn-success">Confirm Purchase</button>
-			            <a th:href="@{/cart}" class="btn btn-secondary ms-2">Back to Cart</a>
-			        </form>
-			    </div>
+					<div class="mb-3 fs-5 fw-semibold">
+						<label for="paymentMethod" class="form-label">Payment Method</label>
+						<select id="paymentMethod" name="paymentMethod" class="form-control rounded-0" required>
+							<option value="">Select</option>
+							<option value="CreditCard">Credit Card</option>
+							<option value="PayNow">PayNow</option>
+							<option value="CashOnDelivery">Cash on Delivery</option>
+						</select>
+					</div>
+
+					<div class="mt-4">
+						<button type="submit" class="btn btn-primary rounded-0">Confirm Purchase</button>
+						<a th:href="@{/cart}" class="btn btn-secondary ms-2 rounded-0">Back to Cart</a>
+					</div>
+				</form>
 			</div>
 		</div>
 	</section>

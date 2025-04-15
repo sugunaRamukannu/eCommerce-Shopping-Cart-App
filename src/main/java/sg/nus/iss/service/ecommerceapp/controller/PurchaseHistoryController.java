@@ -44,6 +44,7 @@ public class PurchaseHistoryController {
 			Customer customer = optCustomer.get();
 			
 			List<Order> orders = orderService.findByCustomer(customer);
+			
 			model.addAttribute("orders", orders);
 		} else {
 			return "redirect:/login";
