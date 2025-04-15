@@ -19,13 +19,15 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id", nullable = false)
 	private int id;
+	@Column(length = 225)
 	private String name;
+	@Column(length = 225)
 	private String description;
 	@Column(nullable = false)
 	private double price;
-	private String productUrl; // for product picture link
+	private String productUrl; 	// for product picture link
 	private String labels;
-
+	
 	@OneToMany(mappedBy = "product")
 	private List<CartItem> cartItems;
 
@@ -72,20 +74,28 @@ public class Product {
 		this.cartItems = cartItems;
 	}
 
-	public String getImgUrl() {
-		return imgUrl;
+	public String getLabels() {
+		return labels;
 	}
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
+
+	public String getProductUrl() {
+		return productUrl;
+	}
+
+	public void setProductUrl(String productUrl) {
+		this.productUrl = productUrl;
 	}
 
 	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double unitPrice) {
-		this.price = unitPrice;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public String getDescription() {

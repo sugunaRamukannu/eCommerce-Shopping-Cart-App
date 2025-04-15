@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Insert the header -->
+<th:block th:insert="~{fragments/header :: header('Order Success')}"></th:block>
+<main>
+	<section class="container p-5 pb-0 px-lg-0 mt-5 pt-5">
+		<div class="coupon row align-items-center mx-auto mt-5 pt-5">
+			<h1 class="mb-4 fw-bold">Order Summary</h1>
+			<div class="container p-5 border border-black">
+
+				<!-- Order Success Header -->
+				<div class="text-center">
+					<h2 class="fs-2 fw-bold">Order Successful!</h2>
+					<div class="checkmark fs-3">&#x2714;</div> <!-- Green round tick icon -->
+				</div>
+
+				<!-- Order Summary Section -->
+				<div class="order-summary">
+					<div class="row">
+						<div class="col fs-3">
+							<p><strong>Total Product Price:</strong> <span
+									th:text="'S$' + ${#numbers.formatDecimal(orderSummary.totalProductPrice, 1, 2)}">0.00</span></p>
+							<p><strong>Shipping Fee:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(orderSummary.shippingFee, 1, 2)}">0.00</span>
+							</p>
+							<p><strong>Discounts Applied:</strong> -<span
+									th:text="'S$' + ${#numbers.formatDecimal(orderSummary.discountsApplied, 1, 2)}">0.00</span></p>
+							<hr>
+							<h4 class="fs-2 fw-bolder">Total Price: <strong th:text="'S$' + ${#numbers.formatDecimal(orderSummary.finalTotal, 1, 2)}">0.00</strong></h4>
+						</div>
+					</div>
+
+					<!-- Order Table -->
+					<h4 class="mt-5 fs-3 fw-bold">Product Details</h4>
+					<table class="table table-striped">
+						<thead class="fs-4 fw-semibold">
+							<tr>
+								<th>Product</th>
+								<th>Unit Price</th>
+								<th>Quantity</th>
+								<th>Subtotal</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="fs-5 fw-medium" th:each="item : ${groupedItems}">
+								<td th:text="${item.product.name}"></td>
+								<td th:text="'S$' + ${#numbers.formatDecimal(item.product.price, 1, 2)}"></td>
+								<td th:text="${item.quantity}"></td>
+								<td th:text="'S$' + ${#numbers.formatDecimal(item.product.price * item.quantity, 1, 2)}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Delivery Address Section -->
+				<div class="mt-5">
+					<h4 class="fs-3 fw-bold mb-3">Details</h4>
+					<p class="fs-5 fw-medium"><strong>Address:</strong> <span th:text="${orderSummary.order.deliveryAddress}">N/A</span></p>
+					<p class="fs-5 fw-medium"><strong>Payment Method:</strong> <span th:text="${orderSummary.order.paymentMethod}">N/A</span>
+					</p>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</main>
+<!-- Insert the footer -->
+<th:block th:insert="~{fragments/footer :: footer}"></th:block>
+
+</html>

@@ -18,10 +18,12 @@
 
 .card-category {
 	width: 10rem;
+	height: 100%;
 }
 
 .card-product {
-	width: 13rem;
+	width: 15rem;
+	height: 100%;
 }
 
 .shadow-color {
@@ -33,26 +35,14 @@
 	font-size: 0.6rem;
 }
 
-.svg-bg-small {
-	background-color: white;
-	transition: 0.3s;
-	min-height: 10rem;
-}
-
-.svg-bg-small > div {
-	transform: translate(10%, 30%);
-}
-
-.svg-bg-small:hover {
-	background-color:rgb(51, 106, 75);
-}
-
-.svg-bg-small:hover, .svg-bg-small:hover a {
-	color: white;
-}
-
 a.active-link {
 	color: #a2e436 !important;
+}
+
+.profile {
+	border-radius: 50%;
+	border: 5px solid #a2e436;
+	background-color: white;
 }
 
 .solo-box-page {
@@ -65,6 +55,12 @@ a.active-link {
 
 .coupon {
 	align-items: flex-start !important;
+}
+
+.order-box {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
 }
 
 @media only screen and (max-width: 600px) {

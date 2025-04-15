@@ -9,9 +9,10 @@
 		<title th:text="${title}">Default Title</title>
 		<link rel="stylesheet" th:href="@{/assets/bootswatch-5/brite/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/assets/css/main.css}">
-		<link rel="icon" type="image/x-icon" th:href="@{assets/img/basket3-fill.svg}">
+		<link rel="icon" type="image/x-icon" th:href="@{/assets/img/basket3-fill.svg}">
 		<script th:src="@{/assets/js/script.js}" defer></script>
 	</head>
+
 	<body>
 		<header>
 			<nav class="navbar navbar-expand-lg bg-dark fixed-top">
@@ -40,7 +41,7 @@
 								name="keyword" required>
 							<button class="btn btn-primary rounded-0" type="submit">Search</button>
 						</form>
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5 align-items-lg-center">
 							<li class="nav-item">
 								<a th:href="@{/}" data-page="home" class="nav-link text-white" aria-current="page">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -58,10 +59,10 @@
 										<path
 											d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
 									</svg>
-									Products
+									<span>Products</span>
 								</a>
 							</li>
-							<li class="nav-item dropdown" data-bs-toggle="collapse" href="#collapseExample">
+							<!--<li class="nav-item dropdown" data-bs-toggle="collapse" href="#collapseExample">
 								<a data-page="categories" class="nav-link dropdown-toggle text-white"
 									th:href="@{/categories}" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
@@ -72,7 +73,7 @@
 										<path
 											d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1m0 5.586 7 7L13.586 9l-7-7H2z" />
 									</svg>
-									Categories
+									<span>Categories</span>
 								</a>
 								<ul class="dropdown-menu rounded-0" data-bs-toggle="collapse"
 									data-bs-target="#collapseExample">
@@ -88,24 +89,25 @@
 											<span>Category 1</span>
 										</a>
 									</li>
-								</ul>
-								<!--it injects the current authentication and security context into your Thymeleaf engine-->
-							<li sec:authorize="isAuthenticated()"  class="nav-item">
+								</ul> 
+							</li> -->
+							<!--it injects the current authentication and security context into your Thymeleaf engine-->
+							<li sec:authorize="isAuthenticated()" class="nav-item">
 								<a th:href="@{/cart}" data-page="cart" class="nav-link text-white position-relative">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-cart d-lg-block mx-auto" viewBox="0 0 16 16">
 										<path
 											d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
 									</svg>
-									<span id="cart-count" class="pill position-absolute badge rounded-0 bg-primary">
+									<!--<span id="cart-count" class="pill position-absolute badge rounded-0 bg-primary">
 										99+
 										<span class="visually-hidden">unread messages</span>
-									</span>
+									</span> -->
 									<span>Cart</span>
 								</a>
 							</li>
-							
-							<li sec:authorize="!isAuthenticated()"  class="nav-item">
+
+							<li sec:authorize="!isAuthenticated()" class="nav-item">
 								<a data-page="login" th:href="@{/login}" class="nav-link text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-person-circle d-lg-block mx-auto" viewBox="0 0 16 16">
@@ -113,7 +115,7 @@
 										<path fill-rule="evenodd"
 											d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
 									</svg>
-									Login/Register
+									<span>Login/Register</span>
 								</a>
 							</li>
 
@@ -121,15 +123,16 @@
 								href="#collapseExample">
 								<a class="nav-link text-primary" href="#" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
-									<!-- Profile Picture Added -->
-									<img class="rounded-circle d-lg-block mx-auto" width="50" height="50"
-										src="https://images.pexels.com/photos/31465740/pexels-photo-31465740/free-photo-of-surprised-man-covering-mouth-in-studio-setting.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+									<!-- Profile Picture Added Based on Last Digit in Phone Number-->
+									<img class="profile rounded-circle d-lg-block mx-auto" width="50" height="50"
+										th:src="@{'/assets/img/'+ ${#authentication.name.charAt(#authentication.name.length() - 1)} +'.svg'}"
 										alt="Profile">
+
 								</a>
 								<ul class="dropdown-menu rounded-0" data-bs-toggle="collapse"
 									data-bs-target="#collapseExample">
 									<li>
-										<a class="dropdown-item" th:href="@{/purchases}">
+										<a class="dropdown-item purchases" th:href="@{/purchase-history}">
 											<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
 												fill="currentColor" class="bi bi-receipt" viewBox="0 0 16 16">
 												<path
@@ -154,12 +157,12 @@
 									</li>
 								</ul>
 							</li>
+						</ul>
 					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
 
-	</header>
+		</header>
 </th:block>
 
 </html>

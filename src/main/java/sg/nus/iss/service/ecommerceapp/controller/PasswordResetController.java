@@ -20,17 +20,15 @@ import sg.nus.iss.service.ecommerceapp.service.OtpService;
 public class PasswordResetController {
 
 	@Autowired
-    private  OtpService otpService;
+    private OtpService otpService;
 	
 	@Autowired
 	private CustomerService customerService;
-	
     
     private final Map<String, String> otpStorage = new HashMap<>();
 
     @GetMapping("/forgot-password")
     public String showForgotPasswordForm(Model model) {
-    	System.out.println("asd");
         model.addAttribute("otpRequest", new OtpRequestDto());
         return "forgot-password";
     }
@@ -51,7 +49,6 @@ public class PasswordResetController {
     @PostMapping("/reset-password")
     public String resetPassword(@ModelAttribute OtpRequestDto otpRequest, Model model,Customer customer) {
         String savedOtp = otpStorage.get(otpRequest.getMobileNumber());
-        System.out.println("savedOtp"+savedOtp);
         if (savedOtp != null && savedOtp.equals(otpRequest.getOtp())) {
         	 System.out.println("savedOtpij"+savedOtp);
              customer.setPassword(otpRequest.getNewPassword());

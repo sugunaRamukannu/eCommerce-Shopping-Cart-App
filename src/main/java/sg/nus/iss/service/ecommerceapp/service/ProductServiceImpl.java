@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
 import jakarta.transaction.Transactional;
 import sg.nus.iss.service.ecommerceapp.model.Product;
 import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
@@ -17,6 +16,7 @@ import sg.nus.iss.service.ecommerceapp.repository.ProductCategoryRepository;
 import sg.nus.iss.service.ecommerceapp.repository.ProductRepository;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 	private ProductCategoryRepository productCategoryRepository;
 	
 	public List<Product> listAllProducts() {
-		
+
 		return productRepository.findAll();
 	}
 
