@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import sg.nus.iss.service.ecommerceapp.model.CartItem;
 import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.model.Order;
+import sg.nus.iss.service.ecommerceapp.model.OrderItem;
 import sg.nus.iss.service.ecommerceapp.model.OrderSummary;
 import sg.nus.iss.service.ecommerceapp.model.Product;
 import sg.nus.iss.service.ecommerceapp.model.ShoppingCart;
@@ -68,8 +69,8 @@ public class PaymentServiceImpl implements PaymentService {
 			if (shoppingCart != null) {
 				List<CartItem> checkedoutItems = cartItemRepository.findByShoppingCartAndCheckedOut(shoppingCart, true);
 
-				Map<Product, List<CartItem>> groupedItems = checkedoutItems.stream()
-						.collect(Collectors.groupingBy(CartItem::getProduct, LinkedHashMap::new, Collectors.toList()));
+				Map<Product, Integer> groupedItems = checkedoutItems.stream()
+						.collect(Collectors.groupingBy(CartItem::getProduct, LinkedHashMap::new, Collectors.summingInt(CartItem::getQuantity)));
 
 				order.setCustomer(customer);
 				order.setDate(LocalDateTime.now());
@@ -77,21 +78,26 @@ public class PaymentServiceImpl implements PaymentService {
 				order.setStatus("PAID");
 				order.setPaymentMethod(paymentMethod);
 				order.setOrderIdString(generateOrderId());
-				order.setOrderItems(checkedoutItems);
-
-				for (List<CartItem> itemGroup : groupedItems.values()) {
-					for (CartItem items : itemGroup) {
-						items.setOrder(order);
-					}
+				
+				List<OrderItem> orderItems = new ArrayList<>();
+				
+				for(Map.Entry<Product, Integer> entry : groupedItems.entrySet()) {
+					Product product = entry.getKey();
+					int totalQuantity = entry.getValue();
+			    	
+					OrderItem orderItem = new OrderItem();
+					orderItem.setProduct(product);
+					orderItem.setQuantity(totalQuantity);
+					orderItem.setPurchasePrice(product.getPrice() * totalQuantity);
+					orderItem.setOrder(order);
+					
+					orderItems.add(orderItem);
 				}
-
-				// flatten items as setItems expects List<CartItem>, not
-				// Collection<List<CartItem>>
-				List<CartItem> allItems = groupedItems.values().stream().flatMap(List::stream)
-						.collect(Collectors.toList());
-
-				order.setOrderItems(allItems);
-				orderRepository.save(order);
+				
+			        order.setOrderItems(orderItems);
+			        orderRepository.save(order);
+			        
+			        cartItemRepository.deleteAll(checkedoutItems);
 
 				return order;
 			}
@@ -111,79 +117,18 @@ public class PaymentServiceImpl implements PaymentService {
 		double shippingFee = 5.00;
 		double discountsApplied = 0.0;
 		double totalProductPrice = order.getOrderItems().stream()
-				.map(item -> item.getProduct().getPrice() * item.getQuantity()).reduce(0.0, Double::sum);
-		double finalTotal = totalProductPrice + shippingFee - discountsApplied;
+	            .mapToDouble(item -> item.getPurchasePrice())
+	            .sum();
+	    double finalTotal = totalProductPrice + shippingFee - discountsApplied;
 
-		Map<Product, List<CartItem>> grouped = order.getOrderItems().stream()
-				.collect(Collectors.groupingBy(CartItem::getProduct, LinkedHashMap::new, Collectors.toList()));
-
-		List<Map<String, Object>> groupedItems = new ArrayList<>();
-
-		for (Map.Entry<Product, List<CartItem>> entry : grouped.entrySet()) {
-			Product product = entry.getKey();
-			int totalQty = entry.getValue().stream().mapToInt(CartItem::getQuantity).sum();
-			double subtotal = product.getPrice() * totalQty;
-
-			Map<String, Object> map = new HashMap<>();
-			map.put("product", product);
-			map.put("quantity", totalQty);
-			map.put("subtotal", subtotal);
-			groupedItems.add(map);
-		}
-
-		OrderSummary summary = new OrderSummary();
-		summary.setOrder(order);
-		summary.setTotalProductPrice(totalProductPrice);
-		summary.setShippingFee(shippingFee);
-		summary.setDiscountsApplied(discountsApplied);
-		summary.setFinalTotal(finalTotal);
-		summary.setGroupedItems(groupedItems);
+	    OrderSummary summary = new OrderSummary();
+	    summary.setOrder(order);
+	    summary.setTotalProductPrice(totalProductPrice);
+	    summary.setShippingFee(shippingFee);
+	    summary.setDiscountsApplied(discountsApplied);
+	    summary.setFinalTotal(finalTotal);
+	    summary.setOrderItems(order.getOrderItems());
 
 		return summary;
-	}
-
-//	public Order createOrder(String mobilePhoneNumber) {
-//		
-//		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
-//		
-//		Order order = new Order();
-////		if (optionalCustomer.isEmpty()) {
-////      throw new IllegalArgumentException("Customer not found");
-////  }
-//		if (optionalCustomer.isPresent()) {
-//			Customer customer = optionalCustomer.get();
-//			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
-//			
-//			if (shoppingCart != null) {
-//				List<CartItem> checkedoutItems = cartItemRepository.findByShoppingCartAndCheckedOut(shoppingCart, true);
-//				
-//				Map<Product, List<CartItem>> groupedItems = checkedoutItems.stream()
-//						.collect(Collectors.groupingBy(CartItem::getProduct, LinkedHashMap::new, Collectors.toList()));
-//				 
-//			    order.setCustomer(customer);
-//			    order.setDate(LocalDateTime.now());
-//			    order.setStatus("PENDING");
-//			    order.setOrderIdString(generateOrderId());
-//			    
-//			    for(List<CartItem> itemGroup : groupedItems.values()) {
-//			    	for (CartItem items : itemGroup) {
-//			    		items.setOrder(order);
-//			    	}
-//			    }
-//			    
-//			    //flatten items as setItems expects List<CartItem>, not Collection<List<CartItem>>
-//			    List<CartItem> allItems = groupedItems.values().stream()
-//		                .flatMap(List::stream)
-//		                .collect(Collectors.toList());
-//
-//		        order.setOrderItems(allItems);
-//			    
-//			    orderRepository.save(order);
-//				
-//				return order;
-//			}
-//		}
-//		
-//		return null;
-//		}		
+	}		
 }

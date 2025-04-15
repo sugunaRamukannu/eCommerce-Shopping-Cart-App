@@ -20,13 +20,18 @@
 					<div class="row">
 						<div class="col fs-3">
 							<p><strong>Total Product Price:</strong> <span
-									th:text="'S$' + ${#numbers.formatDecimal(orderSummary.totalProductPrice, 1, 2)}">0.00</span></p>
-							<p><strong>Shipping Fee:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(orderSummary.shippingFee, 1, 2)}">0.00</span>
+									th:text="'S$' + ${#numbers.formatDecimal(orderSummary.totalProductPrice, 1, 2)}">0.00</span>
 							</p>
-							<p><strong>Discounts Applied:</strong> -<span
-									th:text="'S$' + ${#numbers.formatDecimal(orderSummary.discountsApplied, 1, 2)}">0.00</span></p>
+							<p><strong>Shipping Fee:</strong> <span
+									th:text="'S$' + ${#numbers.formatDecimal(orderSummary.shippingFee, 1, 2)}">0.00</span>
+							</p>
+							<p><strong>Discounts Applied:</strong> <span
+									th:text="'S$' + ${#numbers.formatDecimal(orderSummary.discountsApplied, 1, 2)}">0.00</span>
+							</p>
 							<hr>
-							<h4 class="fs-2 fw-bolder">Total Price: <strong th:text="'S$' + ${#numbers.formatDecimal(orderSummary.finalTotal, 1, 2)}">0.00</strong></h4>
+							<h4 class="fs-2 fw-bolder">Total Price: <strong
+									th:text="'S$' + ${#numbers.formatDecimal(orderSummary.finalTotal, 1, 2)}">0.00</strong>
+							</h4>
 						</div>
 					</div>
 
@@ -42,11 +47,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="fs-5 fw-medium" th:each="item : ${groupedItems}">
+							<tr class="fs-5 fw-medium" th:each="item : ${orderItems}">
 								<td th:text="${item.product.name}"></td>
-								<td th:text="'S$' + ${#numbers.formatDecimal(item.product.price, 1, 2)}"></td>
+								<td
+									th:text="'S$' + ${#numbers.formatDecimal((item.purchasePrice / item.quantity), 1, 2)}">
+								</td>
 								<td th:text="${item.quantity}"></td>
-								<td th:text="'S$' + ${#numbers.formatDecimal(item.product.price * item.quantity, 1, 2)}"></td>
+								<td th:text="'S$' + ${#numbers.formatDecimal(item.purchasePrice, 1, 2)}"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -55,9 +62,15 @@
 				<!-- Delivery Address Section -->
 				<div class="mt-5">
 					<h4 class="fs-3 fw-bold mb-3">Details</h4>
-					<p class="fs-5 fw-medium"><strong>Address:</strong> <span th:text="${orderSummary.order.deliveryAddress}">N/A</span></p>
-					<p class="fs-5 fw-medium"><strong>Payment Method:</strong> <span th:text="${orderSummary.order.paymentMethod}">N/A</span>
+					<p class="fs-5 fw-medium"><strong>Address:</strong> <span
+							th:text="${orderSummary.order.deliveryAddress}">N/A</span></p>
+					<p class="fs-5 fw-medium"><strong>Payment Method:</strong> <span
+							th:text="${orderSummary.order.paymentMethod}">N/A</span>
 					</p>
+				</div>
+
+				<div class="mt-4">
+					<a th:href="@{/cart}" class="btn btn-primary ms-2 rounded-0">Back to Cart</a>
 				</div>
 
 			</div>

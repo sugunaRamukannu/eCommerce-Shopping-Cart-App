@@ -32,21 +32,11 @@ public class PaymentController {
 		
 		OrderSummary summary = paymentService.getOrderSummary(orderId);
 		
-		model.addAttribute("groupedItems", summary.getGroupedItems());
+		model.addAttribute("orderItems", summary.getOrderItems());
 		model.addAttribute("orderSummary", summary);
 		
 		return "order-success";
 	}
-	
-//	@GetMapping("/cart/checkout/payment")
-//	public String showPaymentPage(Model model, Authentication authentication) {
-//		String mobilePhoneNumber = authentication.getName();
-//		
-//		Order order = paymentService.createOrder(mobilePhoneNumber);
-//		model.addAttribute("order", order);
-//		
-//		return "order-success";
-//	}
 	
 	@PostMapping("/cart/checkout/payment")
 	public String confirmCheckout(@RequestParam String deliveryAddress, @RequestParam String paymentMethod, Authentication authentication) {

@@ -3,6 +3,7 @@ package sg.nus.iss.service.ecommerceapp.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,9 +32,12 @@ public class Order {
 	private String status;
 	private String deliveryAddress;
 	private String paymentMethod;
+	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<OrderItem> orderItems;
 
 	@OneToMany(mappedBy="order")
-	private List<CartItem> orderItems;
+	private List<CartItem> cartItems;
 	
 	@ManyToOne
 	@JoinColumn(name="customer_id")
@@ -49,12 +53,12 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public List<CartItem> getOrderItems() {
-		return orderItems;
+	public List<CartItem> getCartItems() {
+		return cartItems;
 	}
 
-	public void setOrderItems(List<CartItem> orderItems) {
-		this.orderItems = orderItems;
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
 	}
 
 	public String getPaymentMethod() {
@@ -119,5 +123,13 @@ public class Order {
 
 	public void setOrderIdString(String orderIdString) {
 		this.orderIdString = orderIdString;
+	}
+
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 }
