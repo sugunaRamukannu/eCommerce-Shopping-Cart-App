@@ -6,7 +6,7 @@ const links = document.querySelectorAll(".nav-link")
 const purchaseButton = document.querySelector(".purchases")
 
 //fix clickbox
-purchaseButton.addEventListener('click', function() {
+purchaseButton?.addEventListener('click', function() {
 	location.href="/purchase-history"
 })
 
@@ -34,14 +34,14 @@ orderBoxes.forEach(order => {
 })*/
 
 
-/*temp to fix later*/
+/*
 function updateCartCount(count) {
           document.getElementById('cart-count').textContent = count;
-      }
+      }*/
 	
 	function submitDeleteForm(productId) {
-			        document.getElementById('delete-form-' + productId).submit();
-			    }
+			document.getElementById('delete-form-' + productId).submit();
+	}
 				
 			    document.querySelector("#checkout-form").addEventListener("submit", function(event) {
 			        const checkboxes = document.querySelectorAll("#checkout-form input[name='checkedoutItems']:checked");
