@@ -4,6 +4,7 @@
 <!-- Insert the header -->
 <th:block th:insert="~{fragments/header :: header('Login')}"></th:block>
 
+
 <main>
     <section class="container pt-5 d-flex">
         <div class="row solo-box-page align-items-center mx-auto mt-5 pt-5">
@@ -11,18 +12,11 @@
                 <form th:action="${showPassword} ? @{/login} : @{/login-check}" 
                       th:object="${logindto}" method="post">
                     <h1 class="mb-4 fw-bold text-center">Login</h1>
-                    
-                    <!-- Display Error Message if Login Failed -->
-					<div th:if="${errorMsg}" class="alert alert-danger py-2 px-3 mt-2" 
-					     style="max-width: 400px; margin: 0 auto; font-size: 0.9rem;">
-					    <p th:text="${errorMsg}" class="mb-0 text-center"></p>
-					</div>
-
                     <div class="mb-3">
                         <label for="mobilePhoneNumber" class="form-label">Mobile Number</label>
                         <input type="tel" th:field="*{username}" class="form-control rounded-0" id="mobilePhoneNumber"
                                name="mobilePhoneNumber" placeholder="Enter Mobile Number" 
-                               required>
+                              required>
                         
                         <!-- Error Message for Mobile Number -->
                         <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></div>

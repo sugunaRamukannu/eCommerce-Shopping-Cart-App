@@ -33,11 +33,7 @@ public class ProductController {
 //	private ProductCategoryRepository productCategoryRepository;
 	
 	@GetMapping("/")
-    public String homePage(Model model, Authentication authentication) {
-
-//     System.out.println(authentication.getName());
-//     System.out.println(authentication.getAuthorities());
-//     
+    public String homePage(Model model) {
     	
 		List<Product> products = productService.findAllProducts();
     	List<ProductCategory> categories = productCategoryService.findAllCategories();   	
@@ -56,7 +52,7 @@ public class ProductController {
         // List all product method
         List<Product> products = productService.findAllProducts(); // assuming productService fetches the products
         model.addAttribute("products", products);
-        System.out.println("productspage");
+        
         // Sort logic
         if (sort != null) {
             switch (sort) {

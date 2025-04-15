@@ -8,10 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import sg.nus.iss.service.ecommerceapp.model.Product;
-<<<<<<< Updated upstream
 import sg.nus.iss.service.ecommerceapp.model.ProductAdminDto;
-=======
->>>>>>> Stashed changes
 import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
 
 @Service
@@ -41,14 +38,10 @@ public interface ProductService {
 	Product editProduct(Product existingProduct);
 	Page<Product> findAllProducts(Pageable pageable) ;
 
-<<<<<<< Updated upstream
 	public ProductCategory saveCategory(ProductCategory category);
 
 
 
 
-=======
-	ProductCategory saveCategory(ProductCategory category);
->>>>>>> Stashed changes
 
 }
