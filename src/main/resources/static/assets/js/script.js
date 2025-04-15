@@ -7,7 +7,7 @@ const purchaseButton = document.querySelector(".purchases")
 
 //fix clickbox
 purchaseButton.addEventListener('click', function() {
-	location.pathname="/purchase-history"
+	location.href="/purchase-history"
 })
 
 links.forEach(link => {
@@ -20,7 +20,6 @@ links.forEach(link => {
 // get last part of url in the form of id and append to page title
 if (currentPage.includes("order detail")) {
 	const orderIdNo = location.pathname.split("/").pop() 
-	const orderIdTitle = document.querySelector(".order-detail-title")
 	document.title += " " + orderIdNo
 }
 
