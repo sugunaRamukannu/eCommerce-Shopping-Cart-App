@@ -21,6 +21,7 @@ import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 @Controller
 @Slf4j
 @AllArgsConstructor
+
 public class LoginController {
 	
 	@Autowired
@@ -34,11 +35,19 @@ public class LoginController {
 	    public String loginPage(Model model, @RequestParam(required = false) String error) {
 	        model.addAttribute("logindto", new LoginDto());
 	        model.addAttribute("showPassword", false);
+	     // if the login failed, based on our config, the error value changes to true
+	        if (error != null) {
+	        	System.out.println("errormobile");
+	            model.addAttribute("errorMsg", "Invalid password");
+	        }
 	        return "login";
 	    }
 
 	    @PostMapping("/login-check")
-	    public String checkMobileAndRedirect(@Valid @ModelAttribute("logindto") LoginDto logindto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+	    public String checkMobileAndRedirect(@Valid @ModelAttribute("logindto") LoginDto logindto, 
+	    		BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+	    	//here we are implementing  custom two-step login flow, so Spring Security can't handle the initial mobile number
+	    	//provided, so we need this logic
 	    	 if(bindingResult.hasErrors()) {
 				 System.out.println("error");
 				 model.addAttribute("logindto", logindto);

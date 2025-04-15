@@ -21,9 +21,16 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+<<<<<<< Updated upstream
 	@Autowired
 	private ProductCategoryRepository productCategoryRepository;
 	
+=======
+	
+	@Autowired
+	private ProductCategoryRepository productCategoryRepository;
+
+>>>>>>> Stashed changes
 	public List<Product> listAllProducts() {
 		
 		return productRepository.findAll();
@@ -97,6 +104,7 @@ public class ProductServiceImpl implements ProductService {
 	    return productRepository.findAll(pageable);
 	}
 	
+<<<<<<< Updated upstream
 	//admin panel
 	
 	@Override
@@ -104,6 +112,9 @@ public class ProductServiceImpl implements ProductService {
 	public Product saveProducts(Product product) {
 		return productRepository.save(product);
 	}
+=======
+
+>>>>>>> Stashed changes
 	
 	@Override
 //	@Transactional
@@ -112,7 +123,11 @@ public class ProductServiceImpl implements ProductService {
 		return productCategoryRepository.save(category);
 	}
 	
+<<<<<<< Updated upstream
 	}
 
 
 
+=======
+}
+>>>>>>> Stashed changes

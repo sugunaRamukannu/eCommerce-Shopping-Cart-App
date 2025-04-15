@@ -1,8 +1,10 @@
 package sg.nus.iss.service.ecommerceapp.config;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
@@ -14,21 +16,30 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+	                                    Authentication authentication) throws IOException, ServletException {
 
-        // Retrieve the saved request (the URL the user was trying to access before login)
-        SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+	    // Check user roles
+	    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
-        System.out.println("savedRequets"+savedRequest);
-        String redirectUrl = "/"; // Default redirect URL if no saved request exists
+	    boolean isAdmin = authorities.stream()
+	        .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
 
-        // Check if there is a saved request (i.e., the user was trying to access a protected page)
-        if (savedRequest != null) {
-            redirectUrl = savedRequest.getRedirectUrl(); // Get the last visited page URL
-        }
+	    if (isAdmin) {
+	        // If admin, redirect to /api/products
+	        response.sendRedirect("/admin/products");
+	    } else {
+	        // If not admin, check for saved request (i.e., the page they originally wanted to access)
+	        SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
 
-        response.sendRedirect(redirectUrl); // Redirect to the last visited page
-    }
+	        String redirectUrl = "/"; // default fallback
+	        if (savedRequest != null) {
+	            redirectUrl = savedRequest.getRedirectUrl();
+	        }
+
+	        response.sendRedirect(redirectUrl);
+	    }
+	}
+
 }
