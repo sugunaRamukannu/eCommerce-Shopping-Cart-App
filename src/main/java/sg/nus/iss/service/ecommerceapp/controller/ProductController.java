@@ -43,6 +43,16 @@ public class ProductController {
         return "index"; 
     }
 	
+	@GetMapping("/products/{categoryId}")
+    public String getCategories(@PathVariable int categoryId, Model model) {
+        	
+        // List all products based on category
+        List<Product> products = productService.getProductsByCategory(categoryId);
+        model.addAttribute("products", products);
+        
+        return "products";
+    }
+	
 
 	@GetMapping("/products")
     public String getProducts(
@@ -64,7 +74,7 @@ public class ProductController {
             }
         }
         
-        return "products"; // Thymeleaf template name
+        return "products";
     }
 	
 	@GetMapping("/search")

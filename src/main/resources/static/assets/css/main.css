@@ -35,25 +35,6 @@
 	font-size: 0.6rem;
 }
 
-.banner-box {
-	background-color: white;
-	transition: 0.3s;
-	min-height: 10rem;
-}
-
-.banner-box > div {
-	transform: translate(10%, 30%);
-}
-
-.banner-box:hover {
-	background-color:rgb(51, 106, 75);
-	cursor: pointer;
-}
-
-.banner-box:hover, .banner-box:hover a {
-	color: white;
-}
-
 a.active-link {
 	color: #a2e436 !important;
 }
@@ -81,14 +62,7 @@ a.active-link {
 	display: flex;
 	gap: 2rem;
 	flex-wrap: wrap;
-	/*transition: 0.3s;
-	cursor: pointer;*/
 }
-
-/*
-.order-box:hover {
-	background-color: #a2e436;
-}*/
 
 @media only screen and (max-width: 600px) {
   .pill {
