@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import sg.nus.iss.service.ecommerceapp.model.Product;
+import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
+import sg.nus.iss.service.ecommerceapp.repository.ProductCategoryRepository;
+import sg.nus.iss.service.ecommerceapp.service.ProductCategoryService;
 import sg.nus.iss.service.ecommerceapp.service.ProductService;
 import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
 
@@ -20,20 +23,54 @@ public class ProductController {
 	private ProductService productService;
 	
 	@Autowired
+	private ProductCategoryService productCategoryService;
+	
+	@Autowired
 	private ShoppingCartService shoppingCartService;
 	
+	//not supposed to use repository in the controller, as we are already using service layer
+//	@Autowired
+//	private ProductCategoryRepository productCategoryRepository;
+	
 	@GetMapping("/")
-	public String displayProducts(Model model) {
-		List<Product> products = productService.listAllProducts();
-		model.addAttribute("products", products);
-		
-		return "index";
-	}
+    public String homePage(Model model) {
+    	
+		List<Product> products = productService.findAllProducts();
+    	List<ProductCategory> categories = productCategoryService.findAllCategories();   	
+        model.addAttribute("products", products);
+        model.addAttribute("categories", categories);
+        return "index"; 
+    }
 	
 
 	@GetMapping("/products")
-	public String displayProductsPage() {
-		return "products";
+    public String getProducts(
+        @RequestParam(required = false) String sort,
+        @RequestParam(required = false) String filter,
+        Model model) {
+        	
+        // List all product method
+        List<Product> products = productService.findAllProducts(); // assuming productService fetches the products
+        model.addAttribute("products", products);
+        
+        // Sort logic
+        if (sort != null) {
+            switch (sort) {
+            case "priceLowHigh" -> products.sort(Comparator.comparing(Product::getPrice));
+            case "priceHighLow" -> products.sort(Comparator.comparing(Product::getPrice).reversed());
+            case "nameAZ" -> products.sort(Comparator.comparing(Product::getName));
+            case "nameZA" -> products.sort(Comparator.comparing(Product::getName).reversed());
+            }
+        }
+        
+        return "products"; // Thymeleaf template name
+    }
+	
+	@GetMapping("/search")
+	public String searchProducts(
+	    @RequestParam("keyword") String keyword,
+	    @RequestParam("searchtype") String searchType,
+	    Model model) {
 
 	}
 	

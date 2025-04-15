@@ -12,11 +12,22 @@ import jakarta.persistence.Table;
 public class ProductCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="product_category_id")
+	@Column(name = "product_category_id", nullable=false)
 	private int id;
 	private String category;
 	
 	public ProductCategory() {
+//		setProducts(new ArrayList<>());/ when we have logic to set the products we can use this, otherwise direct assignment
+		this.products=new ArrayList<>();
+	}
+
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 	public String getCategory() {
@@ -34,4 +45,10 @@ public class ProductCategory {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString() {
+		return "Category no: " + getId() + ", category: " + getCategory();
+	}
+
 }

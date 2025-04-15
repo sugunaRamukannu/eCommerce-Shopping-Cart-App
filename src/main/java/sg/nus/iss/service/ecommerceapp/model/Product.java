@@ -13,17 +13,19 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="product_id")
+	@Column(name = "product_id", nullable = false)
 	private int id;
 	private String name;
 	private String description;
+	@Column(nullable = false)
 	private double price;
-	private String imgUrl;
-	
+	private String productUrl; // for product picture link
+	private String labels;
+
 	@OneToMany(mappedBy = "product")
 	private List<CartItem> cartItems;
 
@@ -32,6 +34,26 @@ public class Product {
 	private ProductCategory productCategory;
 
 	public Product() {
+//		super();
+	}
+
+	public Product(String name, ProductCategory productCategory, String description, double price, String productUrl,
+			String labels) {
+//		super();
+		this.name = name;
+		this.productCategory = productCategory;
+		this.description = description;
+		this.price = price;
+		this.productCategory = productCategory;
+		this.productUrl = productUrl;
+		this.labels = labels;
+
+//		this.setName(name);
+//		this.setProductCategory(productCategory);
+//		this.setDescription(description);
+//		this.setPrice(price);
+//		this.setProductUrl(productUrl);
+//		this.setLabels(labels);
 	}
 
 	public ProductCategory getProductCategory() {
@@ -88,5 +110,11 @@ public class Product {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + getId() + ", name=" + getName() + ", description=" + getDescription() + ", price="
+				+ getPrice() + ", productUrl=" + getProductUrl() + ", label=" + getLabels() + "]";
 	}
 }

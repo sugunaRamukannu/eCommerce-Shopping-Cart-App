@@ -1,5 +1,15 @@
 package sg.nus.iss.service.ecommerceapp.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
+
+
 public interface ProductCategoryService {
+
+
+	List<ProductCategory> findAllCategories();
 
 }
