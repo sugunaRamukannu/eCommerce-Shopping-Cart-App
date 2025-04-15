@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="header(title)">
 
@@ -41,7 +41,7 @@
 								name="keyword" required>
 							<button class="btn btn-primary rounded-0" type="submit">Search</button>
 						</form>
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5 align-items-lg-center">
 							<li class="nav-item">
 								<a th:href="@{/}" data-page="home" class="nav-link text-white" aria-current="page">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -62,7 +62,7 @@
 									Products
 								</a>
 							</li>
-							<li class="nav-item dropdown" data-bs-toggle="collapse" href="#collapseExample">
+							<!--<li class="nav-item dropdown" data-bs-toggle="collapse" href="#collapseExample">
 								<a data-page="categories" class="nav-link dropdown-toggle text-white"
 									th:href="@{/categories}" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
@@ -89,22 +89,24 @@
 											<span>Category 1</span>
 										</a>
 									</li>
-								</ul>
-							<li th:if="${session.userName != null}" class="nav-item">
+								</ul> -->
+							<!--it injects the current authentication and security context into your Thymeleaf engine-->
+							<li sec:authorize="isAuthenticated()" class="nav-item">
 								<a th:href="@{/cart}" data-page="cart" class="nav-link text-white position-relative">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-cart d-lg-block mx-auto" viewBox="0 0 16 16">
 										<path
 											d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
 									</svg>
-									<span id="cart-count" class="pill position-absolute badge rounded-0 bg-primary">
+									<!--<span id="cart-count" class="pill position-absolute badge rounded-0 bg-primary">
 										99+
 										<span class="visually-hidden">unread messages</span>
-									</span>
+									</span> -->
 									<span>Cart</span>
 								</a>
 							</li>
-							<li th:if="${session.userName == null}" class="nav-item">
+
+							<li sec:authorize="!isAuthenticated()" class="nav-item">
 								<a data-page="login" th:href="@{/login}" class="nav-link text-white">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
 										class="bi bi-person-circle d-lg-block mx-auto" viewBox="0 0 16 16">
@@ -116,19 +118,20 @@
 								</a>
 							</li>
 
-							<li th:if="${session.userName != null}" class="nav-item dropdown"
-								data-bs-toggle="collapse" href="#collapseExample">
+							<li sec:authorize="isAuthenticated()" class="nav-item dropdown" data-bs-toggle="collapse"
+								href="#collapseExample">
 								<a class="nav-link text-primary" href="#" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
-									<!-- Profile Picture Added -->
-									<img class="rounded-circle d-lg-block mx-auto" width="50" height="50"
-										src="https://images.pexels.com/photos/31465740/pexels-photo-31465740/free-photo-of-surprised-man-covering-mouth-in-studio-setting.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+									<!-- Profile Picture Added Based on Last Digit in Phone Number-->
+									<img class="profile rounded-circle d-lg-block mx-auto" width="80" height="80"
+										th:src="@{'/assets/img/'+ ${#authentication.name.charAt(#authentication.name.length() - 1)} +'.svg'}"
 										alt="Profile">
+
 								</a>
 								<ul class="dropdown-menu rounded-0" data-bs-toggle="collapse"
 									data-bs-target="#collapseExample">
 									<li>
-										<a class="dropdown-item" th:href="@{/purchases}">
+										<a class="dropdown-item" th:href="@{/purchase-history}">
 											<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
 												fill="currentColor" class="bi bi-receipt" viewBox="0 0 16 16">
 												<path

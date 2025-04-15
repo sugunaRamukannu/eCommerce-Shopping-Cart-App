@@ -1,5 +1,6 @@
 package sg.nus.iss.service.ecommerceapp.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -20,13 +21,19 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="order_id")
 	private int id;
+	private String orderIdString;
 	
 	private double totalPrice;
 	
 	private String orderStatus;
+	
+	private LocalDateTime date;
+	private String status;
+	private String deliveryAddress;
+	private String paymentMethod;
 
-	@OneToMany(mappedBy="id")
-	private List<OrderItem> orderItems;
+	@OneToMany(mappedBy="order")
+	private List<CartItem> orderItems;
 	
 	@ManyToOne
 	@JoinColumn(name="customer_id")
@@ -42,12 +49,44 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public List<OrderItem> getOrderItems() {
+	public List<CartItem> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItem> orderItems) {
+	public void setOrderItems(List<CartItem> orderItems) {
 		this.orderItems = orderItems;
+	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
 	}
 
 	public String getOrderStatus() {
@@ -72,5 +111,13 @@ public class Order {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getOrderIdString() {
+		return orderIdString;
+	}
+
+	public void setOrderIdString(String orderIdString) {
+		this.orderIdString = orderIdString;
 	}
 }

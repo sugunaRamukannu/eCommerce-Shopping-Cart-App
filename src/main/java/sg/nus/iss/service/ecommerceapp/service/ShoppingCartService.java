@@ -24,7 +24,7 @@ public interface ShoppingCartService {
 	
 	void updateCheckedoutStatus(List<Integer> selectedItemIds, String mobilePhoneNumber);
 	
-	List<DeliveryAddress> findDeliveryAddressesByCustomer(String mobilePhoneNumber);
+//	List<DeliveryAddress> findDeliveryAddressesByCustomer(String mobilePhoneNumber);
 	
 //	void uncheckedCurrentUserItems();
 	

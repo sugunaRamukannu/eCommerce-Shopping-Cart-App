@@ -18,7 +18,7 @@
 
 .card-category {
 	width: 10rem;
-	
+	height: 100%;
 }
 
 .card-product {
@@ -56,6 +56,12 @@
 
 a.active-link {
 	color: #a2e436 !important;
+}
+
+.profile {
+	border-radius: 50%;
+	border: 5px solid #a2e436;
+	background-color: white;
 }
 
 .solo-box-page {

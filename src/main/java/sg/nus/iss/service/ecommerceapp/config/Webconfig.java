@@ -3,6 +3,7 @@ package sg.nus.iss.service.ecommerceapp.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 
 @Configuration
 @EnableWebSecurity
@@ -28,14 +30,18 @@ public class Webconfig {
 		// Disable CSRF if you're not dealing with a stateful application (like RESTful
 		// APIs).
 		httpSecurity
-
+		
+				.csrf(csrf -> csrf.disable()) 
+				
 				// Authorization configuration - define which URLs are accessible by which
 				// roles.
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/", "/login", "/login-check", "/forgot-password", "/register",
-								"/send-otp", "/reset-password", "/createAccount", "/submit-password", "/products",
-								"/assets/**")
+						.requestMatchers("/", "/login", "/login-check", "/search", "/forgot-password", "/register", "/send-otp",
+								"/reset-password", "/createAccount", "/submit-password", "/products", "/assets/**")
 						.permitAll() // URLs that don't require authentication.
+						 	.requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()  // Allow fetching
+				         		.requestMatchers(HttpMethod.DELETE, "/api/products/**").permitAll()  // Allow delete
+
 						// .requestMatchers("/createAccount").hasRole("ADMIN")
 						// .requestMatchers("/cart/**").hasRole("USER")
 						.anyRequest().authenticated() // All other URLs require authentication.
@@ -88,5 +94,14 @@ public class Webconfig {
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	// SpringSecurityDialect is a thymeleaf dialect that allows you to use spring
+	// security expressions directly
+	// into your HTML templates..in order to enable it, we have to register this as
+	// a bean
+	@Bean
+	SpringSecurityDialect springSecurityDialect() {
+		return new SpringSecurityDialect();
 	}
 }

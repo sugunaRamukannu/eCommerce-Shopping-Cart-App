@@ -24,7 +24,7 @@ const orderBoxes = document.querySelectorAll(".order-box")
 orderBoxes.forEach(order => {
 	order.addEventListener("click", () => {
 		const orderId = order.dataset.orderId
-		location.href=`/purchases/order-detail/${orderId}`
+		location.href=`/order-detail/${orderId}`
 	})
 })
 
@@ -46,7 +46,7 @@ function updateCartCount(count) {
 			        }
 			    });
 
-/*
+
 // Fetch actual cart summary on page load
 		   window.addEventListener('DOMContentLoaded', () => {
 		       fetch('/cart/summary')
@@ -71,4 +71,4 @@ function updateCartCount(count) {
 				localStorage.setItem('cartCount', cartCount);
             });
         });
-		*/
+	
