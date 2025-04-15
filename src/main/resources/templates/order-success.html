@@ -9,53 +9,58 @@
 			<h1 class="mb-4 fw-bold">Checkout Summary</h1>
 			<div class="container mt-5">
 
-			    <!-- Order Success Header -->
-			    <div class="text-center">
-			        <h2>Order Successful!</h2>
-			        <div class="checkmark">&#x2714;</div> <!-- Green round tick icon -->
-			    </div>
+				<!-- Order Success Header -->
+				<div class="text-center">
+					<h2>Order Successful!</h2>
+					<div class="checkmark">&#x2714;</div> <!-- Green round tick icon -->
+				</div>
 
-			    <!-- Order Summary Section -->
-			    <div class="order-summary">
-			        <h3 class="mt-5">Order Summary</h3>
-			        
-			        <div class="row">
-			            <div class="col-md-6">
-			                <p><strong>Total Product Price:</strong> S$<span th:text="${totalPrice}">0.00</span></p>
-			                <p><strong>Shipping Fee:</strong> S$<span th:text="${shippingFee}">0.00</span></p>
-			                <p><strong>Discounts Applied:</strong> -S$<span th:text="${discountsApplied}">0.00</span></p>
-			                <hr>
-			                <h4>Total Price: S$<span th:text="${totalPrice}">0.00</span></h4>
-			            </div>
-			        </div>
-			        
-			        <!-- Order Table -->
-			        <h4 class="mt-5">Product Details</h4>
-			        <table class="table table-bordered">
-			            <thead>
-			                <tr>
-			                    <th>Product</th>
-			                    <th>Unit Price</th>
-			                    <th>Quantity</th>
-			                    <th>Subtotal</th>
-			                </tr>
-			            </thead>
-			            <tbody>
-			                <tr th:each="item : ${order.items}">
-			                    <td th:text="${item.product.name}"></td>
-			                    <td th:text="'S$' + ${item.product.price}"></td>
-			                    <td th:text="${item.quantity}"></td>
-			                    <td th:text="'S$' + ${item.product.price * item.quantity}"></td>
-			                </tr>
-			            </tbody>
-			        </table>
-			    </div>
+				<!-- Order Summary Section -->
+				<div class="order-summary">
+					<h3 class="mt-5">Order Summary</h3>
 
-			    <!-- Delivery Address Section -->
-			    <div class="mt-5">
-			        <h4>Delivery Address</h4>
-			        <p th:text="${deliveryAddress}">123 Example St, Example City, 123456</p>
-			    </div>
+					<div class="row">
+						<div class="col-md-6">
+							<p><strong>Total Product Price:</strong> S$<span
+									th:text="${orderSummary.totalProductPrice}">0.00</span></p>
+							<p><strong>Shipping Fee:</strong> S$<span th:text="${orderSummary.shippingFee}">0.00</span>
+							</p>
+							<p><strong>Discounts Applied:</strong> -S$<span
+									th:text="${orderSummary.discountsApplied}">0.00</span></p>
+							<hr>
+							<h4>Total Price: S$<span th:text="${orderSummary.finalTotal}">0.00</span></h4>
+						</div>
+					</div>
+
+					<!-- Order Table -->
+					<h4 class="mt-5">Product Details</h4>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Product</th>
+								<th>Unit Price</th>
+								<th>Quantity</th>
+								<th>Subtotal</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="item : ${groupedItems}">
+								<td th:text="${item.product.name}"></td>
+								<td th:text="'S$' + ${item.product.price}"></td>
+								<td th:text="${item.quantity}"></td>
+								<td th:text="${'S$' + (item.product.price * item.quantity)}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Delivery Address Section -->
+				<div class="mt-5">
+					<h4>Details</h4>
+					<p><strong>Address:</strong> <span th:text="${orderSummary.order.deliveryAddress}">N/A</span></p>
+					<p><strong>Payment Method:</strong> <span th:text="${orderSummary.order.paymentMethod}">N/A</span>
+					</p>
+				</div>
 
 			</div>
 		</div>

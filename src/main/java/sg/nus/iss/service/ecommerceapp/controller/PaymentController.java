@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import sg.nus.iss.service.ecommerceapp.model.Order;
+import sg.nus.iss.service.ecommerceapp.model.OrderSummary;
 import sg.nus.iss.service.ecommerceapp.service.PaymentService;
 
 @Controller
@@ -26,16 +27,26 @@ public class PaymentController {
 	//key in payment details
 	//redirect to order placed page
 	//update status in database (pending payment, paid, cancelled)
-	
-	@GetMapping("/cart/checkout/payment")
-	public String showPaymentPage(Model model, Authentication authentication) {
-		String mobilePhoneNumber = authentication.getName();
+	@GetMapping("/order/success")
+	public String showOrderSuccessPage(@RequestParam String orderId, Model model) {
 		
-		Order order = paymentService.createOrder(mobilePhoneNumber);
-		model.addAttribute("order", order);
+		OrderSummary summary = paymentService.getOrderSummary(orderId);
+		
+		model.addAttribute("groupedItems", summary.getGroupedItems());
+		model.addAttribute("orderSummary", summary);
 		
 		return "order-success";
 	}
+	
+//	@GetMapping("/cart/checkout/payment")
+//	public String showPaymentPage(Model model, Authentication authentication) {
+//		String mobilePhoneNumber = authentication.getName();
+//		
+//		Order order = paymentService.createOrder(mobilePhoneNumber);
+//		model.addAttribute("order", order);
+//		
+//		return "order-success";
+//	}
 	
 	@PostMapping("/cart/checkout/payment")
 	public String confirmCheckout(@RequestParam String deliveryAddress, @RequestParam String paymentMethod, Authentication authentication) {

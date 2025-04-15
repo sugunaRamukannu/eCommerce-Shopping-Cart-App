@@ -3,8 +3,15 @@ const currentPage = document.title.toLowerCase()
 
 const links = document.querySelectorAll(".nav-link")
 
+const purchaseButton = document.querySelector(".purchases")
+
+//fix clickbox
+purchaseButton.addEventListener('click', function() {
+	location.pathname="/purchase-history"
+})
+
 links.forEach(link => {
-	linkPage = link.dataset.page
+	const linkPage = link.dataset.page
 	if (currentPage.includes(linkPage)) {
 		link.classList.add("active-link")
 	}
@@ -15,18 +22,17 @@ if (currentPage.includes("order detail")) {
 	const orderIdNo = location.pathname.split("/").pop() 
 	const orderIdTitle = document.querySelector(".order-detail-title")
 	document.title += " " + orderIdNo
-	orderIdTitle.textContent += orderIdNo
 }
 
 //redirect to order details page
-const orderBoxes = document.querySelectorAll(".order-box")
+/*const orderBoxes = document.querySelectorAll(".order-box")
 
 orderBoxes.forEach(order => {
 	order.addEventListener("click", () => {
 		const orderId = order.dataset.orderId
 		location.href=`/order-detail/${orderId}`
 	})
-})
+})*/
 
 
 /*temp to fix later*/

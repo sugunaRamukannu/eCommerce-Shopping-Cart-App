@@ -76,17 +76,19 @@ a.active-link {
 	align-items: flex-start !important;
 }
 
+
 .order-box {
 	display: flex;
-	gap: 5rem;
+	gap: 2rem;
 	flex-wrap: wrap;
-	transition: 0.3s;
-	cursor: pointer;
+	/*transition: 0.3s;
+	cursor: pointer;*/
 }
 
+/*
 .order-box:hover {
 	background-color: #a2e436;
-}
+}*/
 
 @media only screen and (max-width: 600px) {
   .pill {

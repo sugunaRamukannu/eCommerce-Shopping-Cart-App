@@ -7,13 +7,13 @@
 	<section class="container p-5 d-flex">
 		<div class="row solo-box-page-wide align-items-center mx-auto mt-5 pt-5">
 			<div class="col border border-black p-5">
-				<h1 class="order-detail-title mb-4 fw-bold text-center" th:text="'Order ID: ' + ${order.id}">Order ID </h1>
-				<div class="row mb-3 flex-column g-3">
+				<h1 class="order-detail-title mb-4 fw-bold text-center" th:text="'Order ID: ' + ${order.orderIdString}">Order ID </h1>
+				<div class="row mb-3 g-3">
 					<div th:each="orderItem, iterStat:${orderItems}" class="order-box col border border-black p-5">
 						<span class="fs-3 fw-semibold">Product <span th:text="${iterStat.index + 1}"> 1</span>:</span>
-						<span class="fs-3 fw-semibold">Product Name: <span th:text="${orderItem.product.name}"></span></span>
-						<span class="fs-3 fw-semibold">Product Description: <span th:text="${orderItem.product.description}"></span></span>
-						<span class="fs-3 fw-semibold"><img th:src="${orderItem.product.productUrl}" height="200xp" width="200xp" alt="Product Image"/></span>
+						<span class="fs-6">Product Name: <span th:text="${orderItem.product.name}"></span></span>
+						<span class="fs-6">Product Description: <span th:text="${orderItem.product.description}"></span></span>
+						<span class="fs-6"><img th:src="${orderItem.product.productUrl}" height="200xp" width="200xp" alt="Product Image"/></span>
 					</div>
 				</div>
 			</div>

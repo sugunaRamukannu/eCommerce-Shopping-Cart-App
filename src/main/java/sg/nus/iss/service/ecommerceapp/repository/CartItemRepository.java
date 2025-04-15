@@ -10,5 +10,6 @@ import sg.nus.iss.service.ecommerceapp.model.ShoppingCart;
 public interface CartItemRepository extends JpaRepository<CartItem, Integer>{
 
 	List<CartItem> findByCheckedOut(boolean checkedOut);
+	
 	List<CartItem> findByShoppingCartAndCheckedOut(ShoppingCart shoppingCart, boolean checkedOut);
 }
