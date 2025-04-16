@@ -20,7 +20,7 @@ public class Product {
 	@Column(name = "product_id", nullable = false)
 	private int id;
 	@Column(name="name",length = 225)
-	private String productName;
+	private String name;
 	@Column(length = 225)
 	private String description;
 	@Column(nullable = false)
