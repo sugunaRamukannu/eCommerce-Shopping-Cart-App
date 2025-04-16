@@ -37,7 +37,7 @@ public class Webconfig {
 				// roles.
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/", "/login", "/login-check", "/search", "/forgot-password", "/register", "/send-otp",
-								"/reset-password", "/createAccount", "/submit-password", "/products/**", "/assets/**")
+								"/reset-password", "/createAccount", "/submit-password", "/products/**", "/terms", "/assets/**")
 						.permitAll() // URLs that don't require authentication.
 						 	.requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()  // Allow fetching
 				         		.requestMatchers(HttpMethod.DELETE, "/api/products/**").permitAll()  // Allow delete

@@ -50,6 +50,14 @@ public class ProductController {
         List<Product> products = productService.getProductsByCategory(categoryId);
         model.addAttribute("products", products);
         
+        ProductCategory productCategory = null;
+        
+        for (Product product: products) {
+        	productCategory = product.getProductCategory();
+        	break;
+        }
+        model.addAttribute("productCategory", productCategory.getCategory());
+        
         return "products";
     }
 	
