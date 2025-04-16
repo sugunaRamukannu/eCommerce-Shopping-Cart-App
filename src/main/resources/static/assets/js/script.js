@@ -52,6 +52,7 @@ document.querySelector("#checkout-form")?.addEventListener("submit", function(ev
 });
 
 
+/*
 // Fetch actual cart summary on page load
 		   window.addEventListener('DOMContentLoaded', () => {
 		       fetch('/cart/summary')
@@ -75,5 +76,5 @@ document.querySelector("#checkout-form")?.addEventListener("submit", function(ev
 				
 				localStorage.setItem('cartCount', cartCount);
             });
-        });
+        }); */
 	

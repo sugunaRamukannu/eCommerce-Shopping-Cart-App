@@ -5,10 +5,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import sg.nus.iss.service.ecommerceapp.model.Product;
+import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
+import sg.nus.iss.service.ecommerceapp.repository.ProductCategoryRepository;
 import sg.nus.iss.service.ecommerceapp.repository.ProductRepository;
 
 @Service
@@ -17,6 +21,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductCategoryRepository productCategoryRepository;
 
 	public List<Product> listAllProducts() {
 
@@ -86,5 +93,17 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product editProduct(Product existingProduct) {
 		return productRepository.save(existingProduct);
+	}
+	
+	@Override
+	public Page<Product> findAllProducts(Pageable pageable) {
+	    return productRepository.findAll(pageable);
+	}
+	
+	@Override
+//	@Transactional
+	public ProductCategory saveCategory(ProductCategory category) {
+		System.out.println("catgeory"+ category.toString());
+		return productCategoryRepository.save(category);
 	}
 }
