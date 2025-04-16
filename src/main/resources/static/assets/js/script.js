@@ -53,7 +53,7 @@ document.querySelector("#checkout-form")?.addEventListener("submit", function(ev
 
 
 // Fetch actual cart summary on page load
-	/*	   window.addEventListener('DOMContentLoaded', () => {
+		   window.addEventListener('DOMContentLoaded', () => {
 		       fetch('/cart/summary')
 		           .then(response => response.json())
 		           .then(data => {
@@ -63,17 +63,17 @@ document.querySelector("#checkout-form")?.addEventListener("submit", function(ev
 				   
 				   // Update the cart count on the page load
 				   	        updateCartCount(cartCount);
-		   });*/
+		   });
 		      
 
 				
         // Simulate adding to the cart
-     /*   document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+       document.querySelectorAll(".add-to-cart-btn").forEach(button => {
             button.addEventListener("click", () => {
                 cartCount++;
                 updateCartCount(cartCount);
 				
 				localStorage.setItem('cartCount', cartCount);
             });
-        });*/
+        });
 	

@@ -54,6 +54,7 @@ public class ShoppingCartController {
 
 	@PostMapping("/cart/{productId}")
 	public String addToCart(@PathVariable int productId, Model model, Authentication authentication) {
+		System.out.println(productId);
 
 		String mobilePhoneNumber = authentication.getName();
 
