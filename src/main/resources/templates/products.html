@@ -31,7 +31,7 @@
 				</div>
 			</aside>
 			<div class="col">
-				<h1 class="mb-4 fw-bold" th:text="${param.keyword != null ? 'Search Results' : 'Products - ' + productCategory}">Products
+				<h1 class="mb-4 fw-bold" th:text="${param.keyword != null ? 'Search Results' : (productCategory != null ? 'Products - ' + productCategory : 'Products')}">Products
 				</h1>
 
 				<div class="row row-cols-2 row-cols-lg-4 mb-3 g-3">
