@@ -48,7 +48,7 @@
 						</thead>
 						<tbody>
 							<tr class="fs-5 fw-medium" th:each="item : ${orderItems}">
-								<td th:text="${item.product.name}"></td>
+								<td th:text="${item.product.productName}"></td>
 								<td
 									th:text="'S$' + ${#numbers.formatDecimal((item.purchasePrice / item.quantity), 1, 2)}">
 								</td>
