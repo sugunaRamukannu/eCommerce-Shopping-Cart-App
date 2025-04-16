@@ -81,20 +81,29 @@ public class PaymentServiceImpl implements PaymentService {
 				
 				List<OrderItem> orderItems = new ArrayList<>();
 				
+				double accumulatedPrice = 0.0;
+				
+				double shippingFee = 5.00;
+				double discountsApplied = 0.0;
+				
 				for(Map.Entry<Product, Integer> entry : groupedItems.entrySet()) {
 					Product product = entry.getKey();
 					int totalQuantity = entry.getValue();
+					
+					System.out.println(totalQuantity);
 			    	
 					OrderItem orderItem = new OrderItem();
 					orderItem.setProduct(product);
 					orderItem.setQuantity(totalQuantity);
 					orderItem.setPurchasePrice(product.getPrice() * totalQuantity);
+					accumulatedPrice += orderItem.getPurchasePrice();
 					orderItem.setOrder(order);
 					
 					orderItems.add(orderItem);
 				}
-				
+					order.setTotalPrice(accumulatedPrice + shippingFee - discountsApplied);
 			        order.setOrderItems(orderItems);
+			        
 			        orderRepository.save(order);
 			        
 			        cartItemRepository.deleteAll(checkedoutItems);

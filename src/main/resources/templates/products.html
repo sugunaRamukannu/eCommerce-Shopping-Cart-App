@@ -29,20 +29,6 @@
 						</li>
 					</ul>
 				</div>
-				<div class="border border-2 border-black p-3 pb-0 mb-5">
-					<span class="fs-3 fw-bold d-inline-block mb-3">Filter By</span>
-					<ul class="p-0">
-
-						<li class="nav-link fs-5 mb-2">
-							<a th:href="@{/products(filter='category:electronics', sort=${param.sort}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
-								class="text-decoration-none text-dark">Fruit</a>
-						</li>
-						<li class="nav-link fs-5 mb-2">
-							<a th:href="@{/products(filter='category:clothing', sort=${param.sort}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
-								class="text-decoration-none text-dark">Food</a>
-						</li>
-					</ul>
-				</div>
 			</aside>
 			<div class="col">
 				<form>
