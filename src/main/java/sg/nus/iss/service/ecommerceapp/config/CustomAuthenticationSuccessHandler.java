@@ -28,7 +28,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         System.out.println("adminbefore");
         if (isAdmin) {
         	System.out.println("admin");
-        	 redirectUrl = "http://localhost:3000/admin";
+        	 redirectUrl = "http://localhost:3000";
         } else {
             // 2. Get the saved request URL for normal users
             SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
