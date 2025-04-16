@@ -77,8 +77,8 @@ public class ProductController {
             switch (sort) {
             case "priceLowHigh" -> products.sort(Comparator.comparing(Product::getPrice));
             case "priceHighLow" -> products.sort(Comparator.comparing(Product::getPrice).reversed());
-            case "nameAZ" -> products.sort(Comparator.comparing(Product::getName));
-            case "nameZA" -> products.sort(Comparator.comparing(Product::getName).reversed());
+            case "nameAZ" -> products.sort(Comparator.comparing(Product::getProductName));
+            case "nameZA" -> products.sort(Comparator.comparing(Product::getProductName).reversed());
             }
         }
         

@@ -3,11 +3,14 @@ package sg.nus.iss.service.ecommerceapp.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import sg.nus.iss.service.ecommerceapp.model.Product;
+import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
 
-@Service
+
 public interface ProductService {
 
 	List<Product> listAllProducts();
@@ -32,5 +35,12 @@ public interface ProductService {
 	Optional<Product> findProduct(int id);
 
 	Product editProduct(Product existingProduct);
+	
+	Page<Product> findAllProducts(Pageable pageable) ;
+
+
+
+	public ProductCategory saveCategory(ProductCategory category);
+
 
 }

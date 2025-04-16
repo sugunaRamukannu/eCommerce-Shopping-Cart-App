@@ -18,17 +18,25 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
 
-        // Retrieve the saved request (the URL the user was trying to access before login)
-        SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+        // Default redirect URL
+        String redirectUrl = "/";
 
-        System.out.println("savedRequets"+savedRequest);
-        String redirectUrl = "/"; // Default redirect URL if no saved request exists
+        // 1. Check if user has ADMIN role
+        boolean isAdmin = authentication.getAuthorities().stream()
+            .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+        System.out.println("adminbefore");
+        if (isAdmin) {
+        	System.out.println("admin");
+        	 redirectUrl = "http://localhost:3000/admin";
+        } else {
+            // 2. Get the saved request URL for normal users
+            SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
 
-        // Check if there is a saved request (i.e., the user was trying to access a protected page)
-        if (savedRequest != null) {
-            redirectUrl = savedRequest.getRedirectUrl(); // Get the last visited page URL
+            if (savedRequest != null) {
+                redirectUrl = savedRequest.getRedirectUrl(); // ✅ Redirect to last visited page
+            }
         }
 
-        response.sendRedirect(redirectUrl); // Redirect to the last visited page
+        response.sendRedirect(redirectUrl); // 🔁 Perform the redirect
     }
 }
