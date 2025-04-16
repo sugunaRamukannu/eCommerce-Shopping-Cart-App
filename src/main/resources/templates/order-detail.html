@@ -9,13 +9,19 @@
 			<div class="col border border-black p-5">
 				<h1 class="mb-4 fs-4 fw-bold text-center" th:text="'Order ID: ' + ${order.orderIdString}">Order ID </h1>
 				<div class="mb-3 g-3">
-					<div th:each="orderItem, iterStat:${orderItems}" class="mb-3 order-box border border-black p-5 flex-nowrap justify-content-between">
+					<div th:each="orderItem, iterStat:${orderItems}"
+						class="mb-3 order-box border border-black p-5 flex-nowrap justify-content-between">
 						<div class="d-flex flex-column">
 							<span class="fs-3 fw-semibold">Product <span th:text="${iterStat.index + 1}">
 									1</span>:</span>
-							<span class="fw-semibold fs-5 mt-5">Product Name: <span th:text="${orderItem.product.productName}"></span></span>
-							<span class="fw-semibold fs-5 mt-3">Product Description:
+							<span class="fw-medium fs-5 mt-5">Product Name: <span
+									th:text="${orderItem.product.productName}"></span></span>
+							<span class="fw-medium fs-5 mt-3">Product Description:
 								<span th:text="${orderItem.product.description}"></span></span>
+							<span class="fw-medium fs-5 mt-3">Product Quantity:
+								<span th:text="${orderItem.quantity}"></span></span>
+							<span class="fw-medium fs-5 mt-3">Product Purchase Price:
+								<span th:text="${orderItem.purchasePrice}"></span></span>
 						</div>
 
 						<span><img th:src="${orderItem.product.productUrl}" height="200px" width="200px"
