@@ -44,7 +44,7 @@
 						<div class="col mb-3">
 							<label for="userName" class="form-label">Username</label>
 							<input type="text" th:field="*{userName}" class="form-control rounded-0" id="userName"
-								name="userName" placeholder="Enter Usermame">
+								name="userName" placeholder="Enter Username">
 							<div th:if="${#fields.hasErrors('userName')}" th:errors="*{password}" class="text-danger">
 							</div>
 						</div>
@@ -52,10 +52,14 @@
 							<label for="password" class="form-label">Password</label>
 							<input type="password" th:field="*{password}" class="form-control rounded-0" id="password"
 								name="password" placeholder="Enter Password">
-							<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">
+							<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger rounded-0">
 							</div>
 						</div>
-						<div class="col col-lg-6 mt-3 mx-auto">
+						<div class="col col-lg-12 mb-3 d-flex">
+							<input type="checkbox" class="form-check-input p-2 rounded-0 me-3" id="terms" name="terms" required>							
+							<label for="password" class="form-label my-auto">I agree to the terms and conditions <a th:href="@{/terms}">stated here.</a></label>
+						</div>
+						<div class="col col-lg-6 mx-auto">
 							<button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
 						</div>
 

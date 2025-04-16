@@ -73,7 +73,7 @@
 									<!-- Loop through cartItems -->
 									<tr class="fs-5 fw-medium" th:each="entry : ${groupedItems}">
 										<td>
-											<input class="form-check-input p-2 rounded-0" type="checkbox"
+											<input class="form-check-input p-2 d-inline-block me-2 rounded-0" type="checkbox"
 												th:id="'item-' + ${entry.key.id}" th:value="${entry.key.id}"
 												name="checkedoutItems" th:checked="${entry.value[0].checkedOut}" />
 										</td>

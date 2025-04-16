@@ -10,7 +10,7 @@ public class OrderSummary {
 	private double discountsApplied;
 	private double totalProductPrice;
 	private double finalTotal;
-	private List<Map<String, Object>> groupedItems;
+	private List<OrderItem> orderItems;
 	
 	public OrderSummary() {}
 	
@@ -62,12 +62,12 @@ public class OrderSummary {
 		this.order = order;
 	}
 
-	public List<Map<String, Object>> getGroupedItems() {
-		return groupedItems;
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
 	}
 
-	public void setGroupedItems(List<Map<String, Object>> groupedItems) {
-		this.groupedItems = groupedItems;
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 }

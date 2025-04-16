@@ -62,7 +62,7 @@ public class Customer extends User {
 		this.shoppingCart = shoppingCart;
 	}
 
-@Override
+	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return null;

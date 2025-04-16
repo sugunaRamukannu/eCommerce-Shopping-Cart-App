@@ -54,7 +54,7 @@ public class ShoppingCartController {
 
 	@PostMapping("/cart/{productId}")
 	public String addToCart(@PathVariable int productId, Model model, Authentication authentication) {
-
+		
 		String mobilePhoneNumber = authentication.getName();
 
 		shoppingCartService.addProductToCart(productId, mobilePhoneNumber);
@@ -124,10 +124,16 @@ public class ShoppingCartController {
 				.sum();
 
 		double shippingFee = 5.00;
+		double discountsApplied = 0.00;
+		
+		double finalTotal = totalPrice + shippingFee - discountsApplied;
+		
+		model.addAttribute("shippingFee", shippingFee);
+		model.addAttribute("discountsApplied", discountsApplied);
 		model.addAttribute("checkedoutItems", checkedoutItems);
 		model.addAttribute("totalPrice", totalPrice);
-		model.addAttribute("shippingFee", shippingFee);
-
+		model.addAttribute("finalTotal", finalTotal);
+		
 		return "checkout";
 	}
 
@@ -159,8 +165,16 @@ public class ShoppingCartController {
 				entry -> entry.getKey().getPrice() * entry.getValue().stream().mapToInt(CartItem::getQuantity).sum())
 				.sum();
 
+		double shippingFee = 5.00;
+		double discountsApplied = 0.00;
+		
+		double finalTotal = totalPrice + shippingFee - discountsApplied;
+		
+		model.addAttribute("shippingFee", shippingFee);
+		model.addAttribute("discountsApplied", discountsApplied);
 		model.addAttribute("checkedoutItems", checkedoutItems);
 		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("finalTotal", finalTotal);
 
 		return "checkout";
 	}

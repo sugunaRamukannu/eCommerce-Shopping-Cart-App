@@ -10,13 +10,13 @@
 			<div class="container p-5 border border-black">
 				<div class="mb-4 fs-3">
 					<p><strong>Subtotal:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}">0.00</span></p>
-					<p><strong>Shipping Fee:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(shippingFee, 1, 2)}"></span></p>
-					<p><strong>Discount applied:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></p>
+					<p><strong>Shipping Fee:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(shippingFee, 1, 2)}">0.00</span></p>
+					<p><strong>Discount applied:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(discountsApplied, 1, 2)}">0.00</span></p>
 				</div>
 
 				<div class="my-3">
 					<h4 class="fs-2 fw-bolder">
-						Total: <strong th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}">0.00</strong>
+						Total: <strong th:text="'S$' + ${#numbers.formatDecimal(finalTotal, 1, 2)}">0.00</strong>
 					</h4>
 				</div>
 				<table class="table table-striped">
