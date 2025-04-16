@@ -15,10 +15,10 @@
 					<div class="text-decoration-none text-dark">
 						<div data-order-id="1" class="order-box col border border-black p-5">
 							<span class="fs-3 fw-semibold">Order ID: <span th:text="${order.orderIdString}"></span></span>
-							<span class="fs-5">Order Date: <span th:text="${@dateTimeFormatterUtil.formatDate(order.date)}"></span></span>
-							<span class="fs-5">Order Price: <span
+							<span class="fs-5 fw-medium">Order Date: <span th:text="${@dateTimeFormatterUtil.formatDate(order.date)}"></span></span>
+							<span class="fs-5 fw-medium">Order Price: <span
 									th:text="'S$' + ${#numbers.formatDecimal(order.totalPrice, 1, 2)}"></span></span>
-							<span class="fs-5">Order Status: <span
+							<span class="fs-5 fw-medium">Order Status: <span
 									th:text="${order.status}"></span></span>
 							<a th:href="@{/order-detail/{id} (id=${order.id})}" class="btn btn-primary rounded-0">View Order</a>
 						</div>
