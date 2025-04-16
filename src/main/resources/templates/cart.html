@@ -77,7 +77,7 @@
 												th:id="'item-' + ${entry.key.id}" th:value="${entry.key.id}"
 												name="checkedoutItems" th:checked="${entry.value[0].checkedOut}" />
 										</td>
-										<td th:text="${entry.key.name}"></td>
+										<td th:text="${entry.key.productName}"></td>
 										<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price, 1, 2)}"></td>
 										<td th:text="${entry.value.size()}"></td>
 										<td

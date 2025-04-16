@@ -30,7 +30,7 @@
 					</thead>
 					<tbody>
 						<tr class="fs-5 fw-medium" th:each="entry : ${checkedoutItems}">
-							<td th:text="${entry.key.name}"></td>
+							<td th:text="${entry.key.productName}"></td>
 							<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price, 1, 2)}"></td>
 							<td th:text="${entry.value.size()}"></td>
 							<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price * entry.value.size(), 1, 2)}"></td>
