@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import sg.nus.iss.service.ecommerceapp.model.Product;
 import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
 
-@Service
+
 public interface ProductService {
 
 	List<Product> listAllProducts();
@@ -38,6 +38,9 @@ public interface ProductService {
 
 	Product editProduct(Product existingProduct);
 	
+
 	public ProductCategory saveCategory(ProductCategory category);
+
+
 
 }

@@ -22,5 +22,6 @@ public class ProductCategoryDto {
 	public void setCategoryName(String category) {
 		this.category = category;
 	}
+
 }
 

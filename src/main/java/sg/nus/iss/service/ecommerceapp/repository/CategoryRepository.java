@@ -1,5 +1,6 @@
 package sg.nus.iss.service.ecommerceapp.repository;
 
+
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<ProductCategory, Integ
 
 	@Query("SELECT DISTINCT new sg.nus.iss.service.ecommerceapp.model.ProductCategoryDto(p.id, p.category) FROM ProductCategory p")
 	List<ProductCategoryDto> findDistinctCategories();
+
 }
+

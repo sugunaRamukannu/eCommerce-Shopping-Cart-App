@@ -47,7 +47,7 @@
 									</th:block>
 									<!--click product image to pop up enlarge image-->
 									<img th:src="${product.productUrl}" height="200" class="card-img-top rounded-0"
-										th:alt="${product.name}"
+										th:alt="${product.productName}"
 										th:attr="data-bs-toggle='modal', data-bs-target='#imageModal__' + ${product.id}">
 									<!-- Modal with unique ID -->
 									<div class="modal fade" th:id="'imageModal__' + ${product.id}" tabindex="-1"
@@ -55,7 +55,7 @@
 										<div class="modal-dialog modal-dialog-centered modal-lg">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title" th:text="${product.name}">Product Name
+													<h5 class="modal-title" th:text="${product.productName}">Product Name
 													</h5>
 													<button type="button" class="btn-close" data-bs-dismiss="modal"
 														aria-label="Close"></button>
@@ -69,7 +69,7 @@
 											</div>
 										</div>
 									</div>
-									<h5 class="card-title mt-4" th:text="${product.name}">Apple</h5>
+									<h5 class="card-title mt-4" th:text="${product.productName}">Apple</h5>
 									<p class="card-text fw-light mb-0" th:text="${product.productCategory.category}">
 										Fruits & Vegetables</p>
 									<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">

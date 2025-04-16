@@ -14,30 +14,31 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
 
-		// Default redirect URL
-		String redirectUrl = "/";
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws IOException, ServletException {
 
-		// 1. Check if user has ADMIN role
-		boolean isAdmin = authentication.getAuthorities().stream()
-				.anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
-		System.out.println("adminbefore");
-		if (isAdmin) {
-			System.out.println("admin");
-			redirectUrl = "http://localhost:3000/admin";
-		} else {
-			// 2. Get the saved request URL for normal users
-			SavedRequest savedRequest = (SavedRequest) request.getSession()
-					.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+        // Default redirect URL
+        String redirectUrl = "/";
 
-			if (savedRequest != null) {
-				redirectUrl = savedRequest.getRedirectUrl(); // ✅ Redirect to last visited page
-			}
-		}
+        // 1. Check if user has ADMIN role
+        boolean isAdmin = authentication.getAuthorities().stream()
+            .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+        System.out.println("adminbefore");
+        if (isAdmin) {
+        	System.out.println("admin");
+        	 redirectUrl = "http://localhost:3000/admin";
+        } else {
+            // 2. Get the saved request URL for normal users
+            SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
 
-		response.sendRedirect(redirectUrl); // 🔁 Perform the redirect
-	}
+            if (savedRequest != null) {
+                redirectUrl = savedRequest.getRedirectUrl(); // ✅ Redirect to last visited page
+            }
+        }
+
+        response.sendRedirect(redirectUrl); // 🔁 Perform the redirect
+    }
+
 }

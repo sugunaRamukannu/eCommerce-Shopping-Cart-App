@@ -1,7 +1,11 @@
 package sg.nus.iss.service.ecommerceapp.controller;
 
 import java.util.List;
+//import java.util.List;
 import java.util.Optional;
+
+//import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +27,12 @@ import sg.nus.iss.service.ecommerceapp.model.ProductAdminDto;
 import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
 import sg.nus.iss.service.ecommerceapp.model.ProductCategoryDto;
 import sg.nus.iss.service.ecommerceapp.repository.CategoryRepository;
+
+
 import sg.nus.iss.service.ecommerceapp.service.ProductService;
+
+
+
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -70,7 +79,9 @@ public class ProductRestController {
 	    return productsPage.map(product -> {
 	        ProductAdminDto dto = new ProductAdminDto();
 	        dto.setProductId((long) product.getId());
-	        dto.setProductName(product.getName());
+
+	        dto.setProductName(product.getProductName());
+
 	        dto.setPrice(product.getPrice());
 	        dto.setLabels(product.getLabels());
 
@@ -90,7 +101,7 @@ public class ProductRestController {
 	        Product product = selectedProduct.get();
 	        ProductAdminDto dto = new ProductAdminDto();
 	        dto.setProductId((long) product.getId());
-	        dto.setProductName(product.getName());
+	        dto.setProductName(product.getProductName());
 	        dto.setPrice(product.getPrice());
 	        dto.setLabels(product.getLabels());
 //	        dto.setStock(product.getCartItems() != null ? product.getCartItems().size() : 0);
@@ -117,7 +128,7 @@ public class ProductRestController {
 				ProductCategory newCategory=productService.saveCategory(category);
 //
 			 Product product = new Product();
-			    product.setName(productDto.getProductName());
+			    product.setProductName(productDto.getProductName());
 			    product.setPrice(productDto.getPrice());
 			    product.setLabels(productDto.getLabels());
 			    product.setProductCategory(category);
@@ -126,7 +137,9 @@ public class ProductRestController {
 //			    product.setProductCategory(category);
 		Product newProduct=productService.saveProducts(product);
 	
-		System.out.println(product.getName());
+
+		System.out.println(product.getProductName());
+
 		System.out.println(product.getPrice());
 		System.out.println(category.getId());
 	
@@ -152,13 +165,15 @@ public class ProductRestController {
 		if(editProd.isPresent()) {
 			Product existingProduct=editProd.get();
 			System.out.println("existingProduct"+existingProduct.toString());
-	System.out.println("ame"+inProduct.getName());
+
+	System.out.println("ame"+inProduct.getProductName());
 	System.out.println("ame"+inProduct.getLabels());
 //			existingProduct.setId(inProduct.getId());
-			existingProduct.setName(inProduct.getName());
+			existingProduct.setProductName(inProduct.getProductName());
 			existingProduct.setPrice(inProduct.getPrice());
 			existingProduct.setLabels(inProduct.getLabels());
-			System.out.println(existingProduct.getName());
+			System.out.println(existingProduct.getProductName());
+
 			System.out.println(existingProduct.getPrice());
 			System.out.println(existingProduct.getLabels());
 			
@@ -183,5 +198,6 @@ public class ProductRestController {
 		   return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED); 
 	   }
 	}
-	
+
 }
+
