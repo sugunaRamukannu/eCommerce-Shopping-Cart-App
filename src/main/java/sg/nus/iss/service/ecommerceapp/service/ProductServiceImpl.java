@@ -21,9 +21,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+
 	@Autowired
 	private ProductCategoryRepository productCategoryRepository;
 	
+
 	public List<Product> listAllProducts() {
 
 		return productRepository.findAll();
@@ -97,6 +99,7 @@ public class ProductServiceImpl implements ProductService {
 	    return productRepository.findAll(pageable);
 	}
 	
+
 	//admin panel
 	
 	@Override
@@ -104,12 +107,14 @@ public class ProductServiceImpl implements ProductService {
 	public Product saveProducts(Product product) {
 		return productRepository.save(product);
 	}
-	
+
 	@Override
 //	@Transactional
 	public ProductCategory saveCategory(ProductCategory category) {
 		System.out.println("catgeory"+ category.toString());
 		return productCategoryRepository.save(category);
 	}
+
 	
 	}
+

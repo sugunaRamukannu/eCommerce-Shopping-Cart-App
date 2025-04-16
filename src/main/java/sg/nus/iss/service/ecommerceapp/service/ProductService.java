@@ -33,14 +33,14 @@ public interface ProductService {
 	public boolean deleteProduct(int id);
 
 	Optional<Product> findProduct(int id);
+	
+	Page<Product> findAllProducts(Pageable pageable);
 
 	Product editProduct(Product existingProduct);
 	
-	Page<Product> findAllProducts(Pageable pageable) ;
-
-
 
 	public ProductCategory saveCategory(ProductCategory category);
+
 
 
 }

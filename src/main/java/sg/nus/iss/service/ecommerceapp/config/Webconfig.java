@@ -41,7 +41,9 @@ public class Webconfig {
 				// Authorization configuration - define which URLs are accessible by which
 				// roles.
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/", "/login", "/login-check", "/forgot-password", "/register","/search",
+
+						.requestMatchers("/", "/login", "/login-check", "/forgot-password", "/register","/search", "/products/**", "/terms",
+
 //								"/cart","/purchases",
 								"/send-otp","/api/products","/reset-password", "/createAccount", "/submit-password", "/api/products/**",
 								"/assets/**")
@@ -74,6 +76,7 @@ public class Webconfig {
 
 				)
 		.httpBasic(Customizer.withDefaults()); // ← ADD THIS LINE
+
 
 
 		// Return the SecurityFilterChain configuration.

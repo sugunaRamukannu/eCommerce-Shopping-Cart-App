@@ -15,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<ProductCategory, Integ
 
 	@Query("SELECT DISTINCT new sg.nus.iss.service.ecommerceapp.model.ProductCategoryDto(p.id, p.category) FROM ProductCategory p")
 	List<ProductCategoryDto> findDistinctCategories();
+
 }
+

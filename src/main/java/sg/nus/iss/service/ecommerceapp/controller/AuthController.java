@@ -18,4 +18,7 @@ public class AuthController {
                 .map(GrantedAuthority::getAuthority)
                 .orElse("ROLE_USER");
     }
+
 }
+
+

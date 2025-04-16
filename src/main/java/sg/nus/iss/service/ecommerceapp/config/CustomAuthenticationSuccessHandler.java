@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -39,4 +40,5 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         response.sendRedirect(redirectUrl); // 🔁 Perform the redirect
     }
+
 }
