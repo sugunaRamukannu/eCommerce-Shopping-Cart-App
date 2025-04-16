@@ -33,7 +33,7 @@ public class Webconfig {
 	private CustomAuthenticationSuccessHandler successHandler;
 
 	@Bean
-	public SecurityFilterChain securityFilter(HttpSecurity httpSecurity) throws Exception {
+	 SecurityFilterChain securityFilter(HttpSecurity httpSecurity) throws Exception {
 		// Disable CSRF if you're not dealing with a stateful application (like RESTful
 		// APIs).
 		httpSecurity
@@ -47,11 +47,12 @@ public class Webconfig {
 								"/send-otp","/api/products","/reset-password", "/createAccount", "/submit-password", "/api/products/**",
 								"/assets/**")
 						.permitAll() // URLs that don't require authentication.
-						 .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()  // Allow fetching
-				            .requestMatchers(HttpMethod.DELETE, "/api/products/**").permitAll()  // Allow delete
-				            .requestMatchers(HttpMethod.PUT, "/api/products/**").permitAll()//allow update
-				            .requestMatchers(HttpMethod.POST, "/api/products/**").permitAll()//allow update
-				            .requestMatchers("/api/**").permitAll()
+						 .requestMatchers(HttpMethod.GET, "/api/products/**").hasRole("ADMIN") // Allow fetching
+						 .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
+				            .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN") // Allow delete
+				            .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN") //allow update
+				            .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN") //allow update
+				            .requestMatchers("/api/**").hasRole("ADMIN")
 						// .requestMatchers("/createAccount").hasRole("ADMIN")
 						// .requestMatchers("/cart/**").hasRole("USER")
 						.anyRequest().authenticated() // All other URLs require authentication.

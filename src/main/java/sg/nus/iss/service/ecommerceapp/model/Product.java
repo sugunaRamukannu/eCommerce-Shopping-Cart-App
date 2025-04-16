@@ -19,8 +19,8 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id", nullable = false)
 	private int id;
-	@Column(length = 225)
-	private String name;
+	@Column(name="name",length = 225)
+	private String productName;
 	@Column(length = 225)
 	private String description;
 	@Column(nullable = false)
@@ -39,10 +39,10 @@ public class Product {
 //		super();
 	}
 
-	public Product(String name, ProductCategory productCategory, String description, double price, String productUrl,
+	public Product(String productName, ProductCategory productCategory, String description, double price, String productUrl,
 			String labels) {
 //		super();
-		this.name = name;
+		this.productName = productName;
 		this.productCategory = productCategory;
 		this.description = description;
 		this.price = price;
@@ -106,12 +106,12 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getName() {
-		return name;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	public int getId() {
@@ -124,7 +124,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + getId() + ", name=" + getName() + ", description=" + getDescription() + ", price="
+		return "Product [id=" + getId() + ", name=" + getProductName() + ", description=" + getDescription() + ", price="
 				+ getPrice() + ", productUrl=" + getProductUrl() + ", label=" + getLabels() + "]";
 	}
 }

@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	// Query method to find products by category and label
 //	List<Product> findByCategoryCategoryNameAndLabelsContaining(String categoryName, String labels);
 
-	@Query("SELECT p FROM Product as p where p.name like CONCAT('%',:k, '%') ")
+	@Query("SELECT p FROM Product as p where p.productName like CONCAT('%',:k, '%') ")
 	public ArrayList<Product> SearchProductByName(@Param("k") String keyword);
 
 	@Query("Select p from Product as p JOIN p.productCategory c WHERE c.category like CONCAT('%', :k, '%') ")
