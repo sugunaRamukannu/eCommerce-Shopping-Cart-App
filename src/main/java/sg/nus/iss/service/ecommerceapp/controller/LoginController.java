@@ -34,6 +34,9 @@ public class LoginController {
 	    public String loginPage(Model model, @RequestParam(required = false) String error) {
 	        model.addAttribute("logindto", new LoginDto());
 	        model.addAttribute("showPassword", false);
+	        if (error != null) {
+	            model.addAttribute("loginError", "Invalid password");
+	        }
 	        return "login";
 	    }
 
@@ -74,7 +77,7 @@ public class LoginController {
 		public String register(@Valid @ModelAttribute Customer customer, BindingResult bindingResult, Model model) {
 			
 			 if(bindingResult.hasErrors()) {
-				 System.out.println("error");
+				 System.out.println("errorcreate");
 				 System.out.println(bindingResult.getAllErrors());
 				 model.addAttribute("customer", customer);
 				 return"create-account";

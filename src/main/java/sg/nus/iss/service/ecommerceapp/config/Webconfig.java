@@ -66,7 +66,16 @@ public class Webconfig {
 						.successHandler(successHandler) // Custom success handler for login.
 						.failureUrl("/login?error=true"))
 
-				.logout(logout -> logout.permitAll() // Allow everyone to log out.
+				.logout(logout -> logout
+					    .logoutUrl("/logout")
+					    .logoutSuccessUrl("/") // Redirect here after logout
+					    .invalidateHttpSession(true)
+					    .deleteCookies("JSESSIONID")
+					    .permitAll()
+					)
+				.sessionManagement(session -> session
+				    .invalidSessionUrl("/")
+				 // Allow everyone to log out.
 				)
 
 				// Request cache - remember the last visited page after login.

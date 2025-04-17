@@ -12,6 +12,10 @@
                 <form th:action="${showPassword} ? @{/login} : @{/login-check}" 
                       th:object="${logindto}" method="post">
                     <h1 class="mb-4 fw-bold text-center">Login</h1>
+					
+					<div th:if="${loginError}" class="error-message" style="color: red;">
+					    <p th:text="${loginError}"></p>
+					</div>
                     <div class="mb-3">
                         <label for="mobilePhoneNumber" class="form-label">Mobile Number</label>
                         <input type="tel" th:field="*{username}" class="form-control rounded-0" id="mobilePhoneNumber"

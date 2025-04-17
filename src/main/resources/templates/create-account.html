@@ -30,6 +30,8 @@
 							<label for="email" class="form-label">Email Address</label>
 							<input type="email" th:field="*{email}" class="form-control rounded-0" id="email"
 								name="email" placeholder="Enter Email">
+								<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">
+															</div>
 						</div>
 						<div class="col mb-3">
 							<label for="mobilePhoneNumber" class="form-label">Mobile Phone Number</label>
@@ -37,7 +39,7 @@
 								id="mobilePhoneNumber" name="mobilePhoneNumber" placeholder="Enter Mobile Phone Number">
 							<div th:if="${#fields.hasErrors('mobilePhoneNumber')}" th:errors="*{mobilePhoneNumber}"
 								class="text-danger"></div>
-							<div th:if="${mobileExists}" class="alert alert-danger" role="alert">
+							<div th:if="${mobileExists}" class="alert alert-danger"  role="alert">
 								Mobile number already exists. Please use another number.
 							</div>
 						</div>
@@ -45,7 +47,7 @@
 							<label for="userName" class="form-label">Username</label>
 							<input type="text" th:field="*{userName}" class="form-control rounded-0" id="userName"
 								name="userName" placeholder="Enter Username">
-							<div th:if="${#fields.hasErrors('userName')}" th:errors="*{password}" class="text-danger">
+							<div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="text-danger">
 							</div>
 						</div>
 						<div class="col mb-3">
