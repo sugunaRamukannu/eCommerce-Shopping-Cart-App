@@ -7,6 +7,4 @@ import sg.nus.iss.service.ecommerceapp.model.ShoppingCart;
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Integer>{
 	ShoppingCart findByCustomerId(int customerId);
 	void deleteByCustomerId(int customerId);
-	
-	
 }

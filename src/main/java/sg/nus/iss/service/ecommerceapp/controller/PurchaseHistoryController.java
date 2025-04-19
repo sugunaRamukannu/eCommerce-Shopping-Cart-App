@@ -14,7 +14,6 @@ import sg.nus.iss.service.ecommerceapp.exception.OrderNotFoundException;
 import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.model.Order;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
-import sg.nus.iss.service.ecommerceapp.service.OrderItemService;
 import sg.nus.iss.service.ecommerceapp.service.OrderService;
 
 //Author(s): Ramukannu Suguna, Andy Teow Rui Qing
@@ -27,9 +26,6 @@ public class PurchaseHistoryController {
 
 	@Autowired
 	private OrderService orderService;
-
-	@Autowired
-	private OrderItemService orderItemService;
 
 	@GetMapping("/purchase-history")
 	public String viewPurchaseHistory(Model model, Authentication authentication) {

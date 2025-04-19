@@ -1,7 +1,6 @@
 package sg.nus.iss.service.ecommerceapp.model;
 
 import java.util.List;
-import java.util.Map;
 
 public class OrderSummary {
 

@@ -1,8 +1,6 @@
 package sg.nus.iss.service.ecommerceapp.controller;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,13 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jakarta.servlet.http.HttpServletRequest;
 import sg.nus.iss.service.ecommerceapp.model.CartItem;
-import sg.nus.iss.service.ecommerceapp.model.CartSummary;
-import sg.nus.iss.service.ecommerceapp.model.Customer;
-import sg.nus.iss.service.ecommerceapp.model.DeliveryAddress;
-import sg.nus.iss.service.ecommerceapp.model.Product;
-import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
 
 //Author(s): Ramukannu Suguna, Andy Teow Rui Qing
