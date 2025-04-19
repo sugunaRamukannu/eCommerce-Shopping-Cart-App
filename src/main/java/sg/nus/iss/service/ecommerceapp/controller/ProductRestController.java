@@ -30,7 +30,7 @@ import sg.nus.iss.service.ecommerceapp.service.ProductService;
 
 //Author(s): Ramukannu Suguna
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class ProductRestController {

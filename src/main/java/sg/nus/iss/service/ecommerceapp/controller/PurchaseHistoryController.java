@@ -27,6 +27,7 @@ public class PurchaseHistoryController {
 	@Autowired
 	private OrderService orderService;
 
+	//Author(s): Ramukannu Suguna
 	@GetMapping("/purchase-history")
 	public String viewPurchaseHistory(Model model, Authentication authentication) {
 		String mobilePhoneNumber = authentication.getName();
