@@ -16,7 +16,7 @@ import sg.nus.iss.service.ecommerceapp.model.Order;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.OrderService;
 
-//Author(s): Ramukannu Suguna, Andy Teow Rui Qing
+//Author(s): Yu Yaotian, Li Zhuoxuan, Pang Siang Lian, Irene Chan Oei Lin
 
 @Controller
 public class PurchaseHistoryController {

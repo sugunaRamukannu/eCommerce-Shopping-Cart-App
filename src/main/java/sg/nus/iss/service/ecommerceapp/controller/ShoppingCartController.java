@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import sg.nus.iss.service.ecommerceapp.model.CartItem;
 import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
+import sg.nus.iss.service.ecommerceapp.utils.PriceModifierUtil;
 
 //Author(s): Ramukannu Suguna, Andy Teow Rui Qing
 
@@ -66,11 +67,9 @@ public class ShoppingCartController {
 		List<CartItem> checkedoutItems = shoppingCartService.showCheckedoutItems(mobilePhoneNumber);
 		double totalPrice = checkedoutItems.stream()
 				.mapToDouble(checkedoutItem -> (checkedoutItem.getPrice() * checkedoutItem.getQuantity())).sum();
-		double shippingFee = 5.00;
-		double discountsApplied = 0.00;
-		double finalTotal = totalPrice + shippingFee - discountsApplied;
-		model.addAttribute("shippingFee", shippingFee);
-		model.addAttribute("discountsApplied", discountsApplied);
+		double finalTotal = totalPrice + PriceModifierUtil.SHIPPING_FEE - PriceModifierUtil.DISCOUNTS_APPLIED;
+		model.addAttribute("shippingFee", PriceModifierUtil.SHIPPING_FEE);
+		model.addAttribute("discountsApplied", PriceModifierUtil.DISCOUNTS_APPLIED);
 		model.addAttribute("checkedoutItems", checkedoutItems);
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("finalTotal", finalTotal);
