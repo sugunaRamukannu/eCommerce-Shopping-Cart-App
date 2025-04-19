@@ -23,6 +23,8 @@ import sg.nus.iss.service.ecommerceapp.model.Product;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
 
+//Author(s): Ramukannu Suguna, Andy Teow Rui Qing
+
 @Controller
 public class ShoppingCartController {
 

@@ -21,6 +21,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 
+//Author(s): Ramukannu Suguna
+
 @Configuration
 @EnableWebSecurity
 public class Webconfig {

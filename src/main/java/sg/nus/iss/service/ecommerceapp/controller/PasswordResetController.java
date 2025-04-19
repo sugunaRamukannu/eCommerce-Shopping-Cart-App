@@ -19,6 +19,8 @@ import sg.nus.iss.service.ecommerceapp.model.OtpRequestDto;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.OtpService;
 
+//Author(s): Ramukannu Suguna
+
 @Controller
 public class PasswordResetController {
 

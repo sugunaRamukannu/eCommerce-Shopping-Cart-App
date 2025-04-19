@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 
+//Author(s): Ramukannu Suguna
+
 @Service
 public class MyUserDetailService implements UserDetailsService {
 	@Autowired

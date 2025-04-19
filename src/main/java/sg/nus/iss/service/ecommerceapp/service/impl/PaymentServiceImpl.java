@@ -2,28 +2,24 @@ package sg.nus.iss.service.ecommerceapp.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sg.nus.iss.service.ecommerceapp.model.CartItem;
 import sg.nus.iss.service.ecommerceapp.model.Customer;
+import sg.nus.iss.service.ecommerceapp.model.DeliveryAddress;
 import sg.nus.iss.service.ecommerceapp.model.Order;
 import sg.nus.iss.service.ecommerceapp.model.OrderItem;
 import sg.nus.iss.service.ecommerceapp.model.OrderSummary;
 import sg.nus.iss.service.ecommerceapp.model.Product;
-import sg.nus.iss.service.ecommerceapp.model.ShoppingCart;
 import sg.nus.iss.service.ecommerceapp.repository.CartItemRepository;
 import sg.nus.iss.service.ecommerceapp.repository.CustomerRepository;
+import sg.nus.iss.service.ecommerceapp.repository.DeliveryAddressRepository;
 import sg.nus.iss.service.ecommerceapp.repository.OrderRepository;
-import sg.nus.iss.service.ecommerceapp.repository.ShoppingCartRepository;
 import sg.nus.iss.service.ecommerceapp.service.PaymentService;
 
 @Service
@@ -37,6 +33,9 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private DeliveryAddressRepository deliveryAddressRepository;
 
 	@Override
 	public Order confirmOrder(String deliveryAddress, String paymentMethod, String mobilePhoneNumber) {
@@ -78,6 +77,12 @@ public class PaymentServiceImpl implements PaymentService {
 				order.setOrderItems(orderItems);
 
 				orderRepository.save(order);
+				
+				DeliveryAddress address = new DeliveryAddress();
+				address.setCustomer(customer);
+				address.setAddress(deliveryAddress);
+
+				deliveryAddressRepository.save(address);
 
 				cartItemRepository.deleteAll(checkedoutItems);
 
