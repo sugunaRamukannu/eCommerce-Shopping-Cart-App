@@ -46,7 +46,7 @@ public class ShoppingCartController {
 		return "redirect:" + (referer != null ? referer : "/");
 	}
 
-	//remove cart items
+	// remove cart items
 	@PostMapping("/cart/delete")
 	public String deleteProductFromCart(@RequestParam("productId") int productId, Model model,
 			Authentication authentication) {
@@ -63,7 +63,7 @@ public class ShoppingCartController {
 		return "redirect:/cart";
 	}
 
-	//checkout page
+	// checkout page
 	@PostMapping("/cart/checkout")
 	public String checkoutSelectedItems(@RequestParam("checkedoutItems") List<Integer> itemIds, Model model,
 			Authentication authentication) {

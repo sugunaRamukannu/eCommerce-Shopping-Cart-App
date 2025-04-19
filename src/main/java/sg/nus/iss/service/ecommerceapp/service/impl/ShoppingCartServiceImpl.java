@@ -64,14 +64,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			if (optionalProduct.isPresent()) {
 				Product product = optionalProduct.get();
 
-				List<CartItem> cartItems = shoppingCart.getItems().stream()
-						.filter(cart -> cart.getProduct().getId() == (product.getId())).toList();
+				CartItem exsistingItem = null;
+				if(shoppingCart.getItems() != null) {
+					for (CartItem c : shoppingCart.getItems()) {
+						if (c.getProduct().getId() == product.getId()) {
+							exsistingItem = c;
+						}
+					}
+				}
+			
 
-				if (cartItems.size() > 0) {
-					// Update the quantity of the existing cart item
-					CartItem cartItem = cartItems.get(0);
-					cartItem.setQuantity(cartItem.getQuantity() + 1);
-					cartItemRepository.save(cartItem);
+				if (exsistingItem != null) {
+					exsistingItem.setQuantity(exsistingItem.getQuantity() + 1);
+					cartItemRepository.save(exsistingItem);
 				} else {
 					// Create a new cart item and add it to the cart
 					CartItem cartItem = new CartItem();
@@ -80,7 +85,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 					cartItem.setQuantity(1);
 					cartItem.setPrice(product.getPrice());
 					cartItemRepository.save(cartItem);
-
 					// Initialize the items list if it's null
 					if (shoppingCart.getItems() == null) {
 						shoppingCart.setItems(new ArrayList<>());
