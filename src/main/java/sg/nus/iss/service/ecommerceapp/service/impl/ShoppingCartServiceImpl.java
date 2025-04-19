@@ -1,4 +1,4 @@
-package sg.nus.iss.service.ecommerceapp.service;
+package sg.nus.iss.service.ecommerceapp.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import sg.nus.iss.service.ecommerceapp.exception.CustomerNotFoundException;
+import sg.nus.iss.service.ecommerceapp.exception.ProductNotFoundException;
 import sg.nus.iss.service.ecommerceapp.model.CartItem;
 import sg.nus.iss.service.ecommerceapp.model.CartSummary;
 import sg.nus.iss.service.ecommerceapp.model.Customer;
@@ -21,6 +25,7 @@ import sg.nus.iss.service.ecommerceapp.repository.CartItemRepository;
 import sg.nus.iss.service.ecommerceapp.repository.CustomerRepository;
 import sg.nus.iss.service.ecommerceapp.repository.ProductRepository;
 import sg.nus.iss.service.ecommerceapp.repository.ShoppingCartRepository;
+import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -39,85 +44,77 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	@Override
 	public ShoppingCart addProductToCart(int productId, String mobilePhoneNumber) {
-
+		// Retrieve the customer by mobile phone number
 		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
 			ShoppingCart shoppingCart = customer.getShoppingCart();
 
+			// Create a new shopping cart if none exists
 			if (shoppingCart == null) {
-
 				shoppingCart = new ShoppingCart();
 				customer.setShoppingCart(shoppingCart);
 				shoppingCartRepository.save(shoppingCart);
 			}
 
+			// Retrieve the product by ID
 			Optional<Product> optionalProduct = productRepository.findById(productId);
 
 			if (optionalProduct.isPresent()) {
 				Product product = optionalProduct.get();
-				CartItem cartItem = new CartItem();
-				cartItem.setProduct(product);
-				cartItem.setShoppingCart(shoppingCart);
-				cartItem.setQuantity(1);
-				cartItem.setPrice(product.getPrice());
-				cartItemRepository.save(cartItem);
-				// prevent null pointer
-				if (shoppingCart.getItems() == null) {
-					shoppingCart.setItems(new ArrayList<>());
+
+				List<CartItem> cartItems = shoppingCart.getItems().stream()
+						.filter(cart -> cart.getProduct().getId() == (product.getId())).toList();
+
+				if (cartItems.size() > 0) {
+					// Update the quantity of the existing cart item
+					CartItem cartItem = cartItems.get(0);
+					cartItem.setQuantity(cartItem.getQuantity() + 1);
+					cartItemRepository.save(cartItem);
+				} else {
+					// Create a new cart item and add it to the cart
+					CartItem cartItem = new CartItem();
+					cartItem.setProduct(product);
+					cartItem.setShoppingCart(shoppingCart);
+					cartItem.setQuantity(1);
+					cartItem.setPrice(product.getPrice());
+					cartItemRepository.save(cartItem);
+
+					// Initialize the items list if it's null
+					if (shoppingCart.getItems() == null) {
+						shoppingCart.setItems(new ArrayList<>());
+					}
+					shoppingCart.getItems().add(cartItem);
 				}
-				shoppingCart.getItems().add(cartItem);
+				// Set the customer for the shopping cart
 				shoppingCart.setCustomer(customer);
+				customerRepository.save(customer);
+				return shoppingCart;
+			} else {
+				throw new ProductNotFoundException("Product not found with ID: " + productId);
 			}
-
-			System.out.println("ADDED");
-			customerRepository.save(customer);
-
-			return shoppingCart;
 		} else {
-			return new ShoppingCart();
+			throw new CustomerNotFoundException("Customer not found with mobile number: " + mobilePhoneNumber);
 		}
-
 	}
 
 	@Override
-	public Map<Product, List<CartItem>> listItemInCart(String mobilePhoneNumber) {
+	public List<CartItem> listItemInCart(String mobilePhoneNumber) {
 
 		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
-
 		if (optionalCustomer.isPresent()) {
 			ShoppingCart shoppingCart = optionalCustomer.get().getShoppingCart();
-
 			if (shoppingCart != null) {
 				List<CartItem> cartItems = shoppingCart.getItems();
-
-				Map<Product, List<CartItem>> groupedItems = cartItems.stream()
-						.collect(Collectors.groupingBy(CartItem::getProduct, LinkedHashMap::new, Collectors.toList()));
-
-				return groupedItems;
+				return cartItems;
 			}
 		}
-		return new HashMap<>();
+
+		return new ArrayList<>();
 	}
 
-//	public List<CartItem> listItemInCart() {
-//		
-//		String phoneNumber = "999";
-//		
-//		Optional<Customer> optionalCustomer = customerRepository.findBymobilePhoneNumber(phoneNumber);
-//		
-//		if (optionalCustomer.isPresent()) {
-//			ShoppingCart shoppingCart = optionalCustomer.get().getShoppingCart();
-//			
-//			if (shoppingCart != null) {
-//				return shoppingCart.getItems();
-//			}
-//		}
-//		System.out.println("LIST");
-//		return new ArrayList<>();
-//	}
-
+	// total price ? and check this is for cart count only?
 	@Override
 	public CartSummary getCartSummary(String mobilePhoneNumber) {
 
@@ -127,14 +124,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			ShoppingCart shoppingCart = optionalCustomer.get().getShoppingCart();
 
 			if (shoppingCart != null) {
-				int itemCount = shoppingCart.getItems().size();
+				int itemCount = shoppingCart.getItems().stream().mapToInt(item -> item.getQuantity()).sum();
 				double totalPrice = shoppingCart.getItems().stream().mapToDouble(item -> item.getProduct().getPrice())
 						.sum();
 
 				return new CartSummary(itemCount, totalPrice);
 			}
 		}
-		System.out.println("SUMMARY");
 		return new CartSummary(0, 0.0);
 	}
 
@@ -144,7 +140,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
-			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
+			ShoppingCart shoppingCart = customer.getShoppingCart();
 
 			if (shoppingCart != null) {
 				List<CartItem> items = cartItemRepository.findAllById(itemIds);
@@ -157,100 +153,73 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public Map<Product, List<CartItem>> showCheckedoutItems(String mobilePhoneNumber) {
-
+	public List<CartItem> showCheckedoutItems(String mobilePhoneNumber) {
 		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
-
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
-			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
-
-			if (shoppingCart != null) {
-				List<CartItem> checkedoutItems = cartItemRepository.findByCheckedOut(true);
-
-				Map<Product, List<CartItem>> groupedItems = checkedoutItems.stream()
-						.collect(Collectors.groupingBy(CartItem::getProduct, LinkedHashMap::new, Collectors.toList()));
-
-				return groupedItems;
-			}
+			return customer.getShoppingCart().getItems().stream().filter(cart -> cart.getCheckedOut()).toList();
 		}
 
-		return new HashMap<>();
+		return new ArrayList<>();
 	}
 
 	@Override
 	public void updateCheckedoutStatus(List<Integer> selectedItemIds, String mobilePhoneNumber) {
-
 		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
-
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
-			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
-
+			ShoppingCart shoppingCart = customer.getShoppingCart();
 			if (shoppingCart != null) {
 				List<CartItem> allCartItems = shoppingCart.getItems();
-
 				for (CartItem item : allCartItems) {
-					boolean isSelected = selectedItemIds.contains(item.getProduct().getId());
+					boolean isSelected = selectedItemIds.contains(item.getId());
 					item.setCheckedOut(isSelected);
-
 				}
-
 				cartItemRepository.saveAll(allCartItems);
 			}
 		}
 	}
 
-	// this is to unchecked ALL user items
-//	public void uncheckedCurrentUserItems() {
-//		
-//		String phoneNumber = "999";
-//		
-//		Optional<Customer> optionalCustomer = customerRepository.findByPhoneNumber(phoneNumber);
-//		
-//		if (optionalCustomer.isPresent()) {
-//			Customer customer = optionalCustomer.get();
-//			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
-//			
-//			if (shoppingCart != null) {
-//				List<CartItem> checkedItems = cartItemRepository.findByCheckedOut(true);
-//				for (CartItem checkedItem : checkedItems) {
-//					checkedItem.setCheckedOut(false);
-//				}
-//		cartItemRepository.saveAll(checkedItems);
-//			}
-//		}
-//	}
-
 	@Override
+	@Transactional
 	public void deleteProductFromCart(int productId, String mobilePhoneNumber) {
 
 		Optional<Customer> optionalCustomer = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
 
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
-			ShoppingCart shoppingCart = shoppingCartRepository.findByCustomer(customer);
+			ShoppingCart shoppingCart = customer.getShoppingCart();
 
 			if (shoppingCart != null) {
-				List<CartItem> cartItems = shoppingCart.getItems();
 
-				List<CartItem> toDelete = cartItems.stream().filter(item -> item.getProduct().getId() == productId)
-						.collect(Collectors.toList());
+				if (shoppingCart.getItems().size() == 1) {
+					customer.setShoppingCart(null);
+					customerRepository.save(customer);
+					shoppingCartRepository.deleteByCustomerId(customer.getId());
+				}
 
-				cartItems.removeAll(toDelete);
-				cartItemRepository.deleteAll(toDelete);
-				shoppingCartRepository.save(shoppingCart);
+				cartItemRepository.deleteById(productId);
 			}
+
 		}
 	}
 
 	@Override
-	public void emptyCart() {
-		cartItemRepository.deleteAll();
+	@Transactional
+	public void emptyCartByMobileNumber(String mobilePhoneNumber) {
+		Optional<Customer> customerOpt = customerRepository.findByMobilePhoneNumber(mobilePhoneNumber);
+		if (customerOpt.isPresent()) {
+			Customer customer = customerOpt.get();
+			customer.setShoppingCart(null);
+			customerRepository.save(customer);
+			ShoppingCart cart = shoppingCartRepository.findByCustomerId(customer.getId());
+			if (cart != null) {
+				shoppingCartRepository.deleteByCustomerId(customer.getId());
+				cartItemRepository.deleteAll(cart.getItems());
+			}
+		} else {
+			throw new EntityNotFoundException("Customer with mobile number " + mobilePhoneNumber + " not found.");
+		}
 	}
 
-//	@Override
-//	public List<DeliveryAddress> findDeliveryAddressesByCustomer(String mobilePhoneNumber) {
-//		return customerRepository.findDeliveryAddressesByCustomer(mobilePhoneNumber);
-//	}
 }

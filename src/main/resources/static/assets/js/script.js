@@ -39,7 +39,7 @@ function updateCartCount(count) {
           document.getElementById('cart-count').textContent = count;
       }*/
 
-function submitDeleteForm(productId) {
+/*function submitDeleteForm(productId) {
 	document.getElementById('delete-form-' + productId).submit();
 }
 				
@@ -49,7 +49,7 @@ document.querySelector("#checkout-form")?.addEventListener("submit", function(ev
 		alert("Please select at least one item to checkout.");
 		event.preventDefault();
 	}
-});
+});*/
 
 
 

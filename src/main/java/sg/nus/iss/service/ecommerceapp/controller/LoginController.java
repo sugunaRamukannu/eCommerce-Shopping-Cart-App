@@ -19,84 +19,67 @@ import sg.nus.iss.service.ecommerceapp.model.LoginDto;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 
 @Controller
-@Slf4j
 @AllArgsConstructor
 public class LoginController {
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private CustomerService customerService;
-	
-	
-	 @GetMapping("/login")
-	    public String loginPage(Model model, @RequestParam(required = false) String error) {
-	        model.addAttribute("logindto", new LoginDto());
-	        model.addAttribute("showPassword", false);
-	        if (error != null) {
-	            model.addAttribute("loginError", "Invalid password");
-	        }
-	        return "login";
-	    }
 
-	    @PostMapping("/login-check")
-	    public String checkMobileAndRedirect(@Valid @ModelAttribute("logindto") LoginDto logindto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-	    	 if(bindingResult.hasErrors()) {
-				 System.out.println("error");
-				 model.addAttribute("logindto", logindto);
-				 return "login";
-				 }	
-	    	 
-	    	boolean userExists = customerService.checkMobileExists(logindto.getUsername());
-	        System.out.println("login-check"+userExists);
-	        if (userExists) {
-	        	System.out.println("login-checkdo"+userExists);
-	            model.addAttribute("logindto", logindto );
-	            model.addAttribute("showPassword", true);
-	            return "login"; 
-	        } else {
-	        	System.out.println("elseee"+userExists);
-	            redirectAttributes.addFlashAttribute("mobilePhoneNumber", logindto.getUsername());
-	            return "redirect:/createAccount";
-	        }
-	    }
-	    
-	
-		@GetMapping("/createAccount")
-		public String createAccount(@ModelAttribute("mobilePhoneNumber") String mobile, Model model) {
-			System.out.println("Redirected to create account with mobile: " + mobile);
-		    Customer customer = new Customer();
-		    customer.setMobilePhoneNumber(mobile);  
-		    model.addAttribute("customer", customer);
-		    return "create-account";
+	@GetMapping("/login")
+	public String loginPage(Model model, @RequestParam(required = false) String error) {
+		model.addAttribute("logindto", new LoginDto());
+		model.addAttribute("showPassword", false);
+		if (error != null) {
+			model.addAttribute("loginError", "Invalid password");
 		}
-	    
+		return "login";
+	}
+
+	@PostMapping("/login-check")
+	public String checkMobileAndRedirect(@Valid @ModelAttribute("logindto") LoginDto logindto,
+			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("logindto", logindto);
+			return "login";
+		}
+
+		boolean userExists = customerService.checkMobileExists(logindto.getUsername());
+		if (userExists) {
+			model.addAttribute("logindto", logindto);
+			model.addAttribute("showPassword", true);
+			return "login";
+		} else {
+			redirectAttributes.addFlashAttribute("mobilePhoneNumber", logindto.getUsername());
+			return "redirect:/createAccount";
+		}
+	}
+
+	@GetMapping("/createAccount")
+	public String createAccount(@ModelAttribute("mobilePhoneNumber") String mobile, Model model) {
+		Customer customer = new Customer();
+		customer.setMobilePhoneNumber(mobile);
+		model.addAttribute("customer", customer);
+		return "create-account";
+	}
+
+	@PostMapping("/register")
+	public String register(@Valid @ModelAttribute Customer customer, BindingResult bindingResult, Model model) {
+		boolean isMobileNumberExists = customerService.checkMobileExists(customer.getMobilePhoneNumber());
+		if (bindingResult.hasErrors()|| isMobileNumberExists) {
+			model.addAttribute("mobileExists", isMobileNumberExists);
+			model.addAttribute("customer", customer);
+			return "create-account";
+		}
 		
-		@PostMapping("/register")
-		public String register(@Valid @ModelAttribute Customer customer, BindingResult bindingResult, Model model) {
-			
-			 if(bindingResult.hasErrors()) {
-				 System.out.println("errorcreate");
-				 System.out.println(bindingResult.getAllErrors());
-				 model.addAttribute("customer", customer);
-				 return"create-account";
-				 }
-			 if (customerService.checkMobileExists(customer.getMobilePhoneNumber())) {
-			        model.addAttribute("mobileExists", true);
-			        model.addAttribute("customer", customer);
-			        return "create-account"; 
-			    }
-			 
-			String encoded = passwordEncoder.encode(customer.getPassword());
-		    customer.setPassword(encoded);
-		    System.out.println("fortsname"+customer.getFirstName());
-		    customerService.saveCustomer(customer);
-		    model.addAttribute("logindto", new LoginDto());
-		 boolean isUserExists = true; // Set your condition here
-		 System.out.println("isValidCustomersregist"+isUserExists);
-		 model.addAttribute("showPassword",isUserExists);
+		String encoded = passwordEncoder.encode(customer.getPassword());
+		customer.setPassword(encoded);
+		customerService.saveCustomer(customer);
+		model.addAttribute("logindto", new LoginDto());
+		model.addAttribute("showPassword", true);
 		return "/login";
-		}
+	}
 
 }

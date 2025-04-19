@@ -13,7 +13,28 @@
 		</div>
 	</footer>
 	<script th:src="@{/assets/bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js}"></script>
-	</body>
+	<th:block sec:authorize="isAuthenticated()">
+		<script>
+
+			// Fetch actual cart summary on page load
+
+			window.addEventListener('DOMContentLoaded', () => {
+				fetch('/cart/summary')
+					.then(response => response.json())
+					.then(data => {
+						updateCartCount(data.itemCount);
+				});
+			});
+
+
+
+			function updateCartCount(count) {
+				document.getElementById('cart-count').textContent = count;
+			}
+
+		</script>
+	</th:block>
+
 
 </html>
 </th:block>

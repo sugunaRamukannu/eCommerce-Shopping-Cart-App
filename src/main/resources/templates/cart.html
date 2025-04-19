@@ -41,14 +41,14 @@
 			</aside> -->
 			<div class="col px-lg-2">
 				<div class="border border-2 border-black p-3 mb-5 d-flex flex-column">
-					<div th:if="${#maps.isEmpty(groupedItems)}" class="fs-2 fw-semibold mx-auto">
+					<div th:if="${#lists.isEmpty(cartItems)}" class="fs-2 fw-semibold mx-auto">
 						<div class="d-flex flex-column mx-auto">
 							No items in cart!
 							<a th:href="@{/products}" class="btn btn-primary rounded-0 mt-3">Add product</a>
 						</div>
 
 					</div>
-					<span th:if="${!#maps.isEmpty(groupedItems)}">
+					<span th:if="${!#lists.isEmpty(cartItems)}">
 						<span class="fs-3 fw-bold d-inline-block">Checkout Details</span>
 
 						<!--To fix -->
@@ -57,7 +57,7 @@
 						</form>
 
 						<!--To fix -->
-						<form th:action="@{/cart/checkout}" class="overflow-x-scroll" method="post" id="checkout-form">
+						<form th:action="@{/cart/checkout}" class="overflow-x-scroll" method="post" id="checkout-form" novalidate>
 							<table class="table table-striped">
 								<thead class="fs-4 fw-semibold">
 									<tr>
@@ -71,21 +71,22 @@
 								</thead>
 								<tbody>
 									<!-- Loop through cartItems -->
-									<tr class="fs-5 fw-medium" th:each="entry : ${groupedItems}">
+									<tr class="fs-5 fw-medium" th:each="entry : ${cartItems}">
 										<td>
 											<input class="form-check-input p-2 d-inline-block me-2 rounded-0" type="checkbox"
-												th:id="'item-' + ${entry.key.id}" th:value="${entry.key.id}"
-												name="checkedoutItems" th:checked="${entry.value[0].checkedOut}" />
+												th:id="'item-' + ${entry.id}" th:value="${entry.id}"
+												name="checkedoutItems" th:checked="${entry.checkedOut}" />
 										</td>
-										<td th:text="${entry.key.productName}"></td>
-										<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price, 1, 2)}"></td>
-										<td th:text="${entry.value.size()}"></td>
+										<td th:text="${entry.product.productName}"></td>
+										<td th:text="'S$' + ${#numbers.formatDecimal(entry.price, 1, 2)}"></td>
+                                        <td th:text="${entry.quantity}"></td>
 										<td
-											th:text="'S$' + ${#numbers.formatDecimal(entry.key.price * entry.value.size(), 1, 2)}">
+											th:text="'S$' + ${#numbers.formatDecimal(entry.quantity*entry.price , 1, 2)}">
 										</td>
 										<td>
+											
 											<button type="button" class="btn btn-danger btn-sm rounded-0"
-												th:onclick="'submitDeleteForm(' + ${entry.key.id} + ')'">
+												th:onclick="'submitDeleteForm(' + ${entry.id} + ')'">
 												Remove
 											</button>
 										</td>
@@ -95,32 +96,57 @@
 
 							<!-- Cart Summary -->
 							<!--<div class="d-flex justify-content-between">
+							<!--<div class="d-flex justify-content-between">
 								<h3>Total: <span th:id="cart-total"
 										th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></h3>
-								<h3>Items: <span th:id="cart-count" th:text="${itemCount}"></span></h3>-->
-							<!--</div>-->
-
-
+								<!--<h3>Items: <span th:id="cart-count" th:text="${itemCount}"></span></h3>-->
+							</div>
 
 							<!-- Proceed to checkout button -->
 							<button type="submit" class="btn btn-primary mt-3 rounded-0 w-25">Proceed to
 								Checkout</button>
 						</form>
 
-						<div th:each="entry : ${groupedItems}">
-							<form th:action="@{/cart/delete}" method="post" th:id="'delete-form-' + ${entry.key.id}"
-								style="display:none;">
-								<input type="hidden" name="productId" th:value="${entry.key.id}" />
-							</form>
-						</div>
+						<!--//which functionality-->
+						<div th:each="entry : ${cartItems}">
+												<form th:action="@{/cart/delete}" method="post" th:id="'delete-form-' + ${entry.id}"
+													style="display:none;">
+													<input type="hidden" name="productId" th:value="${entry.id}" />
+												</form>
+											</div>
 					</span>
 
 				</div>
 
 			</div>
-		</div>
+			</body>
+			
 	</section>
 </main>
+
+
+<th:block sec:authorize="isAuthenticated()">
+<script>
+	
+	document.addEventListener("DOMContentLoaded", function () {
+	    const form = document.querySelector("#checkout-form");
+	    form.addEventListener("submit", function (event) {
+	        const checkboxes = form.querySelectorAll("input[name='checkedoutItems']:checked");
+	        if (checkboxes.length === 0) {
+	            event.preventDefault(); // Prevent form submission
+	            const toastEl = document.getElementById("warning-toast");
+	            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+	            toast.show();
+	        }
+	    });
+	});
+		    function submitDeleteForm(productId) {
+		        document.getElementById('delete-form-' + productId).submit();
+		    }
+			
+	
+		</script>
+</th:block>
 <!-- Insert the footer -->
 <th:block th:insert="~{fragments/footer :: footer}"></th:block>
 

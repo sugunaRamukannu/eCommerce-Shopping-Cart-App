@@ -1,10 +1,12 @@
-package sg.nus.iss.service.ecommerceapp.service;
+package sg.nus.iss.service.ecommerceapp.service.impl;
 
 import org.springframework.stereotype.Service;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+
+import sg.nus.iss.service.ecommerceapp.service.OtpService;
 
 
 @Service

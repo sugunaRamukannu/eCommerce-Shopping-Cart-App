@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <!-- Insert the header -->
 <th:block th:insert="~{fragments/header :: header('Welcome Home To GetFreshFood')}"></th:block>
@@ -10,6 +10,7 @@
 			<p class="col-md-8 fs-3 fw-semibold">Welcome to GetFreshFood! Where your every shopping needs are met!</p>
 		</div>
 	</section>
+	<!--	//Category Grid-->
 	<section class="py-5 svg-bg">
 		<div class="container px-5 px-md-0">
 			<h2 class="my-4 fw-bold fs-3">Categories</h2>
@@ -20,12 +21,14 @@
 							<!--loop image filename from category ID-->
 							<img th:src="@{'/assets/img/categories/category_' + ${c.id} + '.jpg'}"
 								class="card-img-top rounded-0" th:alt="${c.category}">
-							<a th:href="@{'/products/' + ${c.id}}" class="card-text fs-5 mb-0 mt-auto" th:text="${c.category}">Fruits & Vegetables</a>
+							<a th:href="@{'/products/' + ${c.id}}" class="card-text fs-5 mb-0 mt-auto"
+								th:text="${c.category}">Fruits & Vegetables</a>
 						</div>
 					</div>
 				</div>
 			</div>
 	</section>
+	<!--//products grouped together based on category-->
 	<section class="py-5" th:each="c:${categories}">
 		<div class="container px-5 px-md-0">
 			<h2 class="my-4 fw-bold fs-3" th:text="${c.category}">Fruits & Vegetables</h2>
@@ -36,15 +39,17 @@
 						<div class="card-body d-flex flex-column justify-content-between">
 							<span class="badge fs-6 text-bg-primary position-absolute rounded-0"
 								th:text="${p.labels}">Sale</span>
-							<img th:src="${p.productUrl}" height="200" class="card-img-top rounded-0"
-								th:alt="${p.productName}">
+							<img th:src="${(p.productUrl != null and !#strings.isEmpty(p.productUrl)) ? p.productUrl : '/assets/img/no-image.jpeg'}"
+								height="200" class="card-img-top rounded-0" th:alt="${p.productName}">
+
 							<h5 class="card-title mt-4" th:text="${p.productName}">Apple</h5>
 							<p class="card-text fw-light mb-0" th:text="${p.productCategory.category}">Fruits &
 								Vegetables
 							</p>
 							<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">
 								<span class="fs-5" th:text="'S$' + ${#numbers.formatDecimal(p.price, 1, 2)}">S$20</span>
-								<form th:action="@{/cart/{id}(id=${p.id})}" method="post">
+								<form th:action="@{/cart/{id}(id=${p.id})}" method="post" class="add-to-cart-form"
+									th:data-product-id="${p.id}">
 									<button th:data-product-id="${p.id}"
 										class="btn btn-primary rounded-0 add-to-cart-btn" type="submit"><svg
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -54,13 +59,102 @@
 										</svg>Add</button>
 								</form>
 							</div>
+							
 						</div>
 					</div>
 				</div>
 
+				<!-- Toast container -->
+
+						<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+
+							<div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert"
+								aria-live="assertive" aria-atomic="true">
+
+								<div class="d-flex">
+
+									<div class="toast-body">
+
+										Product added to cart successfully!
+
+									</div>
+
+									<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+										aria-label="Close"></button>
+
+								</div>
+
+							</div>
+
+						</div>
+
+				<!-- Error Toast -->
+				<div class="toast-container position-fixed bottom-0 end-0 p-3">
+					<div id="error-toast" class="toast align-items-center text-bg-danger border-0" role="alert"
+						aria-live="assertive" aria-atomic="true" th:if="${errorMessage}">
+						<div class="d-flex">
+							<div class="toast-body" th:text="${errorMessage}">
+								Something went wrong.
+							</div>
+							<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+								aria-label="Close"></button>
+						</div>
+					</div>
+				</div>
+		
 			</div>
 	</section>
 </main>
+
+
+
+<th:block sec:authorize="isAuthenticated()">
+	<script>
+
+		// Simulate adding to the cart
+		document.querySelectorAll(".add-to-cart-form").forEach(form => {
+			form.addEventListener("submit", event => {
+				event.preventDefault(); // Stop normal form submit
+				const productId = form.getAttribute("data-product-id");
+				fetch(`/cart/${productId}`, {
+					method: "POST"
+				})
+					.then(res => {
+						if (!res.ok) throw new Error("Failed to add to cart");
+						return fetch("/cart/summary");
+					})
+					.then(res => res.json())
+					.then(data => {
+						updateCartCount(data.itemCount);
+						showToast();
+					})
+					.catch(err => console.error(err));
+			});
+
+		});
+
+		function showToast() {
+			const toastEl = document.getElementById("cart-toast");
+			const toast = new bootstrap.Toast(toastEl, {delay: 2000});
+			toast.show();
+		}
+
+	</script>
+
+	<!-- Show error toast if errorMessage exists -->
+	<script th:if="${errorMessage}">
+		document.addEventListener("DOMContentLoaded", function () {
+			const errorToastEl = document.getElementById("error-toast");
+			if (errorToastEl) {
+				const errorToast = new bootstrap.Toast(errorToastEl, {delay: 3000});
+				errorToast.show();
+			}
+		});
+	</script>
+</th:block>
+
+
+
 <!-- Insert the footer -->
 <th:block th:insert="~{fragments/footer :: footer}"></th:block>
 

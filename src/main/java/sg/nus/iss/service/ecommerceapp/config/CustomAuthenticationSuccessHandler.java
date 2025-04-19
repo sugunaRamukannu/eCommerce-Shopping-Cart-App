@@ -19,26 +19,25 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
 
-        // Default redirect URL
+   
         String redirectUrl = "/";
 
-        // 1. Check if user has ADMIN role
         boolean isAdmin = authentication.getAuthorities().stream()
             .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
-        System.out.println("adminbefore");
+        
         if (isAdmin) {
-        	System.out.println("admin");
+        	
         	 redirectUrl = "http://localhost:3000";
         } else {
-            // 2. Get the saved request URL for normal users
+    
             SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
-
+      
             if (savedRequest != null) {
-                redirectUrl = savedRequest.getRedirectUrl(); // ✅ Redirect to last visited page
+                redirectUrl = savedRequest.getRedirectUrl(); 
             }
         }
-
-        response.sendRedirect(redirectUrl); // 🔁 Perform the redirect
+ 
+        response.sendRedirect(redirectUrl); 
     }
 
 }

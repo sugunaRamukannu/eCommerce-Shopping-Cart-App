@@ -13,34 +13,42 @@
 					<h1 class="mb-4 fw-bold text-center">Create Account</h1>
 					<div class="row row-cols-1 row-cols-lg-2 mb-3">
 						<div class="col mb-3">
-							<label for="firstName" class="form-label">First Name</label>
+							<label for="firstName" class="form-label">First Name <span
+									style="color: red;">*</span></label>
 							<input type="text" th:field="*{firstName}" class="form-control rounded-0" id="firstName"
 								name="firstName" placeholder="Enter First Name">
 							<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger">
+								<!--<div th:if="${#fields.hasErrors('firstName')}" class="text-danger">
+								    <p th:text="${#fields.errors('firstName')[0]}"></p>
+								</div>-->
 							</div>
 						</div>
 						<div class="col mb-3">
-							<label for="lastName" class="form-label">Last Name</label>
+							<label for="lastName" class="form-label">Last Name <span
+									style="color: red;">*</span></label>
 							<input type="text" th:field="*{lastName}" class="form-control rounded-0" id="lastName"
 								name="lastName" placeholder="Enter Last Name">
 							<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger">
 							</div>
 						</div>
 						<div class="col mb-3">
-							<label for="email" class="form-label">Email Address</label>
+							<label for="email" class="form-label">Email Address <span
+									style="color: red;">*</span></label>
 							<input type="email" th:field="*{email}" class="form-control rounded-0" id="email"
 								name="email" placeholder="Enter Email">
-								<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">
-															</div>
+							<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">
+							</div>
 						</div>
 						<div class="col mb-3">
-							<label for="mobilePhoneNumber" class="form-label">Mobile Phone Number</label>
+							<label for="mobilePhoneNumber" class="form-label">Mobile Phone Number <span
+									style="color: red;">*</span></label>
 							<input type="tel" th:field="*{mobilePhoneNumber}" class="form-control rounded-0"
 								id="mobilePhoneNumber" name="mobilePhoneNumber" placeholder="Enter Mobile Phone Number">
 							<div th:if="${#fields.hasErrors('mobilePhoneNumber')}" th:errors="*{mobilePhoneNumber}"
 								class="text-danger"></div>
-							<div th:if="${mobileExists}" class="alert alert-danger"  role="alert">
-								Mobile number already exists. Please use another number.
+
+							<div th:if="${mobileExists}" class="text-danger" >
+								<p>Mobile number already registered</p>
 							</div>
 						</div>
 						<div class="col mb-3">
@@ -51,15 +59,18 @@
 							</div>
 						</div>
 						<div class="col mb-3">
-							<label for="password" class="form-label">Password</label>
+							<label for="password" class="form-label">Password <span style="color: red;">*</span></label>
 							<input type="password" th:field="*{password}" class="form-control rounded-0" id="password"
 								name="password" placeholder="Enter Password">
-							<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger rounded-0">
+							<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+								class="text-danger rounded-0">
 							</div>
 						</div>
 						<div class="col col-lg-12 mb-3 d-flex">
-							<input type="checkbox" class="form-check-input p-2 rounded-0 me-3" id="terms" name="terms" required>							
-							<label for="password" class="form-label my-auto">I agree to the terms and conditions <a th:href="@{/terms}">stated here.</a></label>
+							<input type="checkbox" class="form-check-input p-2 rounded-0 me-3" id="terms" name="terms"
+								required>
+							<label for="password" class="form-label my-auto">I agree to the terms and conditions <a
+									th:href="@{/terms}">stated here.</a></label>
 						</div>
 						<div class="col col-lg-6 mx-auto">
 							<button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
