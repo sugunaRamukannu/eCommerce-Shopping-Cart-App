@@ -30,7 +30,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         
         if (isAdmin) {
         	
-        	 redirectUrl = "http://localhost:3000";
+//        	 redirectUrl = "http://localhost:3000";
+        	 redirectUrl = "/app/index";
         } else {
     
             SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");

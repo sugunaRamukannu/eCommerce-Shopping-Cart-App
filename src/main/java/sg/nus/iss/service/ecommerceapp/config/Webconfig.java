@@ -46,7 +46,12 @@ public class Webconfig {
 						.requestMatchers("/", "/login", "/login-check", "/forgot-password", "/register","/search", "/products/**", "/terms",
 
 								"/send-otp","/api/products","/reset-password", "/createAccount", "/submit-password", "/api/products/**",
-								"/assets/**")
+								"/assets/**",
+								"/app/**", // Allow React routes
+								"/app/static/**",     // JS, CSS, media
+								"/app/manifest.json", // Manifest
+								"/app/logo*.png",     // Icons
+								"/app/favicon.ico")   // Favicon
 						.permitAll() // URLs that don't require authentication.
 						 .requestMatchers(HttpMethod.GET, "/api/products/**").hasRole("ADMIN") 
 						 .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
@@ -130,7 +135,7 @@ public class Webconfig {
 	@Bean
 	 CorsConfigurationSource corsConfigurationSource() {
 	    CorsConfiguration configuration = new CorsConfiguration();
-	    configuration.setAllowedOrigins(List.of("http://localhost:3000")); // React app
+//	    configuration.setAllowedOrigins(List.of("http://localhost:3000")); // React app
 	    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 	    configuration.setAllowedHeaders(List.of("*"));
 	    configuration.setAllowCredentials(true); // optional but useful for session cookies
