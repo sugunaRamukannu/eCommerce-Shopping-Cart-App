@@ -20,9 +20,6 @@
 							<input type="text" th:field="*{firstName}" class="form-control rounded-0" id="firstName"
 								name="firstName" placeholder="Enter First Name">
 							<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger">
-								<!--<div th:if="${#fields.hasErrors('firstName')}" class="text-danger">
-								    <p th:text="${#fields.errors('firstName')[0]}"></p>
-								</div>-->
 							</div>
 						</div>
 						<div class="col mb-3">
@@ -44,7 +41,7 @@
 						<div class="col mb-3">
 							<label for="mobilePhoneNumber" class="form-label">Mobile Phone Number <span
 									style="color: red;">*</span></label>
-							<input type="tel" th:field="*{mobilePhoneNumber}" class="form-control rounded-0"
+							<input type="number" th:field="*{mobilePhoneNumber}" class="form-control rounded-0"
 								id="mobilePhoneNumber" name="mobilePhoneNumber" placeholder="Enter Mobile Phone Number">
 							<div th:if="${#fields.hasErrors('mobilePhoneNumber')}" th:errors="*{mobilePhoneNumber}"
 								class="text-danger"></div>
