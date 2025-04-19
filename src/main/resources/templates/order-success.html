@@ -20,68 +20,69 @@
 				<!-- Order Summary Section -->
 				<div class="order-summary">
 					<div class="row">
-						<div class="mb-4 fs-3 row w-50 mx-auto">
+						<div class="mb-4 fs-3 row before-checkout mx-auto">
 							<div class="col-6 fw-bold">Order ID: </div>
-							<div class="col-6 text-end">S$ <span th:text="${orderSummary.order.orderIdString}"></span>
-								<div class="col-6 fw-bold">Total Product Price: </div>
-								<div class="col-6 text-end">S$ <span
-										th:text="${#numbers.formatDecimal(orderSummary.totalProductPrice, 1, 2)}">0.00</span>
-								</div>
-								<div class="col-6 fw-bold">Shipping Fee: </div>
-								<div class="col-6 text-end">S$ <span
-										th:text="${#numbers.formatDecimal(orderSummary.shippingFee, 1, 2)}">0.00</span>
-								</div>
-								<div class="col-6 fw-bold">Discount applied: </div>
-								<div class="col-6 text-end">S$ <span
-										th:text="${#numbers.formatDecimal(orderSummary.discountsApplied, 1, 2)}">0.00</span>
-								</div>
-								<div class="col-6 fw-bold">Total Price: </div>
-								<div class="col-6 fw-bold text-end">S$ <span
-										th:text="${#numbers.formatDecimal(orderSummary.finalTotal, 1, 2)}">0.00</span>
-								</div>
+							<div class="col-6 text-end"><span th:text="${orderSummary.order.orderIdString}"></span>
+							</div>
+							<div class="col-6 fw-bold">Total Product Price: </div>
+							<div class="col-6 text-end">S$ <span
+									th:text="${#numbers.formatDecimal(orderSummary.totalProductPrice, 1, 2)}">0.00</span>
+							</div>
+							<div class="col-6 fw-bold">Shipping Fee: </div>
+							<div class="col-6 text-end">S$ <span
+									th:text="${#numbers.formatDecimal(orderSummary.shippingFee, 1, 2)}">0.00</span>
+							</div>
+							<div class="col-6 fw-bold">Discount applied: </div>
+							<div class="col-6 text-end">S$ <span
+									th:text="${#numbers.formatDecimal(orderSummary.discountsApplied, 1, 2)}">0.00</span>
+							</div>
+							<div class="col-6 fw-bold">Total Price: </div>
+							<div class="col-6 fw-bold text-end">S$ <span
+									th:text="${#numbers.formatDecimal(orderSummary.finalTotal, 1, 2)}">0.00</span>
 							</div>
 						</div>
-
-						<!-- Order Table -->
-						<h4 class="mt-5 fs-3 fw-bold">Product Details</h4>
-						<table class="table table-striped">
-							<thead class="fs-4 fw-semibold">
-								<tr>
-									<th>Product</th>
-									<th>Unit Price</th>
-									<th>Quantity</th>
-									<th>Subtotal</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="fs-5 fw-medium" th:each="item : ${orderItems}">
-									<td th:text="${item.product.productName}"></td>
-									<td
-										th:text="'S$' + ${#numbers.formatDecimal((item.purchasePrice / item.quantity), 1, 2)}">
-									</td>
-									<td th:text="${item.quantity}"></td>
-									<td th:text="'S$' + ${#numbers.formatDecimal(item.purchasePrice, 1, 2)}"></td>
-								</tr>
-							</tbody>
-						</table>
 					</div>
 
-					<!-- Delivery Address Section -->
-					<div class="mt-5">
-						<h4 class="fs-3 fw-bold mb-3">Details</h4>
-						<p class="fs-5 fw-medium"><strong>Address:</strong> <span
-								th:text="${orderSummary.order.deliveryAddress}">N/A</span></p>
-						<p class="fs-5 fw-medium"><strong>Payment Method:</strong> <span
-								th:text="${orderSummary.order.paymentMethod}">N/A</span>
-						</p>
-					</div>
-
-					<div class="mt-4">
-						<a th:href="@{/cart}" class="btn btn-primary ms-2 rounded-0">Back to Cart</a>
-					</div>
-
+					<!-- Order Table -->
+					<h4 class="mt-5 fs-3 fw-bold">Product Details</h4>
+					<table class="table table-striped">
+						<thead class="fs-4 fw-semibold">
+							<tr>
+								<th>Product</th>
+								<th>Unit Price</th>
+								<th>Quantity</th>
+								<th>Subtotal</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="fs-5 fw-medium" th:each="item : ${orderItems}">
+								<td th:text="${item.product.productName}"></td>
+								<td
+									th:text="'S$' + ${#numbers.formatDecimal((item.purchasePrice / item.quantity), 1, 2)}">
+								</td>
+								<td th:text="${item.quantity}"></td>
+								<td th:text="'S$' + ${#numbers.formatDecimal(item.purchasePrice, 1, 2)}"></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
+
+				<!-- Delivery Address Section -->
+				<div class="mt-5">
+					<h4 class="fs-3 fw-bold mb-3">Details</h4>
+					<p class="fs-5 fw-medium"><strong>Address:</strong> <span
+							th:text="${orderSummary.order.deliveryAddress}">N/A</span></p>
+					<p class="fs-5 fw-medium"><strong>Payment Method:</strong> <span
+							th:text="${orderSummary.order.paymentMethod}">N/A</span>
+					</p>
+				</div>
+
+				<div class="mt-4">
+					<a th:href="@{/cart}" class="btn btn-primary ms-2 rounded-0">Back to Cart</a>
+				</div>
+
 			</div>
+		</div>
 	</section>
 </main>
 

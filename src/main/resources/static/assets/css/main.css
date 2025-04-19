@@ -52,7 +52,7 @@ a.active-link {
 }
 
 .solo-box-page-wide {
-	max-width: 70%;
+	width: 70%;
 }
 
 .coupon {
@@ -64,6 +64,10 @@ a.active-link {
 	flex-direction: column;
 	gap: 2rem;
 	flex-wrap: wrap;
+}
+
+.before-checkout {
+	width: 70%;
 }
 
 @media only screen and (max-width: 600px) {

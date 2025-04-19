@@ -13,22 +13,23 @@
 				<div class="mb-3 g-3">
 					<div th:each="orderItem, iterStat:${order.orderItems}"
 						class="mb-3 order-box border border-black p-5 flex-nowrap justify-content-between">
-						<div class="d-flex flex-column">
-							<span class="fs-3 fw-semibold">Product <span th:text="${iterStat.index + 1}">
-									1</span>:</span>
-							<span class="fw-medium fs-5 mt-5">Product Name: <span
-									th:text="${orderItem.product.productName}"></span></span>
-							<span class="fw-medium fs-5 mt-3">Product Description:
-								<span th:text="${orderItem.product.description}"></span></span>
-							<span class="fw-medium fs-5 mt-3">Product Quantity:
-								<span th:text="${orderItem.quantity}"></span></span>
-							<span class="fw-medium fs-5 mt-3">Product Purchase Price:
-								<span
-									th:text="'S$' +${#numbers.formatDecimal(orderItem.purchasePrice, 1, 2)}"></span></span>
+						<div class="d-flex justify-content-between">
+							<div class="d-flex flex-column">
+								<span class="fs-3 fw-semibold">Product <span th:text="${iterStat.index + 1}">
+										1</span>:</span>
+								<span class="fw-medium fs-5 mt-5">Product Name: <span
+										th:text="${orderItem.product.productName}"></span></span>
+								<span class="fw-medium fs-5 mt-3">Product Description:
+									<span th:text="${orderItem.product.description}"></span></span>
+								<span class="fw-medium fs-5 mt-3">Product Quantity:
+									<span th:text="${orderItem.quantity}"></span></span>
+								<span class="fw-medium fs-5 mt-3">Product Purchase Price:
+									<span
+										th:text="'S$' +${#numbers.formatDecimal(orderItem.purchasePrice, 1, 2)}"></span></span>
+							</div>
+							<div><img th:src="${orderItem.product.productUrl}" height="200px" width="200px"
+									alt="Product Image" /></div>
 						</div>
-
-						<span><img th:src="${orderItem.product.productUrl}" height="200px" width="200px"
-								alt="Product Image" /></span>
 					</div>
 					<a th:href="@{/purchase-history}" class="btn btn-primary rounded-0">
 						Back To Purchase History</a>
