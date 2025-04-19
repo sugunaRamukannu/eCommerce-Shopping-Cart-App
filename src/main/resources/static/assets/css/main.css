@@ -52,7 +52,11 @@ a.active-link {
 }
 
 .solo-box-page-wide {
-	max-width: 70%;
+	width: 70%;
+}
+
+.order-success {
+	width: 75%;
 }
 
 .coupon {

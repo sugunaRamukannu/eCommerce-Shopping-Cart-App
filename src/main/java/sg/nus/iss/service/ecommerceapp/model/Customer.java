@@ -18,7 +18,7 @@ import jakarta.validation.constraints.Size;
 
 
 @Entity
-@Table(name = "customers")
+@Table(name = "users")
 public class Customer extends User {
 	
 	@NotBlank(message = "Mobile number is required")

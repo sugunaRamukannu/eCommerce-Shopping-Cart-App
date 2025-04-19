@@ -20,9 +20,9 @@
 				<!-- Order Summary Section -->
 				<div class="order-summary">
 					<div class="row">
-						<div class="mb-4 fs-3 row w-50 mx-auto">
+						<div class="mb-4 fs-3 row order-success mx-auto">
 							<div class="col-6 fw-bold">Order ID: </div>
-							<div class="col-6 text-end">S$ <span th:text="${orderSummary.order.orderIdString}"></span>
+							<div class="col-6 text-end"><span th:text="${orderSummary.order.orderIdString}"></span></div>
 								<div class="col-6 fw-bold">Total Product Price: </div>
 								<div class="col-6 text-end">S$ <span
 										th:text="${#numbers.formatDecimal(orderSummary.totalProductPrice, 1, 2)}">0.00</span>
