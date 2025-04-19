@@ -12,19 +12,19 @@
 					<span class="fs-3 fw-bold d-inline-block mb-3">Sort By</span>
 					<ul class="p-0">
 						<li class="nav-link fs-5 mb-2">
-							<a th:href="@{/products(sort='priceLowHigh', filter=${param.filter}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+							<a th:href="@{/products(sort='priceLowHigh', keyword=${param.keyword}, searchtype=${param.searchtype})}"
 								class="text-decoration-none text-dark">Price: Low to high</a>
 						</li>
 						<li class="nav-link fs-5 mb-2">
-							<a th:href="@{/products(sort='priceHighLow', filter=${param.filter}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+							<a th:href="@{/products(sort='priceHighLow', keyword=${param.keyword}, searchtype=${param.searchtype})}"
 								class="text-decoration-none text-dark">Price: High to low</a>
 						</li>
 						<li class="nav-link fs-5 mb-2">
-							<a th:href="@{/products(sort='nameAZ', filter=${param.filter}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+							<a th:href="@{/products(sort='nameAZ', keyword=${param.keyword}, searchtype=${param.searchtype})}"
 								class="text-decoration-none text-dark">Product: A-Z</a>
 						</li>
 						<li class="nav-link fs-5">
-							<a th:href="@{/products(sort='nameZA', filter=${param.filter}, keyword=${param.keyword}, searchtype=${param.searchtype})}"
+							<a th:href="@{/products(sort='nameZA', keyword=${param.keyword}, searchtype=${param.searchtype})}"
 								class="text-decoration-none text-dark">Product: Z-A</a>
 						</li>
 					</ul>
@@ -46,7 +46,7 @@
 											th:text="${product.labels}">Sale</span>
 									</th:block>
 									<!--click product image to pop up enlarge image-->
-									<img th:src="${product.productUrl}" height="200" class="card-img-top rounded-0"
+									<img th:src="${(product.productUrl != null and !#strings.isEmpty(product.productUrl)) ? product.productUrl : '/assets/img/no-image.jpeg'}" height="200" class="card-img-top rounded-0"
 										th:alt="${product.productName}"
 										th:attr="data-bs-toggle='modal', data-bs-target='#imageModal__' + ${product.id}">
 									<!-- Modal with unique ID -->
@@ -75,7 +75,7 @@
 									<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">
 										<span class="fs-5"
 											th:text="'S$' + ${#numbers.formatDecimal(product.price, 1, 2)}">S$20.00</span>
-										<form th:action="@{/cart/{id}(id=${product.id})}" method="post">
+										<form th:action="@{/cart/{id}(id=${product.id})}" method="post" class="add-to-cart-form" th:data-product-id="${product.id}">
 											<button th:data-product-id="${product.id}"
 												class="btn btn-primary rounded-0 add-to-cart-btn" type="submit"><svg
 													xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -88,6 +88,27 @@
 								</div>
 							</div>
 						</div>
+						<!-- Toast container -->
+
+														<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+
+														  <div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+
+														    <div class="d-flex">
+
+														      <div class="toast-body">
+
+														        Product added to cart successfully!
+
+														      </div>
+
+														      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+
+														    </div>
+
+														  </div>
+
+														</div>
 					</th:block>
 
 
@@ -101,6 +122,44 @@
 		</div>
 	</section>
 </main>
+
+
+
+<th:block sec:authorize="isAuthenticated()">
+	<script>
+
+
+
+		// Simulate adding to the cart
+		document.querySelectorAll(".add-to-cart-form").forEach(form => {
+			form.addEventListener("submit", event => {
+				event.preventDefault(); // Stop normal form submit
+				const productId = form.getAttribute("data-product-id");
+				fetch(`/cart/${productId}`, {
+					method: "POST"
+				})
+					.then(res => {
+						if (!res.ok) throw new Error("Failed to add to cart");
+						return fetch("/cart/summary"); 
+					})
+					.then(res => res.json())
+					.then(data => {
+						updateCartCount(data.itemCount);
+						showToast();
+					})
+					.catch(err => console.error(err));
+			});
+
+		});
+		
+		function showToast() {
+						     const toastEl = document.getElementById("cart-toast");
+						      const toast = new bootstrap.Toast(toastEl, {delay: 2000});
+						     toast.show();
+						 }
+
+	</script>
+</th:block>
 <!-- Insert the footer -->
 <th:block th:insert="~{fragments/footer :: footer}"></th:block>
 

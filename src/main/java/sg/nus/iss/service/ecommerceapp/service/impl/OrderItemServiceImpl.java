@@ -1,4 +1,4 @@
-package sg.nus.iss.service.ecommerceapp.service;
+package sg.nus.iss.service.ecommerceapp.service.impl;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sg.nus.iss.service.ecommerceapp.model.Order;
 import sg.nus.iss.service.ecommerceapp.model.OrderItem;
 import sg.nus.iss.service.ecommerceapp.repository.OrderItemRepository;
+import sg.nus.iss.service.ecommerceapp.service.OrderItemService;
 
 @Service
 @Transactional

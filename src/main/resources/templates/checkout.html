@@ -30,10 +30,10 @@
 					</thead>
 					<tbody>
 						<tr class="fs-5 fw-medium" th:each="entry : ${checkedoutItems}">
-							<td th:text="${entry.key.productName}"></td>
-							<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price, 1, 2)}"></td>
-							<td th:text="${entry.value.size()}"></td>
-							<td th:text="'S$' + ${#numbers.formatDecimal(entry.key.price * entry.value.size(), 1, 2)}"></td>
+							<td th:text="${entry.product.productName}"></td>
+							<td th:text="'S$' + ${#numbers.formatDecimal(entry.price, 1, 2)}"></td>
+							<td th:text="${entry.quantity}"></td>
+							<td th:text="'S$' + ${#numbers.formatDecimal(entry.quantity*entry.price, 1, 2)}"></td>
 						</tr>
 						<tr th:if="${#lists.isEmpty(checkedoutItems)}">
 							<td colspan="5">No items to checkout.</td>
@@ -71,6 +71,9 @@
 		</div>
 	</section>
 </main>
+
+
+
 <!-- Insert the footer -->
 <th:block th:insert="~{fragments/footer :: footer}"></th:block>
 

@@ -13,6 +13,6 @@ public interface CustomerService {
 	
 	public Optional<Customer> findBymobilePhoneNumber(String username);
 	
-	public Customer findByCustomerUserName(String userName);
+
 
 }

@@ -33,8 +33,7 @@ public class Webconfig {
 
 	@Bean
 	 SecurityFilterChain securityFilter(HttpSecurity httpSecurity) throws Exception {
-		// Disable CSRF if you're not dealing with a stateful application (like RESTful
-		// APIs).
+	
 		httpSecurity
 		.cors(Customizer.withDefaults()) 
 		.csrf(csrf -> csrf.disable()) 
@@ -44,18 +43,16 @@ public class Webconfig {
 
 						.requestMatchers("/", "/login", "/login-check", "/forgot-password", "/register","/search", "/products/**", "/terms",
 
-//								"/cart","/purchases",
 								"/send-otp","/api/products","/reset-password", "/createAccount", "/submit-password", "/api/products/**",
 								"/assets/**")
 						.permitAll() // URLs that don't require authentication.
-						 .requestMatchers(HttpMethod.GET, "/api/products/**").hasRole("ADMIN") // Allow fetching
+						 .requestMatchers(HttpMethod.GET, "/api/products/**").hasRole("ADMIN") 
 						 .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
-				            .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN") // Allow delete
-				            .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN") //allow update
-				            .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN") //allow update
+				            .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN") 
+				            .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN")
+				            .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN") 
 				            .requestMatchers("/api/**").hasRole("ADMIN")
-						// .requestMatchers("/createAccount").hasRole("ADMIN")
-						// .requestMatchers("/cart/**").hasRole("USER")
+						
 						.anyRequest().authenticated() // All other URLs require authentication.
 				)
 				
@@ -66,7 +63,16 @@ public class Webconfig {
 						.successHandler(successHandler) // Custom success handler for login.
 						.failureUrl("/login?error=true"))
 
-				.logout(logout -> logout.permitAll() // Allow everyone to log out.
+				.logout(logout -> logout
+					    .logoutUrl("/logout")
+					    .logoutSuccessUrl("/") // Redirect here after logout
+					    .invalidateHttpSession(true)
+					    .deleteCookies("JSESSIONID")
+					    .permitAll()
+					)
+				.sessionManagement(session -> session
+				    .invalidSessionUrl("/")
+				 // Allows everyone to log out.
 				)
 
 				// Request cache - remember the last visited page after login.
@@ -94,13 +100,13 @@ public class Webconfig {
 	}
 
 //	It's the core engine that verifies user credentials.
-//
+
 //	If this is not defined, Spring won’t know how to authenticate users from the DB properly.
 
 	@Bean
 	AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-		System.out.println("provider");
+	
 		provider.setUserDetailsService(myUserDetailService);
 		provider.setPasswordEncoder(passwordEncoder());
 		return provider;

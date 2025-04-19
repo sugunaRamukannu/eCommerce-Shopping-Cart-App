@@ -22,11 +22,11 @@ public class MyUserDetailService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("userdata" + username);
+		
 		Optional<Customer> user = userService.findBymobilePhoneNumber(username);
 
 		if (user.isEmpty()) {
-			System.out.println("user");
+		
 			throw new UsernameNotFoundException("Invalid user");
 		}
 
@@ -35,8 +35,7 @@ public class MyUserDetailService implements UserDetailsService {
 
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + user.get().getRole()));
-		System.out.println("user" + user.get().getMobilePhoneNumber());
-
+	
 		// returning the user details
 		return new org.springframework.security.core.userdetails.User(user.get().getMobilePhoneNumber(),
 				user.get().getPassword(), authorities);

@@ -26,12 +26,10 @@ public class ShoppingCart {
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
-	private double totalPrice;
 	
 	@OneToMany(mappedBy = "shoppingCart")
 	private List<CartItem> items;
 	
-
 	public ShoppingCart() {
 	}
 
@@ -43,16 +41,6 @@ public class ShoppingCart {
 
 	public void setItems(List<CartItem> items) {
 		this.items = items;
-	}
-
-
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-
-
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 
 

@@ -6,19 +6,24 @@ import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
 @Table(name = "customers")
 public class Customer extends User {
 	
-//	@NotBlank(message = "Code is required")
-//	@Size(min=8,max = 8, message = "Invalid mobile number")
-//	@Column(name="mobile_phone_number")
+	@NotBlank(message = "Mobile number is required")
+    @Pattern(regexp = "^\\d{8}$", message = "Please enter a valid number")
+	 	@Column(name="mobile_phone_number")
 	private String mobilePhoneNumber;
 	
 	public Customer(int id, String firstName, String lastName, String userName, String email,
@@ -40,10 +45,10 @@ public class Customer extends User {
 	}
 
 
-	@OneToOne(mappedBy = "customer")
+	@OneToOne(mappedBy = "customer",  cascade = CascadeType.ALL)
 	private ShoppingCart shoppingCart;
 	
-	@OneToMany(mappedBy="id")
+	@OneToMany(mappedBy="id",  cascade = CascadeType.ALL)
 	private List<DeliveryAddress> deliveryAddresses;
 
 	public List<DeliveryAddress> getDeliveryAddresses() {
