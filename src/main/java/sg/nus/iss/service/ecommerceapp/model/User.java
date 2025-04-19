@@ -19,7 +19,7 @@ public abstract class User implements UserDetails{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
+    @Column(name = "user_id")
     private int id;
 
     @NotBlank(message = "First name is required")
