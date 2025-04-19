@@ -16,6 +16,8 @@ import sg.nus.iss.service.ecommerceapp.repository.ProductCategoryRepository;
 import sg.nus.iss.service.ecommerceapp.repository.ProductRepository;
 import sg.nus.iss.service.ecommerceapp.service.ProductService;
 
+//Author(s): Yu Yaotian, Li Zhuoxuan, Pang Siang Lian, Irene Chan Oei Lin
+
 @Service
 public class ProductServiceImpl implements ProductService {
 

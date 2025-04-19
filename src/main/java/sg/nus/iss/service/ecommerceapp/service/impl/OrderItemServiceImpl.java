@@ -11,6 +11,8 @@ import sg.nus.iss.service.ecommerceapp.model.OrderItem;
 import sg.nus.iss.service.ecommerceapp.repository.OrderItemRepository;
 import sg.nus.iss.service.ecommerceapp.service.OrderItemService;
 
+//Author(s): Ramukannu Suguna, Andy Teow Rui Qing
+
 @Service
 @Transactional
 public class OrderItemServiceImpl implements OrderItemService {

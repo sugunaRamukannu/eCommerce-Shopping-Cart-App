@@ -28,6 +28,8 @@ import sg.nus.iss.service.ecommerceapp.model.ProductCategoryDto;
 import sg.nus.iss.service.ecommerceapp.service.ProductCategoryService;
 import sg.nus.iss.service.ecommerceapp.service.ProductService;
 
+//Author(s): Ramukannu Suguna
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")

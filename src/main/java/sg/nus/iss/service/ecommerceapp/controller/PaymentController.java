@@ -14,6 +14,8 @@ import sg.nus.iss.service.ecommerceapp.model.Order;
 import sg.nus.iss.service.ecommerceapp.model.OrderSummary;
 import sg.nus.iss.service.ecommerceapp.service.PaymentService;
 
+//Author(s): Ramukannu Suguna, Andy Teow Rui Qing
+
 @Controller
 public class PaymentController {
 

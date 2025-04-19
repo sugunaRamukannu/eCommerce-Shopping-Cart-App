@@ -27,6 +27,8 @@ import sg.nus.iss.service.ecommerceapp.repository.ProductRepository;
 import sg.nus.iss.service.ecommerceapp.repository.ShoppingCartRepository;
 import sg.nus.iss.service.ecommerceapp.service.ShoppingCartService;
 
+//Author(s): Ramukannu Suguna, Andy Teow Rui Qing
+
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 

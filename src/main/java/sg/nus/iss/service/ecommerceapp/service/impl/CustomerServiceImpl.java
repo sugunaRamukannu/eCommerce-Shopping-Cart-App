@@ -9,6 +9,8 @@ import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.repository.CustomerRepository;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 
+//Author(s): Ramukannu Suguna
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 

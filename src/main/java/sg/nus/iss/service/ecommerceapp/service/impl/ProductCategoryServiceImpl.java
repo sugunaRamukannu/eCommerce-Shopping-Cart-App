@@ -11,8 +11,9 @@ import sg.nus.iss.service.ecommerceapp.model.ProductCategoryDto;
 import sg.nus.iss.service.ecommerceapp.repository.ProductCategoryRepository;
 import sg.nus.iss.service.ecommerceapp.service.ProductCategoryService;
 
-@Service
+//Author(s): Yu Yaotian, Li Zhuoxuan, Pang Siang Lian, Irene Chan Oei Lin
 
+@Service
 public class ProductCategoryServiceImpl implements ProductCategoryService {
 	@Autowired
 	private ProductCategoryRepository productCategoryRepository;

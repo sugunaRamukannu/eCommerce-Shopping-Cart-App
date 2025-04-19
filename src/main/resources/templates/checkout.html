@@ -1,3 +1,5 @@
+<!-- Author(s): Lee Yi Cheng, Melvin -->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -8,16 +10,15 @@
 		<div class="coupon row align-items-center mx-auto mt-5 pt-5">
 			<h1 class="mb-4 fw-bold">Checkout Summary</h1>
 			<div class="container p-5 border border-black">
-				<div class="mb-4 fs-3">
-					<p><strong>Subtotal:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}">0.00</span></p>
-					<p><strong>Shipping Fee:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(shippingFee, 1, 2)}">0.00</span></p>
-					<p><strong>Discount applied:</strong> <span th:text="'S$' + ${#numbers.formatDecimal(discountsApplied, 1, 2)}">0.00</span></p>
-				</div>
-
-				<div class="my-3">
-					<h4 class="fs-2 fw-bolder">
-						Total: <strong th:text="'S$' + ${#numbers.formatDecimal(finalTotal, 1, 2)}">0.00</strong>
-					</h4>
+				<div class="mb-4 fs-3 row w-50 mx-auto">
+					<div class="col-6 fw-bold">Subtotal: </div>
+					<div class="col-6 text-end">S$ <span th:text="${#numbers.formatDecimal(totalPrice, 1, 2)}">0.00</span></div>
+					<div class="col-6 fw-bold">Shipping Fee: </div>
+					<div class="col-6 text-end">S$ <span class="text-end" th:text="${#numbers.formatDecimal(shippingFee, 1, 2)}">0.00</span></div>
+					<div class="col-6 fw-bold">Discount applied: </div>
+					<div class="col-6 text-end">S$ <span class="text-end" th:text="${#numbers.formatDecimal(discountsApplied, 1, 2)}">0.00</span></div>
+					<div class="col-6 fw-bold">Total: </div>
+					<div class="col-6 fw-bold text-end">S$ <span class="text-end" th:text="${#numbers.formatDecimal(finalTotal, 1, 2)}">0.00</span></div>
 				</div>
 				<table class="table table-striped">
 					<thead class="fs-4 fw-semibold">
@@ -49,7 +50,8 @@
 				<form th:action="@{/cart/checkout/payment}" method="post">
 					<div class="mb-3 fs-5 fw-semibold">
 						<label for="address" class="form-label">Delivery Address</label>
-						<textarea id="address" name="deliveryAddress" class="form-control rounded-0" rows="3" required></textarea>
+						<textarea id="address" name="deliveryAddress" class="form-control rounded-0" rows="3"
+							required></textarea>
 					</div>
 
 					<div class="mb-3 fs-5 fw-semibold">

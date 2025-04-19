@@ -1,3 +1,5 @@
+<!-- Author(s): Lee Yi Cheng, Melvin -->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
@@ -7,7 +9,7 @@
 	<section class="py-5 bg-primary title-section">
 		<div class="container px-5 px-md-0">
 			<h1 class="display-4 fw-bold mb-3">Food For Thought</h1>
-			<p class="col-md-8 fs-3 fw-semibold">Welcome to GetFreshFood! Where your every shopping needs are met!</p>
+			<p class="fs-3 fw-semibold">Welcome to GetFreshFood! Where your every shopping needs are met!</p>
 		</div>
 	</section>
 	<!--	//Category Grid-->
@@ -28,13 +30,17 @@
 				</div>
 			</div>
 	</section>
-	<!--//products grouped together based on category-->
+	<section class="py-5 bg-primary title-section">
+		<div class="container px-5 px-md-0">
+			<h1 class="display-2 fw-bold mb-1">Recommended</h1>
+		</div>
+	</section>
 	<section class="py-5" th:each="c:${categories}">
 		<div class="container px-5 px-md-0">
 			<h2 class="my-4 fw-bold fs-3" th:text="${c.category}">Fruits & Vegetables</h2>
 			<div class="row row-card g-3">
 
-				<div class="col" th:each="p:${c.products}">
+				<div class="col" th:each="p:${c.products}" th:if="${!p.labels.isEmpty()}">
 					<div class="card card-product position-relative p-2 rounded-0 border border-2">
 						<div class="card-body d-flex flex-column justify-content-between">
 							<span class="badge fs-6 text-bg-primary position-absolute rounded-0"
@@ -59,34 +65,34 @@
 										</svg>Add</button>
 								</form>
 							</div>
-							
+
 						</div>
 					</div>
 				</div>
 
 				<!-- Toast container -->
 
-						<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+				<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
 
-							<div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert"
-								aria-live="assertive" aria-atomic="true">
+					<div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert"
+						aria-live="assertive" aria-atomic="true">
 
-								<div class="d-flex">
+						<div class="d-flex">
 
-									<div class="toast-body">
+							<div class="toast-body">
 
-										Product added to cart successfully!
-
-									</div>
-
-									<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-										aria-label="Close"></button>
-
-								</div>
+								Product added to cart successfully!
 
 							</div>
 
+							<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+								aria-label="Close"></button>
+
 						</div>
+
+					</div>
+
+				</div>
 
 				<!-- Error Toast -->
 				<div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -101,7 +107,7 @@
 						</div>
 					</div>
 				</div>
-		
+
 			</div>
 	</section>
 </main>

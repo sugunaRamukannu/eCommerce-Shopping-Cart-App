@@ -1,3 +1,5 @@
+<!-- Author(s): Lee Yi Cheng, Melvin -->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -7,38 +9,6 @@
 	<section class="container p-5 pb-0 px-lg-0 mt-5 pt-5">
 		<div class="coupon row align-items-center mx-auto mt-5 pt-5">
 			<h1 class="mb-4 fw-bold">My Cart</h1>
-			<!--<aside class="col-xs-12 col-lg-8 px-lg-0 align-self-start mb-2 mb-lg-0">
-				<div class="border border-2 border-black p-3 mb-2 d-flex flex-column">
-					<span class="fs-3 fw-bold d-inline-block">Deliver To</span>
-					<span>Address is this:
-						<span th:each="address: ${addresses}">
-							<span th:text="${address}"></span>
-						</span>
-					</span>
-					<div th:each="product: ${products}">
-						<span th:text="${product.id}"></span>
-					</div>
-				</div>
-				<div class="border border-2 border-black p-3">
-					<span class="fs-3 fw-bold d-inline-block me-2">Cart Items</span>
-					<div class="form-check d-flex align-items-center justify-content-around">
-						<div th:each="item : ${cartItems}">
-							<span class="fs-4 fw-bold" th:text="${item.product.name}"></span>
-							<span class="fs-5 fw-medium" th:text="'S$' + ${item.price}"></span>
-							<span class="fs-5 fw-medium" th:text="${item.quantity}"></span>
-							<span class="fs-5 fw-medium" th:text="'S$' + ${item.price * item.quantity}"></span>
-						</div>
-						<div th:if="${#lists.isEmpty(cartItems)}">
-							<span colspan="4">No items in cart.</span>
-						</div>
-					</div>
-					<div th:each="entry : ${groupedItems}">
-						<form th:action="@{/cart/delete}" method="post" th:id="'delete-form-' + ${entry.key.id}"
-							style="display:none;">
-							<input type="hidden" name="productId" th:value="${entry.key.id}" />
-						</form>
-					</div>
-			</aside> -->
 			<div class="col px-lg-2">
 				<div class="border border-2 border-black p-3 mb-5 d-flex flex-column">
 					<div th:if="${#lists.isEmpty(cartItems)}" class="fs-2 fw-semibold mx-auto">
@@ -57,7 +27,8 @@
 						</form>
 
 						<!--To fix -->
-						<form th:action="@{/cart/checkout}" class="overflow-x-scroll" method="post" id="checkout-form" novalidate>
+						<form th:action="@{/cart/checkout}" class="overflow-x-scroll" method="post" id="checkout-form"
+							novalidate>
 							<table class="table table-striped">
 								<thead class="fs-4 fw-semibold">
 									<tr>
@@ -73,18 +44,18 @@
 									<!-- Loop through cartItems -->
 									<tr class="fs-5 fw-medium" th:each="entry : ${cartItems}">
 										<td>
-											<input class="form-check-input p-2 d-inline-block me-2 rounded-0" type="checkbox"
-												th:id="'item-' + ${entry.id}" th:value="${entry.id}"
+											<input class="form-check-input p-2 d-inline-block me-2 rounded-0"
+												type="checkbox" th:id="'item-' + ${entry.id}" th:value="${entry.id}"
 												name="checkedoutItems" th:checked="${entry.checkedOut}" />
 										</td>
 										<td th:text="${entry.product.productName}"></td>
 										<td th:text="'S$' + ${#numbers.formatDecimal(entry.price, 1, 2)}"></td>
-                                        <td th:text="${entry.quantity}"></td>
+										<td th:text="${entry.quantity}"></td>
 										<td
 											th:text="'S$' + ${#numbers.formatDecimal(entry.quantity*entry.price , 1, 2)}">
 										</td>
 										<td>
-											
+
 											<button type="button" class="btn btn-danger btn-sm rounded-0"
 												th:onclick="'submitDeleteForm(' + ${entry.id} + ')'">
 												Remove
@@ -93,59 +64,54 @@
 									</tr>
 								</tbody>
 							</table>
-
-							<!-- Cart Summary -->
-							<!--<div class="d-flex justify-content-between">
-							<!--<div class="d-flex justify-content-between">
-								<h3>Total: <span th:id="cart-total"
-										th:text="'S$' + ${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></h3>
-								<!--<h3>Items: <span th:id="cart-count" th:text="${itemCount}"></span></h3>-->
-							</div>
-
 							<!-- Proceed to checkout button -->
-							<button type="submit" class="btn btn-primary mt-3 rounded-0 w-25">Proceed to
-								Checkout</button>
-						</form>
-
-						<!--//which functionality-->
-						<div th:each="entry : ${cartItems}">
-												<form th:action="@{/cart/delete}" method="post" th:id="'delete-form-' + ${entry.id}"
-													style="display:none;">
-													<input type="hidden" name="productId" th:value="${entry.id}" />
-												</form>
-											</div>
-					</span>
-
+							<button type="submit" class="btn btn-primary mt-3 rounded-0 w-25">
+								Proceed to Checkout
+							</button>
 				</div>
 
+
+				</form>
+
+				<!--//which functionality-->
+				<div th:each="entry : ${cartItems}">
+					<form th:action="@{/cart/delete}" method="post" th:id="'delete-form-' + ${entry.id}"
+						style="display:none;">
+						<input type="hidden" name="productId" th:value="${entry.id}" />
+					</form>
+				</div>
+				</span>
+
 			</div>
-			</body>
-			
+
+		</div>
+		</body>
+
 	</section>
 </main>
 
 
 <th:block sec:authorize="isAuthenticated()">
-<script>
-	
-	document.addEventListener("DOMContentLoaded", function () {
-	    const form = document.querySelector("#checkout-form");
-	    form.addEventListener("submit", function (event) {
-	        const checkboxes = form.querySelectorAll("input[name='checkedoutItems']:checked");
-	        if (checkboxes.length === 0) {
-	            event.preventDefault(); // Prevent form submission
-	            const toastEl = document.getElementById("warning-toast");
-	            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
-	            toast.show();
-	        }
-	    });
-	});
-		    function submitDeleteForm(productId) {
-		        document.getElementById('delete-form-' + productId).submit();
-		    }
-			
-	
-		</script>
+	<script>
+
+		document.addEventListener("DOMContentLoaded", function () {
+			const form = document.querySelector("#checkout-form");
+			form.addEventListener("submit", function (event) {
+				const checkboxes = form.querySelectorAll("input[name='checkedoutItems']:checked");
+				if (checkboxes.length === 0) {
+					event.preventDefault(); // Prevent form submission
+					const toastEl = document.getElementById("warning-toast");
+					const toast = new bootstrap.Toast(toastEl, {delay: 3000});
+					toast.show();
+				}
+			});
+		});
+		function submitDeleteForm(productId) {
+			document.getElementById('delete-form-' + productId).submit();
+		}
+
+
+	</script>
 </th:block>
 <!-- Insert the footer -->
 <th:block th:insert="~{fragments/footer :: footer}"></th:block>

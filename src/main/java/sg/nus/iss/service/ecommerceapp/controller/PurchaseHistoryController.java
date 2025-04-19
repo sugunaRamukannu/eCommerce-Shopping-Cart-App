@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import sg.nus.iss.service.ecommerceapp.exception.OrderNotFoundException;
 import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.model.Order;
-import sg.nus.iss.service.ecommerceapp.model.OrderItem;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 import sg.nus.iss.service.ecommerceapp.service.OrderItemService;
 import sg.nus.iss.service.ecommerceapp.service.OrderService;
+
+//Author(s): Ramukannu Suguna, Andy Teow Rui Qing
 
 @Controller
 public class PurchaseHistoryController {

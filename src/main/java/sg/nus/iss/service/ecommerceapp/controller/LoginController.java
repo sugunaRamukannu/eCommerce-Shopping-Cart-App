@@ -18,6 +18,8 @@ import sg.nus.iss.service.ecommerceapp.model.Customer;
 import sg.nus.iss.service.ecommerceapp.model.LoginDto;
 import sg.nus.iss.service.ecommerceapp.service.CustomerService;
 
+//Author(s): Ramukannu Suguna
+
 @Controller
 @AllArgsConstructor
 public class LoginController {

@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Component;
 
+//Author(s): Lee Yi Cheng, Melvin
+
 @Component("dateTimeFormatterUtil")
 public class DateTimeFormatterUtil {
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");

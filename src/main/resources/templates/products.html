@@ -1,3 +1,5 @@
+<!-- Author(s): Lee Yi Cheng, Melvin -->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -8,7 +10,9 @@
 
 		<div class="row w-100 align-items-center mx-auto mt-5 pt-5">
 			<aside class="col-lg-2 mt-5 me-5 pt-5 px-lg-0 d-none d-lg-block align-self-start">
-				<div class="border border-2 border-black p-3 pb-0 mb-5">
+				<!-- hide sort table when return search result by keyword-->
+				<div class="border border-2 border-black p-3 pb-0 mb-5"
+					th:if="${param.keyword == null or param.sort != null}">
 					<span class="fs-3 fw-bold d-inline-block mb-3">Sort By</span>
 					<ul class="p-0">
 						<li class="nav-link fs-5 mb-2">
@@ -31,7 +35,9 @@
 				</div>
 			</aside>
 			<div class="col">
-				<h1 class="mb-4 fw-bold" th:text="${param.keyword != null ? 'Search Results' : (productCategory != null ? 'Products - ' + productCategory : 'Products')}">Products
+				<h1 class="mb-4 fw-bold"
+					th:text="${param.keyword != null ? 'Search Results' : (productCategory != null ? 'Products - ' + productCategory : 'Products')}">
+					Products
 				</h1>
 
 				<div class="row row-cols-2 row-cols-lg-4 mb-3 g-3">
@@ -46,8 +52,8 @@
 											th:text="${product.labels}">Sale</span>
 									</th:block>
 									<!--click product image to pop up enlarge image-->
-									<img th:src="${(product.productUrl != null and !#strings.isEmpty(product.productUrl)) ? product.productUrl : '/assets/img/no-image.jpeg'}" height="200" class="card-img-top rounded-0"
-										th:alt="${product.productName}"
+									<img th:src="${(product.productUrl != null and !#strings.isEmpty(product.productUrl)) ? product.productUrl : '/assets/img/no-image.jpeg'}"
+										height="200" class="card-img-top rounded-0" th:alt="${product.productName}"
 										th:attr="data-bs-toggle='modal', data-bs-target='#imageModal__' + ${product.id}">
 									<!-- Modal with unique ID -->
 									<div class="modal fade" th:id="'imageModal__' + ${product.id}" tabindex="-1"
@@ -55,7 +61,8 @@
 										<div class="modal-dialog modal-dialog-centered modal-lg">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title" th:text="${product.productName}">Product Name
+													<h5 class="modal-title" th:text="${product.productName}">Product
+														Name
 													</h5>
 													<button type="button" class="btn-close" data-bs-dismiss="modal"
 														aria-label="Close"></button>
@@ -75,7 +82,8 @@
 									<div class="d-grid d-md-flex justify-content-md-between align-items-center mt-auto">
 										<span class="fs-5"
 											th:text="'S$' + ${#numbers.formatDecimal(product.price, 1, 2)}">S$20.00</span>
-										<form th:action="@{/cart/{id}(id=${product.id})}" method="post" class="add-to-cart-form" th:data-product-id="${product.id}">
+										<form th:action="@{/cart/{id}(id=${product.id})}" method="post"
+											class="add-to-cart-form" th:data-product-id="${product.id}">
 											<button th:data-product-id="${product.id}"
 												class="btn btn-primary rounded-0 add-to-cart-btn" type="submit"><svg
 													xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -90,25 +98,27 @@
 						</div>
 						<!-- Toast container -->
 
-														<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+						<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
 
-														  <div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+							<div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert"
+								aria-live="assertive" aria-atomic="true">
 
-														    <div class="d-flex">
+								<div class="d-flex">
 
-														      <div class="toast-body">
+									<div class="toast-body">
 
-														        Product added to cart successfully!
+										Product added to cart successfully!
 
-														      </div>
+									</div>
 
-														      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+									<button type="button" class="btn-close btn-close-white me-2 m-auto"
+										data-bs-dismiss="toast" aria-label="Close"></button>
 
-														    </div>
+								</div>
 
-														  </div>
+							</div>
 
-														</div>
+						</div>
 					</th:block>
 
 
@@ -140,7 +150,7 @@
 				})
 					.then(res => {
 						if (!res.ok) throw new Error("Failed to add to cart");
-						return fetch("/cart/summary"); 
+						return fetch("/cart/summary");
 					})
 					.then(res => res.json())
 					.then(data => {
@@ -151,12 +161,12 @@
 			});
 
 		});
-		
+
 		function showToast() {
-						     const toastEl = document.getElementById("cart-toast");
-						      const toast = new bootstrap.Toast(toastEl, {delay: 2000});
-						     toast.show();
-						 }
+			const toastEl = document.getElementById("cart-toast");
+			const toast = new bootstrap.Toast(toastEl, {delay: 2000});
+			toast.show();
+		}
 
 	</script>
 </th:block>
