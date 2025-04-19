@@ -21,6 +21,7 @@ import sg.nus.iss.service.ecommerceapp.repository.CustomerRepository;
 import sg.nus.iss.service.ecommerceapp.repository.DeliveryAddressRepository;
 import sg.nus.iss.service.ecommerceapp.repository.OrderRepository;
 import sg.nus.iss.service.ecommerceapp.service.PaymentService;
+import sg.nus.iss.service.ecommerceapp.utils.PriceModifierUtil;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -59,9 +60,6 @@ public class PaymentServiceImpl implements PaymentService {
 
 				double accumulatedPrice = 0.0;
 
-				double shippingFee = 5.00;
-				double discountsApplied = 0.0;
-
 				for (CartItem checkedoutItem : checkedoutItems) {
 					Product product = checkedoutItem.getProduct();
 					int totalQuantity = checkedoutItem.getQuantity();
@@ -73,7 +71,7 @@ public class PaymentServiceImpl implements PaymentService {
 					orderItem.setOrder(order);
 					orderItems.add(orderItem);
 				}
-				order.setTotalPrice(accumulatedPrice + shippingFee - discountsApplied);
+				order.setTotalPrice(accumulatedPrice + PriceModifierUtil.SHIPPING_FEE - PriceModifierUtil.DISCOUNTS_APPLIED);
 				order.setOrderItems(orderItems);
 
 				orderRepository.save(order);
@@ -101,16 +99,14 @@ public class PaymentServiceImpl implements PaymentService {
 		if (order == null)
 			throw new RuntimeException("No order placed");
 
-		double shippingFee = 5.00;
-		double discountsApplied = 0.0;
 		double totalProductPrice = order.getOrderItems().stream().mapToDouble(item -> item.getPurchasePrice()).sum();
-		double finalTotal = totalProductPrice + shippingFee - discountsApplied;
+		double finalTotal = totalProductPrice + PriceModifierUtil.SHIPPING_FEE - PriceModifierUtil.DISCOUNTS_APPLIED;
 
 		OrderSummary summary = new OrderSummary();
 		summary.setOrder(order);
 		summary.setTotalProductPrice(totalProductPrice);
-		summary.setShippingFee(shippingFee);
-		summary.setDiscountsApplied(discountsApplied);
+		summary.setShippingFee(PriceModifierUtil.SHIPPING_FEE);
+		summary.setDiscountsApplied(PriceModifierUtil.DISCOUNTS_APPLIED);
 		summary.setFinalTotal(finalTotal);
 		summary.setOrderItems(order.getOrderItems());
 

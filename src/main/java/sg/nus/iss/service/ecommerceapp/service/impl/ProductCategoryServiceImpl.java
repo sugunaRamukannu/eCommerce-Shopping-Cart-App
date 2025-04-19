@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import sg.nus.iss.service.ecommerceapp.model.ProductCategory;
 import sg.nus.iss.service.ecommerceapp.model.ProductCategoryDto;
 import sg.nus.iss.service.ecommerceapp.repository.ProductCategoryRepository;

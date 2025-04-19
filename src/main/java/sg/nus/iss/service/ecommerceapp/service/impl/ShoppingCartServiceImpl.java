@@ -120,7 +120,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		return new ArrayList<>();
 	}
 
-	// total price ? and check this is for cart count only?
 	@Override
 	public CartSummary getCartSummary(String mobilePhoneNumber) {
 

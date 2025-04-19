@@ -60,7 +60,6 @@ public class HomeController {
 	        return "products";
 	    }
 	
-	// pending review and exception
 	@GetMapping("/products")
 	public String displayProducts(@RequestParam(required = false) String sort, Model model) {
 
