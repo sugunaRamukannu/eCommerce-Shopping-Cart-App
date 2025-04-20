@@ -80,7 +80,7 @@ public class LoginController {
 		customerService.saveCustomer(customer);
 		model.addAttribute("logindto", new LoginDto());
 		model.addAttribute("showPassword", true);
-		return "/login";
+		return "login";
 	}
 
 }
