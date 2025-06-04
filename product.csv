@@ -1,0 +1,101 @@
+id,name,product_category_id,description,price,product_url,labels
+1,Hand Sanitizer - 70% Alcohol Base,1,Bath & Hand Wash,12.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/hand_sanitizer_70_alcohol_base.jpg,
+2,"Face Wash - Oil Control, Active",1,Skin Care,5.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/facewash_oil_control.jpeg,
+3,Chia Seeds,4,Dry Fruits,6,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/chia_seed.jpeg,new
+4,Dog Supplement - Absolute Calcium Tablet,2,Pet Food & Accessories,19.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/absolute_calcium_pet.jpeg,new
+5,"Mamypoko Diaper Pants - Xtra Large, 12-17 Kg",7,Diapers & Wipes,69.9,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/diaper_pants_xl.jpeg,
+6,SPF 15 Sunscreen Lotion,1,Skin Care,14.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/SPF15_sunblock_lotion.jpeg,popular
+7,"Adult Dry Cat Food - +1 Year, Ocean Fish",2,Pet Food & Accessories,49.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/catfood_adult_oceanfish.jpeg,
+8,Soap,1,Bath & Hand Wash,21.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/LUX_soap.jpeg,
+9,"LED Bulb - 13 Watt, Cool Daylight, B22 Base",2,Appliances & Electricals,13,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/LED_13W_cooldaylight.jpeg,
+10,Fresh Catch Fish Fingers,9,Fish & Seafood,12,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/fresh_catch_fishfingers.jpeg,new
+11,Chicken Cocktail Sausage,9,"Sausages, Bacon & Salami",11,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/chicken_cocktail_sausages.jpeg,
+12,Green Sliced Olives,10,Tinned & Processed Food,10,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/green_sliced_olives.jpeg,
+13,Blueberry,8,Fresh Fruits,20.94,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/blueberry.jpeg,new
+14,Peri Peri Sauce ,10,"Sauces, Spreads & Dips",8.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/peri-peri_sauce_medium.jpeg,
+15,Sensodyne Toothpaste - Fresh Mint,1,Oral Care,11.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/sensodyne_toothpaste_freshmint.jpeg,
+16,Savoury - Pizza,10,"Snacks, Dry Fruits, Nuts",9.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Savoury+-+Pizza.jpg,
+17,Light Soy Sauce - Reduced Salt,10,"Sauces, Spreads & Dips",19.25,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/kikkoman_light_soysauce_less_salt.jpeg,popular
+18,Caesar Salad Cream,10,"Sauces, Spreads & Dips",13.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/caesar_salad_cream.jpeg,popular
+19,Free Range Eggs - Omega 3,9,Eggs,7.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/free_range_egg.jpeg,popular
+20,Ultra Protect Spray,1,Bath & Hand Wash,20,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/ultra_protect_spray.jpeg,new
+21,Marvel Spiderman Metal Kids Pencil Box,3,Stationery,7.45,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/marvel_spiderman_pencilcase.jpeg,sale
+22,Baby Powder With Fragrance,7,Baby Bath & Hygiene,4.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/baby_powder_blossom.jpeg,
+23,Juice/Milk Mugs,2,Crockery & Cutlery,14,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/milk+mug.jpeg,
+24,Listerine Mouthwash - Cool Mint With Mild Taste,1,Oral Care,12.25,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/listerine_cool_mint_mildtaste.jpeg,
+25,Maggie Tomato Ketchup,10,"Spreads, Sauces, Ketchup",5.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/maggie_tomato_sauce.jpeg,
+26,Noodles - Medium Egg,10,"Noodle, Pasta, Vermicelli",13.75,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/medium_egg_noodles.jpeg,sale
+27,Honey - Weight Watchers,10,"Spreads, Sauces, Ketchup",27.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/weight_watchers_honey.jpeg,
+28,Protein Bars - Peanut Cocoa,10,Cereals & Breakfast,30,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/choco_peanut_bar.jpeg,new
+29,"Cat Care - Comfort Bowl, 32Oz GIb1010",2,Pet Food & Accessories,18,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/cat_bowl.jpeg,
+30,Atlantic Salmon - Smoked  Presliced,9,Fish & Seafood,59,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/atlantic_sliced_smoked_salmon.jpeg,new
+31,Peanut Butter ,10,"Sauces, Spreads & Dips",14.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/peanut_butter_cream.jpeg,
+32,"Prawns, Peeled & Deveined",9,Fish & Seafood,34.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/peeled_prawn.jpeg,
+33,Baby Wipes - Gentle,7,Diapers & Wipes,2.2,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/gentle_baby_wipes.jpeg,
+34,Pokka - Green Tea,5,Tea,9.75,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/pokka_green_tea.jpeg,
+35,"Apple - Green, Premium",8,Fresh Fruits,9.06,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/green_apple.jpeg,sale
+36,Sugar - Refined,4,"Salt, Sugar & Jaggery",14.75,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/fine_sugar.jpeg,
+37,Tea Spoon - Super Pack,2,Crockery & Cutlery,8.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/tea_spoon_set.jpeg,new
+38,"Chicken - Breakfast Ham, Sliced",9,"Sausages, Bacon & Salami",10.65,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/breakfast_chicken_ham.jpeg,
+39,Kodomo Baby Shampoo,7,Baby Bath & Hygiene,9.6,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/kodomo_baby_shampoo.jpeg,sale
+40,Baby Cream,7,Baby Bath & Hygiene,13,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/gohnson_baby_cream.jpeg,
+41,Argan Oil - Conditioner,1,Hair Care,17.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/argon_oil_conditioner.jpeg,sale
+42,Garlic - Organically Grown,8,Organic Fruits & Vegetables,3.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/organic_garlic.jpeg,
+43,Apple Fruit Juice,5,Fruit Juices & Drinks,4,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/apple_juice.jpeg,
+44,Alkaline Battery AAA-2B,2,Appliances & Electricals,4,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/alkaline+battery_AAA.jpeg,sale
+45,Disney Baby - Bio Green Apple Mickey Tearproof Shampoo,1,Hair Care,8.75,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/disney+baby_green_apple_tearproof_shampoo.jpeg,
+46,Mountain Dew,5,Energy & Soft Drinks,2,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/mountain_dew.jpeg,sale
+47,"Apple - Red Delicious, Premium",8,Fresh Fruits,11.38,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/red_apple.jpeg,popular
+48,Farm Fresh Egg,9,Eggs,3.75,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/farm_fresh_egg.jpeg,
+49,Naturel Extra Light Olive Oil,4,Edible Oils & Ghee,67.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/naturel_extra_light_olive_oil.jpeg,
+50,Soy Milk - Unsweetened,6,Non Dairy,6,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/unsweetened_organic_soymilk.jpeg,new
+51,Chocolate Fudge Cake,6,Cakes & Pastries,20,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Chocolate+Fudge+Cake.jpg,popular
+52,Cheese - Slices,6,Dairy,18,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Cheese+-+Slices.jpg,
+53,Silicon Gloves - Assorted Colour,2,Gardening,54.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/sensodyne_toothpaste_freshmint.jpeg,
+54,"Pumpkin - Disco, Organically Grown",8,Exotic Fruits & Veggies,2.44,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Pumpkin+-+Disco%2C+Organically+Grown.jpg,
+55,Liquid Detergent Refill,3,Detergents & Dishwash,16,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Liquid+Detergent+Refill.jpg,
+56,"Mamypoko Diaper Pants - Small, 4-8 Kg",7,Diapers & Wipes,69.9,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Mamypoko+Diaper+Pants+-+Small%2C+4-8+Kg.jpg,popular
+57,Croissant,6,Gourmet Breads,4.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Croissant.jpg,
+58,Organic Sesame Oil/Black Til Oil,4,Edible Oils & Ghee,26.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Organic+Sesame+Oil_Black+Til+Oil.jpg,
+59,Sausages - Smoked Chicken,9,"Sausages, Bacon & Salami",7.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Sausages+-+Smoked+Chicken.jpg,
+60,Whole Wheat Bread,6,Gourmet Breads,2.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Whole+Wheat+Bread.jpg,
+61,360 Degree Charcoal Gold Toothbrush,1,Oral Care,9.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/360+Degree+Charcoal+Gold+Toothbrush.jpg,popular
+62,SCS Butter - Unsalted,6,Dairy,8.25,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/SCS+Butter+-+Unsalted.jpg,
+63,Rice,4,Rice & Rice Products,12.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Rice.jpg,sale
+64,Juice - Orange,5,Fruit Juices & Drinks,1,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Juice+-+Orange.jpg,sale
+65,Fruit Yoghurt - Strawberry,6,Dairy,8,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Fruit+Yoghurt+-+Strawberry.jpg,
+66,Kiwi - Green,8,Exotic Fruits & Veggies,13.06,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/green_kiwi.jpg,popular
+67,Facial Tissues Box - 2 Ply - 100% Virgin Pulp/Paper,3,"Disposables, Garbage Bag",21,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Facial+Tissues+Box+-+2+Ply+-+100+Virgin+Pulp_Paper.jpg,popular
+68,"LED Bulb - 14 Watt, Cool Day Light, Base B22D",2,Appliances & Electricals,14,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/LED+Bulb+-+14+Watt%2C+Cool+Day+Light%2C+Base+B22D.jpg,popular
+69,Kitchen Towel,3,"Disposables, Garbage Bag",8,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Kitchen+Towel.jpg,new
+70,Potato - Organically Grown,8,Organic Fruits & Vegetables,1.81,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Potato+-+Organically+Grown.jpg,
+71,Organics Premium Black Tea,5,Tea,8,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Organics+Premium+Black+Tea.jpg,
+72,Refined - Sunflower Oil,4,Edible Oils & Ghee,9.75,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Refined+-+Sunflower+Oil.jpg,
+73,Dishwash Liquid,3,Detergents & Dishwash,1,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Dishwash+Liquid.jpg,sale
+74,Sweet Potato - Organically Grown,8,Organic Fruits & Vegetables,1.25,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Sweet+Potato+-+Organically+Grown.jpg,popular
+75,Cashew,4,Dry Fruits,50,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Cashew.jpg,new
+76,Ayam Brand - Sardine In Tomato Sauce,9,Fish & Seafood,3.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Sardine+In+Tomato+Sauce.jpg,new
+77,Soft  Drink,5,Energy & Soft Drinks,1,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Soft++Drink.jpg,sale
+78,3-In-1 Coffee,5,Coffee,5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/3-In-1+Coffee.jpg,popular
+79,Toilet Tissue Roll,3,"Disposables, Garbage Bag",9.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Toilet+Tissue+Roll.jpg,
+80,Basmati Rice,4,Rice & Rice Products,6.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Basmati+Rice.jpg,popular
+81,Dishwash - Bar,3,Detergents & Dishwash,2.25,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Dishwash+-+Bar.jpg,
+82,Himalayan - Pink Salt,4,"Salt, Sugar & Jaggery",6.25,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Himalayan+-+Pink+Salt.jpg,
+83,Mineral Water 1.5L x 6,5,Water,12,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Mineral+Water+1.5L+x+6.jpg,
+84,"Corn Flour, Starch",4,"Atta, Flours & Sooji",2.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Corn+Flour%2C+Starch.jpg,
+85,Lactose Free Milk,6,Dairy,7.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Lactose+Free+Milk.jpg,sale
+86,Silicone Pacifier Step 3 - Cherry,7,Baby Accessories,12.45,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Silicone+Pacifier+Step+3+-+Cherry.jpg,new
+87,100 % Coconut Water - With No Added Sugar,5,Fruit Juices & Drinks,13.5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/100+%25+Coconut+Water+-+With+No+Added+Sugar.jpg,popular
+88,Hazelnut Coffee - Ready To Drink,5,Fruit Juices & Drinks,7,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Hazelnut+Coffee+-+Ready+To+Drink.jpg,
+89,Real Ice Cream - Choco Chips,6,Ice Creams & Desserts,10,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Real+Ice+Cream+-+Choco+Chips.jpg,
+90,Celery,8,Exotic Fruits & Veggies,1.03,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Celery.jpg,
+91,Chicken - Nuggets,9,"Sausages, Bacon & Salami",15,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Chicken+-+Nuggets.jpg,
+92,Paper Cups,3,Party & Festive Needs,1.6,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Paper+Cups.jpg,
+93,Disposable Bowl,3,Party & Festive Needs,3.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Disposable+Bowl.jpg,
+94,Orange - Imported,8,Fresh Fruits,8.06,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Orange+-+Imported.jpg,
+95,Baby Wash Top-To-Toe,7,Baby Bath & Hygiene,33,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Baby+Wash+Top-To-Toe.jpg,sale
+96,Aloe Vera Baby Wipes,7,Diapers & Wipes,9.95,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Aloe+Vera+Baby+Wipes.jpg,
+97,Natural Ice Cream - Madagascar,6,Ice Creams & Desserts,21.25,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Natural+Ice+Cream+-+Madagascar.jpg,new
+98,Gloves,2,Gardening,5,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Gloves.jpg,
+99,Baby Sun lotion SPF50+,7,Baby Bath & Hygiene,70,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Baby+Sun+lotion+SPF50%2B.jpg,
+100,Disposable Snack Plate - 7 Inches,3,Party & Festive Needs,4.45,https://gff-image-angelpang.s3.us-east-1.amazonaws.com/productUrl/Disposable+Snack+Plate+-+7+Inches.jpg,
