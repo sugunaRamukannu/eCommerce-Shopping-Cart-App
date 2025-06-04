@@ -13,13 +13,13 @@ import sg.nus.iss.service.ecommerceapp.service.OtpService;
 @Service
 public class SmsOtpServiceImpl implements OtpService {
 
-    private static final String ACCOUNT_SID = "AC3eb7093756e0cb849faa2f97fe69b2f7";
+    private static final String ACCOUNT_SID = "AC3e##################";
     
-    private static final String AUTH_TOKEN = "0c6dd099b40f4fdbee1731aec651413e";
-    private static final String FROM_PHONE = "+18595453665";
+    private static final String AUTH_TOKEN = "0c####################";
+    private static final String FROM_PHONE = "+185########";
     
 //    private SmsOtpServiceImpl smsOtpServiceImpl;
- 
+
     public SmsOtpServiceImpl() {
     	Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
